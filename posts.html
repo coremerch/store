@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="COREMERCH Blog — Infrastructure insights, commerce strategy, and technical guides for sovereign digital commerce. Built in Zimbabwe." />
+  <meta name="keywords" content="sovereign commerce blog, crypto payments guide, digital product infrastructure, GitHub Pages store, NOWPayments tutorial" />
+  <meta property="og:title" content="COREMERCH Blog — Core Infrastructure Insights" />
+  <meta property="og:description" content="Technical guides, commerce strategy, and infrastructure insights from the team that built sovereign commerce from Zimbabwe." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coremerch.io/posts.html" />
+  <title>Blog — COREMERCH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --black:        #07080F;
+      --navy:         #0C1220;
+      --navy-mid:     #131D30;
+      --navy-light:   #1A2640;
+      --teal:         #00BDB3;
+      --teal-glow:    rgba(0,189,179,0.12);
+      --teal-border:  rgba(0,189,179,0.25);
+      --amber:        #F0A500;
+      --amber-glow:   rgba(240,165,0,0.12);
+      --amber-border: rgba(240,165,0,0.25);
+      --white:        #F4F6FA;
+      --grey:         #8591A3;
+      --grey-dark:    #47566A;
+      --border:       rgba(255,255,255,0.07);
+      --font-main:    'Inter', -apple-system, sans-serif;
+      --font-head:    'Space Grotesk', -apple-system, sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-main);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    h1 { font-size: clamp(2rem,5vw,3.2rem); }
+    h2 { font-size: clamp(1.5rem,4vw,2.2rem); }
+    h3 { font-size: 1.1rem; }
+    h4 { font-size: .93rem; }
+
+    p  { color: var(--grey); line-height: 1.8; }
+    a  {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    a:hover { color: var(--white); }
+
+    /* ── Layout ──────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .container-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .section { padding: 80px 0; }
+
+    /* ── Buttons ─────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 8px;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: .86rem;
+      cursor: pointer;
+      border: none;
+      transition: all .25s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--teal); color: var(--black); }
+    .btn-primary:hover {
+      background: var(--white);
+      color: var(--black);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,189,179,.28);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    /* ── Badges ─────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: .67rem;
+      font-weight: 700;
+      font-family: var(--font-head);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .badge-teal {
+      background: var(--teal-glow);
+      color: var(--teal);
+      border: 1px solid var(--teal-border);
+    }
+    .badge-amber {
+      background: var(--amber-glow);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    /* ── Section label ───────────────────────── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .section-label-line {
+      width: 28px; height: 2px;
+      background: var(--teal);
+    }
+    .section-label-text {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    /* ── Navigation ──────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 72px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      background: rgba(7,8,15,.9);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--grey);
+      font-size: .86rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+    .nav-cta { display: flex; gap: 10px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all .3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--navy);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 28px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--white);
+      font-size: .93rem;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Page Hero ───────────────────────────── */
+    .page-hero {
+      padding: 140px 0 64px;
+      background: linear-gradient(180deg,
+        var(--navy) 0%, var(--black) 100%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(0,189,179,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-inner { position: relative; z-index: 1; }
+    .page-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .page-eyebrow-line {
+      width: 32px; height: 2px;
+      background: var(--teal);
+    }
+    .page-eyebrow-text {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--teal);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    /* ── Filter tabs ─────────────────────────── */
+    .filter-bar {
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+      background: rgba(7,8,15,.96);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      padding: 16px 20px;
+      background: none;
+      border: none;
+      color: var(--grey);
+      font-family: var(--font-head);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+      letter-spacing: .02em;
+    }
+    .filter-btn:hover { color: var(--white); }
+    .filter-btn.active {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
+
+    /* ── Posts grid ──────────────────────────── */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 24px;
+    }
+
+    /* ── Post card ───────────────────────────── */
+    .post-card {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all .3s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .post-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,189,179,.09);
+      color: inherit;
+    }
+    .post-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .post-card.featured:hover {
+      border-color: var(--amber);
+      box-shadow: 0 24px 60px rgba(240,165,0,.09);
+    }
+
+    /* post image area */
+    .post-image {
+      background: var(--navy-mid);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .post-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg, transparent 60%, var(--navy) 100%
+      );
+    }
+
+    .featured .post-image {
+      width: 340px;
+      height: auto;
+      border-radius: 0;
+    }
+
+    /* post body */
+    .post-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .post-cat {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+    .featured .post-cat { color: var(--amber); }
+
+    .post-date {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      color: var(--grey-dark);
+    }
+
+    .post-read-time {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      color: var(--grey-dark);
+    }
+
+    .post-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.35;
+      transition: color .2s;
+    }
+    .post-card:hover .post-title { color: var(--teal); }
+    .post-card.featured:hover .post-title {
+      color: var(--amber);
+    }
+
+    .featured .post-title {
+      font-size: 1.3rem;
+    }
+
+    .post-excerpt {
+      font-size: .83rem;
+      color: var(--grey);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .post-author-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--navy-mid);
+      border: 1px solid var(--teal-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .7rem;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .post-author-name {
+      font-size: .76rem;
+      color: var(--grey);
+      font-family: var(--font-head);
+    }
+
+    .post-read-link {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: .76rem;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ── Empty state ─────────────────────────── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .empty-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    /* ── Newsletter ──────────────────────────── */
+    .newsletter-wrap {
+      background: linear-gradient(135deg,
+        var(--navy-mid), rgba(0,189,179,.05));
+      border: 1px solid var(--teal-border);
+      border-radius: 20px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      margin: 64px 0;
+    }
+    .newsletter-wrap h2 { margin-bottom: 10px; }
+    .newsletter-wrap p  {
+      font-size: .93rem;
+      max-width: 460px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .newsletter-input {
+      flex: 1;
+      min-width: 220px;
+      background: var(--black);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--white);
+      font-family: var(--font-main);
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .newsletter-input::placeholder {
+      color: var(--grey-dark);
+    }
+    .newsletter-input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,189,179,.1);
+    }
+    .newsletter-stat-col {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .newsletter-stat-num {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .newsletter-stat-label {
+      font-size: .76rem;
+      color: var(--grey-dark);
+      margin-top: 4px;
+    }
+    .newsletter-status {
+      margin-top: 10px;
+      font-size: .78rem;
+      display: none;
+    }
+    .newsletter-status.success {
+      color: var(--teal);
+      display: block;
+    }
+    .newsletter-status.error {
+      color: #F87171;
+      display: block;
+    }
+
+    /* ── Topics sidebar strip ────────────────── */
+    .topics-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .topic-chip {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: var(--font-head);
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--grey);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .topic-chip:hover,
+    .topic-chip.active {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: var(--teal-glow);
+    }
+
+    /* ── Pagination ──────────────────────────── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 56px;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: .82rem;
+      color: var(--grey);
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+    }
+    .page-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .page-btn.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--black);
+    }
+
+    /* ── Footer ──────────────────────────────── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 68px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 52px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .footer-brand-name span { color: var(--teal); }
+    .footer-brand p {
+      font-size: .84rem;
+      max-width: 260px;
+      line-height: 1.75;
+    }
+    .footer-col h4 {
+      font-family: var(--font-head);
+      font-size: .74rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      color: var(--grey);
+      font-size: .84rem;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--teal); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: .76rem; color: var(--grey-dark); }
+    .footer-bottom-links { display: flex; gap: 22px; }
+    .footer-bottom-links a {
+      font-size: .76rem;
+      color: var(--grey-dark);
+      transition: color .2s;
+    }
+    .footer-bottom-links a:hover { color: var(--teal); }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .posts-grid { grid-template-columns: repeat(2,1fr); }
+      .post-card.featured { flex-direction: column; }
+      .featured .post-image { width: 100%; height: 180px; }
+      .newsletter-wrap { grid-template-columns: 1fr; }
+      .newsletter-stat-col { text-align: left; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .posts-grid { grid-template-columns: 1fr; }
+      .post-card.featured { grid-column: auto; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .newsletter-wrap { padding: 28px; }
+    }
+    @media (max-width: 480px) {
+      .page-hero { padding: 120px 0 44px; }
+      .post-body { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      CORE<span>MERCH</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="products.html">Products</a></li>
+      <li><a href="freebies.html">Free Resources</a></li>
+      <li><a href="posts.html" class="active">Blog</a></li>
+      <li><a href="custom-job.html">Custom Work</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="freebies.html"
+         class="btn btn-secondary"
+         style="padding:9px 16px;font-size:.8rem;">
+        Free Resources
+      </a>
+      <a href="products.html"
+         class="btn btn-primary"
+         style="padding:9px 16px;font-size:.8rem;">
+        Browse Products
+      </a>
+    </div>
+    <div class="hamburger"
+         id="hamburger"
+         onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="freebies.html">Free Resources</a>
+  <a href="posts.html">Blog</a>
+  <a href="custom-job.html">Custom Work</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- ── Page Hero ────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-eyebrow">
+      <div class="page-eyebrow-line"></div>
+      <span class="page-eyebrow-text">
+        The COREMERCH Blog
+      </span>
+    </div>
+    <h1>
+      Infrastructure Insights.<br>
+      Commerce Intelligence.
+    </h1>
+    <p style="margin-top:16px;max-width:540px;
+              font-size:1rem;">
+      Technical guides, commerce strategy, and real
+      experience from building sovereign digital commerce
+      infrastructure from Zimbabwe — and deploying it
+      everywhere.
+    </p>
+  </div>
+</div>
+
+<!-- ── Filter Bar ─────────────────────────────────── -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <button class="filter-btn active"
+              onclick="filterPosts('all',this)">
+        All Posts
+      </button>
+      <button class="filter-btn"
+              onclick="filterPosts('infrastructure',this)">
+        Infrastructure
+      </button>
+      <button class="filter-btn"
+              onclick="filterPosts('crypto',this)">
+        Crypto Payments
+      </button>
+      <button class="filter-btn"
+              onclick="filterPosts('strategy',this)">
+        Strategy
+      </button>
+      <button class="filter-btn"
+              onclick="filterPosts('tutorials',this)">
+        Tutorials
+      </button>
+      <button class="filter-btn"
+              onclick="filterPosts('origin',this)">
+        Our Story
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Posts Section ─────────────────────────────────── -->
+<section class="section" id="posts">
+  <div class="container">
+
+    <!-- Topics strip -->
+    <div class="topics-strip" id="topicsStrip">
+      <div class="topic-chip active"
+           onclick="filterPosts('all',null,this)">
+        All Topics
+      </div>
+      <div class="topic-chip"
+           onclick="filterPosts('infrastructure',null,this)">
+        Infrastructure
+      </div>
+      <div class="topic-chip"
+           onclick="filterPosts('crypto',null,this)">
+        Crypto Payments
+      </div>
+      <div class="topic-chip"
+           onclick="filterPosts('strategy',null,this)">
+        Strategy
+      </div>
+      <div class="topic-chip"
+           onclick="filterPosts('tutorials',null,this)">
+        Tutorials
+      </div>
+      <div class="topic-chip"
+           onclick="filterPosts('origin',null,this)">
+        Our Story
+      </div>
+    </div>
+
+    <!-- Posts grid -->
+    <div class="posts-grid" id="postsGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination">
+      <!-- Populated by JS -->
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Newsletter ─────────────────────────────────────── -->
+<div class="container">
+  <div class="newsletter-wrap">
+    <div>
+      <div class="section-label" style="margin-bottom:14px;">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          Stay Current
+        </span>
+      </div>
+      <h2>Infrastructure Updates.<br>Straight To Your Inbox.</h2>
+      <p style="margin-top:8px;">
+        New stack documentation, tool updates, commerce
+        strategy, and tutorials — delivered when published.
+        No marketing. No frequency pressure.
+      </p>
+      <form class="newsletter-form"
+            onsubmit="subscribeNewsletter(event)">
+        <input
+          type="email"
+          class="newsletter-input"
+          id="newsletterEmail"
+          placeholder="your@email.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="btn btn-primary">
+          Subscribe →
+        </button>
+      </form>
+      <div class="newsletter-status"
+           id="newsletterStatus">
+      </div>
+    </div>
+    <div class="newsletter-stat-col">
+      <div class="newsletter-stat-num">0%</div>
+      <div class="newsletter-stat-label">
+        Spam. Ever.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          CORE<span>MERCH</span>
+        </div>
+        <p>
+          Core infrastructure for digital commerce.
+          Sell anything, from anywhere, to everyone.
+          No platforms. No gatekeepers.
+        </p>
+        <p style="margin-top:14px;font-size:.76rem;
+                  color:var(--grey-dark);">
+          Built in Zimbabwe 🇿🇼
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul class="footer-links">
+          <li>
+            <a href="products.html?filter=deployment">
+              Done For You
+            </a>
+          </li>
+          <li>
+            <a href="products.html?filter=blueprint">
+              Blueprints
+            </a>
+          </li>
+          <li>
+            <a href="products.html?filter=template">
+              Templates
+            </a>
+          </li>
+          <li>
+            <a href="products.html?filter=membership">
+              Membership
+            </a>
+          </li>
+          <li>
+            <a href="freebies.html">Free Resources</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="posts.html">Blog</a></li>
+          <li><a href="custom-job.html">Custom Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="legal.html">Legal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Start Free</h4>
+        <ul class="footer-links">
+          <li>
+            <a href="freebies.html">
+              Infrastructure Map
+            </a>
+          </li>
+          <li>
+            <a href="freebies.html">Fee Cheatsheet</a>
+          </li>
+          <li>
+            <a href="freebies.html">
+              Platform Database
+            </a>
+          </li>
+          <li>
+            <a href="freebies.html">
+              NOWPayments Guide
+            </a>
+          </li>
+          <li>
+            <a href="freebies.html">
+              Stack Selector Quiz
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        © 2025 COREMERCH.
+        Built in Zimbabwe.
+        All rights reserved.
+      </p>
+      <div class="footer-bottom-links">
+        <a href="legal.html#privacy">Privacy</a>
+        <a href="legal.html#terms">Terms</a>
+        <a href="legal.html#refund">Refunds</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── JavaScript ─────────────────────────────────────── -->
+<script>
+
+  // ══════════════════════════════════════════════
+  // CONFIG
+  // ══════════════════════════════════════════════
+  const SCRIPT_URL =
+    'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL';
+
+  // ══════════════════════════════════════════════
+  // POST DATA
+  // This is your post index.
+  // Your GitHub content bot publishes individual
+  // post HTML files. Add each post here as an
+  // object. The slug maps to the filename:
+  // posts/[slug].html
+  // ══════════════════════════════════════════════
+  const POSTS = [
+    {
+      slug:     'why-stripe-doesnt-work-in-africa',
+      title:    'Why Stripe Does Not Work In Africa — And What To Use Instead',
+      excerpt:  'Stripe requires banking partnerships, regulatory relationships, and compliance infrastructure that simply does not exist in most African countries. Here is the complete technical explanation — and the solution.',
+      category: 'infrastructure',
+      date:     '2025-01-15',
+      readTime: '8 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '🌍',
+      featured: true
+    },
+    {
+      slug:     'how-nowpayments-webhook-works',
+      title:    'How NOWPayments Webhook Verification Works',
+      excerpt:  'A complete technical breakdown of how NOWPayments monitors the blockchain and fires webhooks to your backend automatically — no manual verification required.',
+      category: 'crypto',
+      date:     '2025-01-12',
+      readTime: '6 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '⚡'
+    },
+    {
+      slug:     'github-pages-digital-store',
+      title:    'Building A Digital Product Store On GitHub Pages',
+      excerpt:  'GitHub Pages is not just for portfolios and documentation. Here is how to turn it into a fully functional digital product storefront that costs nothing to host.',
+      category: 'tutorials',
+      date:     '2025-01-10',
+      readTime: '12 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '🏗️'
+    },
+    {
+      slug:     'cloudflare-workers-commerce',
+      title:    'Cloudflare Workers As A Commerce Backend',
+      excerpt:  'How to use Cloudflare Workers to process orders, verify crypto payments, deliver products, and send notifications — all serverless, all free.',
+      category: 'infrastructure',
+      date:     '2025-01-08',
+      readTime: '10 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '☁️'
+    },
+    {
+      slug:     'usdt-tron-vs-bsc-vs-solana',
+      title:    'USDT on TRON vs BSC vs Solana — Which Network For Your Store?',
+      excerpt:  'A practical comparison of USDT across three low-fee networks. Transaction costs, confirmation times, wallet availability, and which one to recommend to your buyers.',
+      category: 'crypto',
+      date:     '2025-01-06',
+      readTime: '7 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '💵'
+    },
+    {
+      slug:     'digital-product-pricing-strategy',
+      title:    'Pricing Digital Products For Global Crypto Buyers',
+      excerpt:  'Pricing strategy for creators selling to buyers who pay with crypto. What price points convert best, how to handle volatility, and why $19 outperforms $20.',
+      category: 'strategy',
+      date:     '2025-01-04',
+      readTime: '9 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '💡'
+    },
+    {
+      slug:     'built-in-zimbabwe',
+      title:    'Why We Built COREMERCH From Zimbabwe',
+      excerpt:  'The full origin story. What it means to build commerce infrastructure from inside one of the most financially isolated economies on earth — and why that makes it better.',
+      category: 'origin',
+      date:     '2025-01-02',
+      readTime: '5 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '🇿🇼',
+    },
+    {
+      slug:     'google-apps-script-order-system',
+      title:    'Building An Automated Order System With Google Apps Script',
+      excerpt:  'Step-by-step guide to building an order management system using Google Apps Script — free, cloud-hosted, and capable of handling hundreds of orders per day.',
+      category: 'tutorials',
+      date:     '2024-12-30',
+      readTime: '14 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '⚙️'
+    },
+    {
+      slug:     'supabase-vs-google-sheets',
+      title:    'Supabase vs Google Sheets For Commerce Data',
+      excerpt:  'When to use Google Sheets as your database and when to migrate to Supabase. A practical comparison based on order volume, query complexity, and team size.',
+      category: 'infrastructure',
+      date:     '2024-12-28',
+      readTime: '8 min read',
+      author:   'CM',
+      authorName: 'COREMERCH',
+      emoji:    '🗄️'
+    }
+  ];
+
+  // ══════════════════════════════════════════════
+  // STATE
+  // ══════════════════════════════════════════════
+  let currentFilter  = 'all';
+  let currentPage    = 1;
+  const POSTS_PER_PAGE = 6;
+
+  // ══════════════════════════════════════════════
+  // INIT
+  // ══════════════════════════════════════════════
+  window.addEventListener('DOMContentLoaded',
+    function() {
+      renderPosts();
+      // Handle URL category param
+      const params = new URLSearchParams(
+        window.location.search
+      );
+      const cat = params.get('cat');
+      if (cat) {
+        filterPosts(cat, null, null);
+      }
+    }
+  );
+
+  // ══════════════════════════════════════════════
+  // FILTER
+  // ══════════════════════════════════════════════
+  function filterPosts(cat, tabBtn, chipEl) {
+    currentFilter = cat;
+    currentPage   = 1;
+
+    // Update tab buttons
+    document.querySelectorAll('.filter-btn')
+      .forEach(function(b) {
+        b.classList.remove('active');
+      });
+    if (tabBtn) tabBtn.classList.add('active');
+
+    // Update topic chips
+    document.querySelectorAll('.topic-chip')
+      .forEach(function(c) {
+        c.classList.remove('active');
+      });
+    if (chipEl) chipEl.classList.add('active');
+
+    renderPosts();
+  }
+
+  // ══════════════════════════════════════════════
+  // RENDER POSTS
+  // ══════════════════════════════════════════════
+  function renderPosts() {
+    const grid =
+      document.getElementById('postsGrid');
+    if (!grid) return;
+
+    // Filter
+    const filtered = POSTS.filter(function(p) {
+      return currentFilter === 'all' ||
+             p.category === currentFilter;
+    });
+
+    // Paginate
+    const start = (currentPage - 1) * POSTS_PER_PAGE;
+    const page  = filtered.slice(
+      start, start + POSTS_PER_PAGE
+    );
+
+    grid.innerHTML = '';
+
+    if (page.length === 0) {
+      grid.innerHTML =
+        '<div class="empty-state">' +
+          '<div class="empty-icon">📭</div>' +
+          '<div class="empty-title">' +
+            'No posts in this category yet.' +
+          '</div>' +
+          '<p style="margin-top:8px;font-size:.85rem;">' +
+            'New content is published regularly. ' +
+            'Subscribe to the newsletter to be notified.' +
+          '</p>' +
+        '</div>';
+      renderPagination(0);
+      return;
+    }
+
+    page.forEach(function(post, index) {
+      const isFeatured = post.featured &&
+                         currentFilter === 'all' &&
+                         currentPage === 1 &&
+                         index === 0;
+
+      const el = document.createElement('a');
+      el.href      = 'posts/' + post.slug + '.html';
+      el.className = 'post-card' +
+        (isFeatured ? ' featured' : '');
+      el.dataset.category = post.category;
+
+      el.innerHTML =
+        '<div class="post-image">' +
+          post.emoji +
+        '</div>' +
+        '<div class="post-body">' +
+          '<div class="post-meta">' +
+            '<span class="post-cat">' +
+              formatCat(post.category) +
+            '</span>' +
+            '<span class="post-date">' +
+              formatDate(post.date) +
+            '</span>' +
+            '<span class="post-read-time">' +
+              post.readTime +
+            '</span>' +
+          '</div>' +
+          '<div class="post-title">' +
+            post.title +
+          '</div>' +
+          '<div class="post-excerpt">' +
+            post.excerpt +
+          '</div>' +
+          '<div class="post-footer">' +
+            '<div class="post-author">' +
+              '<div class="post-author-avatar">' +
+                post.author +
+              '</div>' +
+              '<span class="post-author-name">' +
+                post.authorName +
+              '</span>' +
+            '</div>' +
+            '<span class="post-read-link">' +
+              'Read →' +
+            '</span>' +
+          '</div>' +
+        '</div>';
+
+      grid.appendChild(el);
+    });
+
+    renderPagination(filtered.length);
+    animatePosts();
+  }
+
+  // ══════════════════════════════════════════════
+  // PAGINATION
+  // ══════════════════════════════════════════════
+  function renderPagination(total) {
+    const wrap =
+      document.getElementById('pagination');
+    if (!wrap) return;
+
+    const totalPages = Math.ceil(
+      total / POSTS_PER_PAGE
+    );
+
+    wrap.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    // Prev
+    if (currentPage > 1) {
+      const prev = document.createElement('div');
+      prev.className   = 'page-btn';
+      prev.textContent = '←';
+      prev.addEventListener('click', function() {
+        currentPage--;
+        renderPosts();
+        document.getElementById('posts')
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+      wrap.appendChild(prev);
+    }
+
+    // Pages
+    for (var i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('div');
+      btn.className = 'page-btn' +
+        (i === currentPage ? ' active' : '');
+      btn.textContent = i;
+      btn.dataset.page = i;
+      btn.addEventListener('click', (function(pg) {
+        return function() {
+          currentPage = pg;
+          renderPosts();
+          document.getElementById('posts')
+            .scrollIntoView({ behavior: 'smooth' });
+        };
+      })(i));
+      wrap.appendChild(btn);
+    }
+
+    // Next
+    if (currentPage < totalPages) {
+      const next = document.createElement('div');
+      next.className   = 'page-btn';
+      next.textContent = '→';
+      next.addEventListener('click', function() {
+        currentPage++;
+        renderPosts();
+        document.getElementById('posts')
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+      wrap.appendChild(next);
+    }
+  }
+
+  // ══════════════════════════════════════════════
+  // HELPERS
+  // ══════════════════════════════════════════════
+  function formatCat(cat) {
+    const map = {
+      infrastructure: 'Infrastructure',
+      crypto:         'Crypto Payments',
+      strategy:       'Strategy',
+      tutorials:      'Tutorial',
+      origin:         'Our Story'
+    };
+    return map[cat] || cat;
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-GB', {
+      day:   'numeric',
+      month: 'short',
+      year:  'numeric'
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // ANIMATE POSTS ON RENDER
+  // ══════════════════════════════════════════════
+  function animatePosts() {
+    document.querySelectorAll('.post-card')
+      .forEach(function(el, i) {
+        el.style.opacity   = '0';
+        el.style.transform = 'translateY(22px)';
+        el.style.transition =
+          'opacity .4s ease ' + (i * 0.06) + 's, ' +
+          'transform .4s ease ' + (i * 0.06) + 's';
+        setTimeout(function() {
+          el.style.opacity   = '1';
+          el.style.transform = 'translateY(0)';
+        }, 50);
+      });
+  }
+
+  // ══════════════════════════════════════════════
+  // NEWSLETTER
+  // ══════════════════════════════════════════════
+  async function subscribeNewsletter(e) {
+    e.preventDefault();
+
+    const emailEl =
+      document.getElementById('newsletterEmail');
+    const statusEl =
+      document.getElementById('newsletterStatus');
+    const btn = e.target.querySelector('button');
+
+    const email = emailEl.value.trim();
+    if (!email) return;
+
+    btn.disabled    = true;
+    btn.textContent = 'Subscribing…';
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action:    'newsletter_subscribe',
+          email:     email,
+          source:    'blog-page',
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      statusEl.textContent =
+        '✓ Subscribed. You will hear from us when ' +
+        'new content is published.';
+      statusEl.className = 'newsletter-status success';
+      emailEl.value      = '';
+      btn.textContent    = '✓ Subscribed';
+
+    } catch (err) {
+      statusEl.textContent =
+        'Something went wrong. Please try again.';
+      statusEl.className = 'newsletter-status error';
+      btn.disabled       = false;
+      btn.textContent    = 'Subscribe →';
+    }
+  }
+
+  // ══════════════════════════════════════════════
+  // MOBILE MENU
+  // ══════════════════════════════════════════════
+  function toggleMenu() {
+    document.getElementById('mobileMenu')
+      .classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu =
+      document.getElementById('mobileMenu');
+    const ham  =
+      document.getElementById('hamburger');
+    if (!menu.contains(e.target) &&
+        !ham.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // ══════════════════════════════════════════════
+  // NAVBAR SCROLL
+  // ══════════════════════════════════════════════
+  window.addEventListener('scroll', function() {
+    const nav =
+      document.getElementById('navbar');
+    nav.style.background = window.scrollY > 50
+      ? 'rgba(7,8,15,.98)'
+      : 'rgba(7,8,15,.9)';
+    nav.style.boxShadow = window.scrollY > 50
+      ? '0 4px 32px rgba(0,0,0,.4)'
+      : 'none';
+  });
+
+</script>
+</body>
+</html>
