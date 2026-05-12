@@ -3,27 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="COREMERCH Free Resources — 5 free downloads for digital creators. Infrastructure map, crypto fee cheatsheet, platform restriction database, NOWPayments quick start, and stack selector quiz." />
-  <meta name="keywords" content="free sovereign commerce resources, crypto payment guide, platform restrictions, NOWPayments setup, digital product infrastructure" />
-  <meta property="og:title" content="COREMERCH Free Resources — Start Here. No Cost. No Card." />
-  <meta property="og:description" content="5 free resources for digital creators who want sovereign commerce infrastructure. Submit your email. Download instantly." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://coremerch.io/freebies.html" />
+  <meta name="description" content="Free resources from COREMERCH — Infrastructure maps, fee cheatsheets, NOWPayments guides, and more. No email required." />
   <title>Free Resources — COREMERCH</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
       --black:        #07080F;
       --navy:         #0C1220;
       --navy-mid:     #131D30;
-      --navy-light:   #1A2640;
       --teal:         #00BDB3;
-      --teal-dark:    #009990;
       --teal-glow:    rgba(0,189,179,0.12);
       --teal-border:  rgba(0,189,179,0.25);
       --amber:        #F0A500;
@@ -33,8 +24,452 @@
       --grey:         #8591A3;
       --grey-dark:    #47566A;
       --border:       rgba(255,255,255,0.07);
-      --green:        #22C55E;
-      --green-glow:   rgba(34,197,94,0.12);
+      --font-main:    'Inter', sans-serif;
+      --font-head:    'Space Grotesk', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-main);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed; top:0; left:0; right:0;
+      height: 64px; padding: 0 24px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      background: rgba(7,8,15,.95);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .label-line { width:28px; height:2px; background:var(--teal); }
+    .label-text {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: var(--grey);
+      max-width: 480px;
+      margin: 0 auto 16px;
+    }
+
+    .no-email-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--teal);
+      background: var(--teal-glow);
+      border: 1px solid var(--teal-border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 60px;
+    }
+
+    .freebies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .freebie-card {
+      background: var(--navy);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .freebie-card:hover {
+      border-color: var(--teal-border);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(0,189,179,.07);
+    }
+
+    .fc-icon {
+      padding: 32px 28px 16px;
+      font-size: 2.4rem;
+    }
+
+    .fc-body {
+      padding: 0 28px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fc-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .fc-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .98rem;
+      color: var(--white);
+      line-height: 1.35;
+    }
+
+    .fc-desc {
+      font-size: .83rem;
+      color: var(--grey);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .fc-footer {
+      padding: 18px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .fc-free-badge {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .88rem;
+      color: var(--teal);
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      background: var(--teal-glow);
+      border: 1px solid var(--teal-border);
+      color: var(--teal);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: .82rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-download:hover {
+      background: var(--teal);
+      color: var(--black);
+      border-color: var(--teal);
+    }
+
+    /* Upgrade callout */
+    .upgrade-wrap {
+      background: linear-gradient(135deg,
+        rgba(240,165,0,.08), rgba(240,165,0,.03));
+      border: 1px solid var(--amber-border);
+      border-radius: 20px;
+      padding: 52px 48px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .upgrade-wrap h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 14px;
+      color: var(--amber);
+    }
+
+    .upgrade-wrap p {
+      color: var(--grey);
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+
+    .btn-amber {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 10px;
+      background: var(--amber);
+      color: var(--black);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .btn-amber:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    footer p { font-size:.8rem; color:var(--grey-dark); }
+    footer a { color:var(--teal); text-decoration:none; }
+
+    @media (max-width:860px) {
+      .freebies-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:520px) {
+      .freebies-grid { grid-template-columns: 1fr; }
+      .upgrade-wrap  { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">CORE<span>MERCH</span></a>
+  <a href="products.html"
+     style="padding:8px 16px;border-radius:8px;
+            background:var(--teal);color:var(--black);
+            font-family:var(--font-head);font-weight:600;
+            font-size:.82rem;text-decoration:none;">
+    Browse Products
+  </a>
+</nav>
+
+<div style="padding-top:64px;">
+<div class="container">
+
+  <div class="page-hero">
+    <div class="section-label">
+      <div class="label-line"></div>
+      <span class="label-text">Free Resources</span>
+      <div class="label-line"></div>
+    </div>
+    <h1>Take What You Need.<br>No Strings Attached.</h1>
+    <p>
+      Practical resources for building sovereign
+      digital commerce. No platform required.
+    </p>
+    <div class="no-email-note">
+      ✓ No email required — direct download
+    </div>
+  </div>
+
+  <div class="freebies-grid">
+
+    <div class="freebie-card">
+      <div class="fc-icon">🗺️</div>
+      <div class="fc-body">
+        <div class="fc-label">Reference</div>
+        <div class="fc-name">
+          Sovereign Commerce Infrastructure Map
+        </div>
+        <p class="fc-desc">
+          Visual map of the complete COREMERCH infrastructure.
+          Every tool, every layer, every connection.
+          Understand the architecture before you build.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/infrastructure-map.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="freebie-card">
+      <div class="fc-icon">💸</div>
+      <div class="fc-body">
+        <div class="fc-label">Cheatsheet</div>
+        <div class="fc-name">
+          Platform Fee Comparison Cheatsheet
+        </div>
+        <p class="fc-desc">
+          Side-by-side fee breakdown: Stripe vs Gumroad vs
+          Shopify vs COREMERCH. Know exactly what each
+          platform takes from every sale.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/fee-cheatsheet.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="freebie-card">
+      <div class="fc-icon">🗄️</div>
+      <div class="fc-body">
+        <div class="fc-label">Database</div>
+        <div class="fc-name">
+          Platform Availability Database
+        </div>
+        <p class="fc-desc">
+          Which platforms work in which countries.
+          195 countries. 12 platforms. Updated quarterly.
+          Know before you build.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/platform-database.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="freebie-card">
+      <div class="fc-icon">⚡</div>
+      <div class="fc-body">
+        <div class="fc-label">Guide</div>
+        <div class="fc-name">
+          NOWPayments Integration Quickstart
+        </div>
+        <p class="fc-desc">
+          From zero to your first crypto payment in under
+          an hour. API key setup, IPN configuration,
+          webhook testing — everything step by step.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/nowpayments-guide.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="freebie-card">
+      <div class="fc-icon">🧭</div>
+      <div class="fc-body">
+        <div class="fc-label">Decision Tool</div>
+        <div class="fc-name">
+          Stack Selector Framework
+        </div>
+        <p class="fc-desc">
+          Answer 5 questions. Get a recommended commerce stack.
+          Built for creators who know their situation
+          but not which infrastructure fits it.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/stack-selector.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="freebie-card">
+      <div class="fc-icon">🔐</div>
+      <div class="fc-body">
+        <div class="fc-label">Security</div>
+        <div class="fc-name">
+          Crypto Payment Security Checklist
+        </div>
+        <p class="fc-desc">
+          12-point checklist for securing your crypto
+          commerce stack. IPN verification, wallet hygiene,
+          address confirmation, and more.
+        </p>
+      </div>
+      <div class="fc-footer">
+        <span class="fc-free-badge">FREE</span>
+        <a href="freebies/security-checklist.pdf"
+           class="btn-download"
+           download>
+          ↓ Download PDF
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="upgrade-wrap">
+    <h2>Ready to Build?</h2>
+    <p>
+      The free resources show you what is possible.
+      The products build it for you — or hand you
+      everything to build it yourself.
+    </p>
+    <a href="products.html" class="btn-amber">
+      Browse All Products →
+    </a>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  <p>
+    © 2025 COREMERCH. Built in Zimbabwe 🇿🇼 —
+    <a href="legal.html">Legal & Privacy</a>
+  </p>
+</footer>
+
+</body>
+</html>      --green-glow:   rgba(34,197,94,0.12);
       --font-main:    'Inter', -apple-system, sans-serif;
       --font-head:    'Space Grotesk', -apple-system, sans-serif;
       --font-mono:    'JetBrains Mono', monospace;
