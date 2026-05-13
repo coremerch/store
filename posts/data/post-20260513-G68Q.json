@@ -1,0 +1,129 @@
+{
+  "id": "post-20260513-G68Q",
+  "title": "The No-Nonsense Guide to Deploying a Digital Store on Cloudflare Pages for Free — The Full Infrastructure Guide",
+  "date": "2026-05-13T08:05:56.527Z",
+  "category": "Store Setup",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+  "image": "https://coremerch.github.io/posts/images/post-20260513-G68Q.jpg",
+  "imageSource": "picsum",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Setting up a sovereign digital store is a four-step sequence that most creators overcomplicate by starting in the wrong order. Step one is the backend: Cloudflare Workers or Google Apps Script handles payment verification, order logging, and product delivery. Step two is the payment layer: NOWPayments connects your wallet addresses to the checkout flow — no KYC required from you or your buyer. Step three is the storefront: Cloudflare Pages or GitHub Pages serves your store for free with no server management. Step four is testing: complete a real mainnet transaction, confirm the webhook fires, the order logs, and the delivery email arrives with a working download link. Only after step four passes cleanly should you promote the store. COREMERCH deploys the complete Edge Stack — Cloudflare Pages plus Workers plus Supabase plus NOWPayments — in 48 hours, end-to-end tested before handoff."
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 01 — the Sovereign Starter Stack — uses GitHub Pages for storefront hosting, Google Apps Script as the backend Web App, Google Sheets as the order database, Google Drive for product file storage, and Gmail for delivery email. The entire stack costs nothing per month. Google Apps Script runs in response to webhook events from NOWPayments, validates the payment, logs the order to Google Sheets, generates a receipt, and sends a Gmail delivery email with a Google Drive shared link. The daily limits on the free tier — 100 Gmail sends per day, Apps Script quotas sufficient for approximately 200 orders per day — are adequate for most creators at the early and growth stages. When volume exceeds these limits, the Sovereign Blueprint documents exactly how and when to migrate to Stack 02 without store downtime."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 02 — the Edge Commerce Stack — uses Cloudflare Pages for storefront hosting, Cloudflare Workers for backend webhook handling, Supabase for order storage, Cloudflare R2 for product file delivery, and Resend for transactional email. The entire stack costs nothing per month up to significant volume thresholds — Cloudflare Workers provides 100,000 requests per day free, Supabase provides 500MB of PostgreSQL storage free, Cloudflare R2 provides 10GB storage and zero egress fees free, and Resend provides 3,000 emails per month free. SPF, DKIM, and DMARC are configured during COREMERCH deployment to ensure delivery emails reach inboxes rather than spam folders. The end-to-end test before handoff confirms that the complete pipeline — payment to webhook to order log to delivery email — functions correctly on mainnet before the creator is handed control."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "The NOWPayments configuration sequence is the same regardless of which stack you are deploying. Create a NOWPayments account — no KYC required, no document upload, no bank account needed. Navigate to the wallet settings and add the wallet addresses for each cryptocurrency you want to accept. USDT on Tron and Bitcoin are the practical starting point for most creators in restricted markets. Generate an API key from the NOWPayments dashboard — this key goes into your backend configuration. Set the webhook endpoint URL in the NOWPayments IPN settings — this is the URL of your Cloudflare Worker or Apps Script Web App. Set the webhook secret key — a string you generate that both NOWPayments and your backend know, used to verify that incoming webhooks are legitimate. This configuration takes under 30 minutes and is documented step by step in the Sovereign Blueprint."
+    },
+    {
+      "type": "callout",
+      "text": "The entire sovereign stack — hosting, payments, delivery, order storage — has zero monthly cost after the one-time deployment."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Testing before promotion is not optional — it is the step that determines whether your store functions correctly under real conditions before real buyers encounter it. The test sequence has four steps. First: deploy the backend — Cloudflare Worker or Apps Script Web App — and confirm the webhook endpoint returns a valid response to a test HTTP POST. Second: configure the storefront and confirm the checkout displays correctly on desktop and mobile, QR codes generate, and live price feeds load. Third: complete a real mainnet transaction with a small amount of actual crypto — send real USDT or BTC to your configured wallet address and confirm in your NOWPayments dashboard that the transaction was detected and the webhook was fired. Fourth: check your order database — Supabase or Google Sheets — and confirm the order was logged correctly, the delivery email arrived, and the download link works. Only after all four steps confirm should you share the store URL publicly."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "The post-deployment ownership transfer is explicit in every COREMERCH deployment. When the build is complete and the end-to-end test passes, COREMERCH provides the credentials and configuration details for every component under the customer's accounts. The GitHub or Cloudflare repository is under the customer's account from the start — COREMERCH never owns the code. The Supabase or Google Sheets database is under the customer's account. The NOWPayments account is under the customer's email. The Cloudflare Workers and Pages deployments are under the customer's Cloudflare account. The Resend account is under the customer's email. COREMERCH has collaborator access during the build period and removes that access upon delivery. From that point, the store runs entirely under the customer's own accounts with no dependency on COREMERCH infrastructure, access, or continued operation."
+    },
+    {
+      "type": "heading",
+      "text": "How do I build a digital store that accepts crypto payments for free?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The setup sequence matters because each component depends on the previous one being correctly configured. Start with NOWPayments: create your account, configure wallet addresses for each coin you want to accept, generate the API key, and note the IPN secret key you will set. Then configure the backend: in Stack 01, deploy the Google Apps Script Web App and note its URL; in Stack 02, deploy the Cloudflare Worker and note its URL. Set that URL as the webhook endpoint in your NOWPayments IPN settings. Then configure the storefront: Cloudflare Pages or GitHub Pages with your product pages and checkout flow pointing to the backend. Then run a real mainnet test — send actual crypto to your configured wallet address, confirm NOWPayments detects it, confirm the webhook fires to your backend, confirm the order appears in your database, and confirm the delivery email arrives with a working download link. Only after the complete pipeline test passes should you make the store URL public. COREMERCH runs this complete test before handoff on every deployment."
+    },
+    {
+      "type": "callout",
+      "text": "Test a real mainnet transaction before you promote — finding a configuration error with your own crypto costs less than finding it with a buyer's."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Creators at the store setup stage comparing Stack 01 and Stack 02 are typically choosing between building it themselves with the Sovereign Blueprint at $47 — which covers both stacks in complete detail with full source code — or having COREMERCH deploy the complete Edge Stack under their accounts with the Edge Commerce Stack at $197. Both result in the same ownership structure: your GitHub or Cloudflare account, your Supabase database, your NOWPayments account, your wallet, your store. The difference is deployment time — four to six hours self-deploying Stack 01 following the Blueprint, versus 48 hours for a fully configured Stack 02 deployed by COREMERCH. See both options at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Follow the setup sequence without skipping steps — configuration errors are significantly harder to diagnose than setup time. First: create your NOWPayments account, add wallet addresses, generate your API key, and note your IPN secret key. Second: deploy the backend — configure Cloudflare Worker with your NOWPayments credentials and product settings, or configure Google Apps Script with the same — and confirm the endpoint URL. Third: set the webhook endpoint URL in your NOWPayments IPN settings. Fourth: deploy the storefront to Cloudflare Pages or GitHub Pages and confirm product pages and checkout display correctly. Fifth: configure your custom domain and DNS if using one, and confirm HTTPS is active. Sixth: complete a real mainnet test transaction and confirm the complete pipeline — payment detected, webhook fired, backend processed, order logged, delivery email sent, download link working. Seventh: check the order database for the test entry. Only after steps six and seven pass cleanly should you share the store URL publicly."
+    },
+    {
+      "type": "callout",
+      "text": "Follow the setup sequence in order: backend first, payment layer second, mainnet test third, promote fourth."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    "post-20260513-L7KH",
+    "post-20260512-NMQ5",
+    "post-20260512-BFT8"
+  ],
+  "meta": {
+    "searchQuery": "deploy digital store cloudflare pages free",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1434,
+    "aiProvider": "gemini",
+    "aiModel": "gemini-2.5-flash",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I build a digital store that accepts crypto payments for free?",
+      "What is the difference between Stack 01 and Stack 02 in COREMERCH?",
+      "Can I host a digital product store on GitHub Pages or Cloudflare Pages?",
+      "How do I connect NOWPayments to my static site?"
+    ],
+    "relatedSearches": [
+      "github pages digital store crypto payments free hosting",
+      "cloudflare pages workers supabase nowpayments stack",
+      "coremerch edge stack deployment 48 hours",
+      "sovereign starter stack google apps script nowpayments"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "5.1",
+    "generatedAt": "2026-05-13T08:05:56.565Z"
+  }
+}
