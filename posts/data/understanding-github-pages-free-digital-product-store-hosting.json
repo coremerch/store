@@ -1,0 +1,415 @@
+{
+  "id": "post-20260515-55I8",
+  "slug": "understanding-github-pages-free-digital-product-store-hosting",
+  "title": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+  "date": "2026-05-15T21:32:23.161Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260515-55I8.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Kenya, digital [[LINK:https://coremerch.github.io/store/blog/how-creator-built-how-bangladeshi-freelancers-accept-international|COREMERCH guide to creator]]s face a significant hurdle: lack of access to conventional [[LINK:https://coremerch.github.io/store/blog/usdt-[[LINK:https://coremerch.github.io/store/blog/payment-solutions-zimbabwean-digital-sellers-step-step-deployment-2|Payment Solutions]]-gateways-digital-products-explained-digital-creators-2|payment]] platforms like Stripe or PayPal. This restriction hinders their ability to sell digital products online, limiting their earning potential. However, there's a solution that bypasses these limitations: sovereign commerce infrastructure. By leveraging GitHub Pages for hosting, digital creators can establish a free digital product store, gaining control over their sales and customer data."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/how-how-start-selling-digital-products-crypto-works-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-how-start-selling-digital-products-crypto-works-2",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Github pages"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sovereign commerce infrastructure refers to the combination of tools and services that enable digital creators to sell their products online without relying on third-party platforms. This approach ensures that creators maintain ownership of their customer data and sales processes. GitHub Pages, a free service offered by GitHub, allows creators to host their digital stores, providing a foundation for sovereign commerce infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pricing digital products in crypto is straightforward because NOWPayments handles the currency conversion automatically. You set your price in USD. The checkout pulls live exchange rates and displays the exact amount in whichever cryptocurrency the buyer selects. For USDT-denominated products, there is no conversion at all — one dollar in equals one dollar received, minus network fees that typically amount to less than $0.10 on Tron or Solana. You receive the crypto equivalent of your USD price in the wallet you configured in your NOWPayments account. COREMERCH never touches these funds at any point — the wallet is yours from the moment of setup and remains yours unconditionally."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product types that work with automated crypto delivery are any digital files that can be stored and delivered via download link: ebooks in PDF or EPUB format, courses packaged as ZIP archives, Notion templates exported as files or share links, font families as ZIP archives of OTF and TTF files, Lightroom or Capture One preset packs, beat files as WAV or MP3 archives, plugin installers, stock photo packs, software license keys, and any other file-based product. The delivery system in Stack 01 uses Google Drive shared links. Stack 02 uses Cloudflare R2 presigned URLs with configurable expiry times — typically 24 to 72 hours — which prevents download links from being shared indefinitely after a single purchase."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure empowers digital creators."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital store, creators can start by setting up a GitHub Pages site and configuring their backend using Cloudflare Workers or Google Apps Script. They can then integrate NOWPayments for crypto payments and set up order storage and file delivery using services like Supabase and Google Drive. With these components in place, creators can begin selling their digital products online, free from the limitations of conventional payment platforms."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Complete Builder Kit, available at https://coremerch.github.io/products.html for $197, provides digital creators with all the necessary tools and documentation to deploy a sovereign digital store. This kit includes all 6 blueprints, 7 templates, and a scaling playbook, empowering creators to establish a fully functional online store with automatic crypto payment processing and instant product delivery."
+    },
+    {
+      "type": "callout",
+      "text": "GitHub Pages provides free hosting for digital stores."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "For digital creators seeking to establish a sovereign commerce infrastructure, the Complete Builder Kit offers a comprehensive solution. By investing in this kit, creators can gain the knowledge and tools necessary to deploy a fully functional digital store, complete with automatic crypto payment processing and instant product delivery, all for $197."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital store, follow these steps: set up a GitHub Pages site, configure your backend using Cloudflare Workers or Google Apps Script, integrate NOWPayments for crypto payments, set up order storage using Supabase or Google Sheets, configure file delivery using Google Drive or Cloudflare R2, and test your store to ensure all components are functioning correctly. With these steps completed, you can begin selling your digital products online, free from the limitations of conventional payment platforms."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "What is sovereign commerce infrastructure?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Sovereign commerce infrastructure refers to the combination of tools and services that enable digital creators to sell their products online without relying on third-party platforms."
+    },
+    {
+      "type": "faq_question",
+      "text": "How does GitHub Pages facilitate sovereign commerce?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "GitHub Pages provides a free hosting service for digital stores, allowing creators to maintain ownership of their customer data and sales processes."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the role of NOWPayments in sovereign commerce?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments facilitates crypto payments, enabling creators to receive payments in a variety of cryptocurrencies."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use sovereign commerce infrastructure if I'm not tech-savvy?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, with the right tools and documentation, such as the Complete Builder Kit, creators can deploy a sovereign digital store even without extensive technical expertise."
+    },
+    {
+      "type": "faq_question",
+      "text": "Is sovereign commerce infrastructure secure?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, by leveraging services like Cloudflare Workers and Google Apps Script, creators can ensure their digital stores are secure and reliable."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments facilitates crypto payments with low fees."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260512-U2RN",
+      "slug": "everything-you-need-know-about-github-pages-free-2"
+    },
+    {
+      "id": "post-20260512-PD1K",
+      "slug": "everything-you-need-know-about-github-pages-free"
+    },
+    {
+      "id": "post-20260512-CAFK",
+      "slug": "understanding-digital-product-stores-kyc-payments-plain-language-2"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is sovereign commerce infrastructure?",
+      "answer": "Sovereign commerce infrastructure refers to the combination of tools and services that enable digital creators to sell their products online without relying on third-party platforms."
+    },
+    {
+      "question": "How does GitHub Pages facilitate sovereign commerce?",
+      "answer": "GitHub Pages provides a free hosting service for digital stores, allowing creators to maintain ownership of their customer data and sales processes."
+    },
+    {
+      "question": "What is the role of NOWPayments in sovereign commerce?",
+      "answer": "NOWPayments facilitates crypto payments, enabling creators to receive payments in a variety of cryptocurrencies."
+    },
+    {
+      "question": "Can I use sovereign commerce infrastructure if I'm not tech-savvy?",
+      "answer": "Yes, with the right tools and documentation, such as the Complete Builder Kit, creators can deploy a sovereign digital store even without extensive technical expertise."
+    },
+    {
+      "question": "Is sovereign commerce infrastructure secure?",
+      "answer": "Yes, by leveraging services like Cloudflare Workers and Google Apps Script, creators can ensure their digital stores are secure and reliable."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-15",
+    "lastReviewed": "2026-05-15",
+    "nextReviewDue": "2026-07-14"
+  },
+  "social": {
+    "x": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure B https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "linkedIn": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "forum": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "hook": "Understanding GitHub Pages for Free Digital Pro...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting"
+  },
+  "crossPostSummary": {
+    "title": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+    "hook": "Understanding GitHub Pages for Free Digital Pro...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "forum": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "x": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure B https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "linkedIn": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+    "hook50": "Understanding GitHub Pages for Free Digital Pro..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-15T21:32:23.163Z",
+      "dateModified": "2026-05-15T21:32:23.163Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260515-55I8.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting"
+      },
+      "keywords": "github pages digital product store free hosting",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is sovereign commerce infrastructure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sovereign commerce infrastructure refers to the combination of tools and services that enable digital creators to sell their products online without relying on third-party platforms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does GitHub Pages facilitate sovereign commerce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub Pages provides a free hosting service for digital stores, allowing creators to maintain ownership of their customer data and sales processes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the role of NOWPayments in sovereign commerce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments facilitates crypto payments, enabling creators to receive payments in a variety of cryptocurrencies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use sovereign commerce infrastructure if I'm not tech-savvy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with the right tools and documentation, such as the Complete Builder Kit, creators can deploy a sovereign digital store even without extensive technical expertise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is sovereign commerce infrastructure secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, by leveraging services like Cloudflare Workers and Google Apps Script, creators can ensure their digital stores are secure and reliable."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260515-55I8.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260515-55I8.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Understanding GitHub Pages for Free Digital Product Store Hosting: A Plain-Language Infrastructure Breakdown",
+        "url": "https://coremerch.github.io/store/blog/understanding-github-pages-free-digital-product-store-hosting"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Github pages",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "github pages",
+    "totalWords": 960,
+    "count": 7,
+    "densityPercent": 0.7,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "github pages digital product store free hosting",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1026,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-15T21:32:23.164Z"
+  }
+}
