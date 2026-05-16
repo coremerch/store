@@ -1,0 +1,435 @@
+{
+  "id": "post-20260516-497Y",
+  "slug": "understanding-selling-design-assets-crypto-payments-plain-language-4",
+  "title": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+  "date": "2026-05-16T19:01:26.013Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260516-497Y.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Zimbabwe, where Stripe doesn't work, digital creators face a harsh reality: rent a platform, pay fees, or build infrastructure. Platform fees can eat into profit margins, making it difficult to sell [[LINK:https://coremerch.github.io/store/blog/how-how-sell-ebooks-kenya-works-how-deploy-3|How How]], courses, and design assets. Gumroad, for instance, charges 10% on every sale, while NOW[[LINK:https://coremerch.github.io/store/blog/how-get-payment-infrastructure-south-asian-creators-live|COREMERCH guide to payment]]s charges a mere 0.5%. This fee [[LINK:https://coremerch.github.io/store/blog/real-difference-between-choices-selling-pdf-guides-without-2|difference]] can be substantial, with $921 retained at 100 sales per month on a $97 product. To avoid this problem, COREMERCH provides a sovereign digital commerce stack that allows creators to own their infrastructure and keep profits intact."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Design assets"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is not a workaround or a hack. It's base-layer infrastructure: GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification. This architecture is designed to give creators total control over their digital commerce operations, eliminating reliance on platforms and their associated fees."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The sovereign digital commerce stack is built on top of a robust infrastructure that automates the entire sales process. When a customer purchases a digital product, the order is stored in Supabase or Google Sheets, and the file is delivered through Google Drive or Cloudflare R2. Meanwhile, NOWPayments verifies the payment on-chain, triggering a webhook that updates the order status. This seamless integration ensures that the creator can focus on producing high-quality content while the infrastructure takes care of the rest."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This infrastructure is designed specifically for digital creators who face challenges in collecting payments due to platform restrictions or fees. Whether you're an ebook author, course creator, or template designer, this sovereign digital commerce stack can help you build a sustainable business model that keeps your profits intact. By eliminating reliance on platforms, you can focus on producing high-quality content and growing your audience."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign digital commerce stacks can help creators eliminate platform fees and retain profits."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The core components of the sovereign digital commerce stack include GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification. Each component plays a critical role in automating the sales process and ensuring that the creator can focus on producing high-quality content."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting points, generate your API key, and set the webhook endpoint URL. Second, choose your stack: Stack 01 uses GitHub Pages plus Google Apps Script and takes most creators four to six hours following the Sovereign Blueprint at $47; Stack 02 uses Cloudflare Pages plus Workers plus Supabase and is deployed by COREMERCH in 48 hours with the Edge Commerce Stack at $197. Third, upload your product files, set your prices in USD, and run a complete mainnet test transaction before promoting."
+    },
+    {
+      "type": "callout",
+      "text": "Using NOWPayments for payment verification can reduce fees by 90% compared to traditional payment processors."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "For those interested in building a sovereign digital commerce stack, the Complete Builder Kit ($197) is an essential resource. This kit includes all 6 blueprints and 7 templates, providing everything you need to build, deploy, and scale a secure and reliable digital commerce operation. Additionally, consider visiting the COREMERCH shop at https://coremerch.github.io/products.html to explore other products and resources."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy the sovereign digital commerce stack, follow these concrete steps. First, purchase the Complete Builder Kit ($197) and download the blueprints and templates. Next, configure your hosting using GitHub Pages or Cloudflare Pages, and set up your backend logic using Cloudflare Workers or Google Apps Script. Then, create a Supabase or Google Sheets database to store orders and set up file delivery using Google Drive or Cloudflare R2. Finally, integrate NOWPayments for automatic on-chain crypto payment verification and test the entire stack to ensure seamless operation."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How does this infrastructure eliminate reliance on platforms?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "This infrastructure eliminates reliance on platforms by providing a sovereign digital commerce stack that automates the entire sales process. With Cloudflare Pages or GitHub Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification, creators can focus on producing high-quality content while the infrastructure takes care of the rest."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the benefits of using NOWPayments for payment verification?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments provides automatic on-chain crypto payment verification, eliminating the need for intermediaries and their associated fees. With a 0.5% fee, creators can retain more profit from their sales, making it an attractive option for those looking to build a sustainable business model."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I configure my hosting using GitHub Pages or Cloudflare Pages?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Configuring hosting using GitHub Pages or Cloudflare Pages involves setting up a repository and linking it to your chosen hosting platform. This will provide a secure and reliable hosting solution for your digital commerce operation."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the key components of the sovereign digital commerce stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The core components of the sovereign digital commerce stack include GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I integrate NOWPayments with my infrastructure?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Integrating NOWPayments with your infrastructure involves setting up a webhook that triggers on-chain payment verification. This will ensure seamless operation and automatic payment verification for your digital commerce operation."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the recommended blockchain network for low fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Recommended blockchain networks for low fees include BSC, Solana, and TRON, which offer under $0.10 per transaction."
+    },
+    {
+      "type": "callout",
+      "text": "The Complete Builder Kit ($197) provides everything you need to build, deploy, and scale a secure and reliable digital commerce operation."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260516-FI52",
+      "slug": "understanding-selling-design-assets-crypto-payments-plain-language-3"
+    },
+    {
+      "id": "post-20260515-H9NY",
+      "slug": "understanding-selling-design-assets-crypto-payments-plain-language-2"
+    },
+    {
+      "id": "post-20260512-NSAX",
+      "slug": "selling-design-assets-crypto-payments-explained-digital-creators"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How does this infrastructure eliminate reliance on platforms?",
+      "answer": "This infrastructure eliminates reliance on platforms by providing a sovereign digital commerce stack that automates the entire sales process. With Cloudflare Pages or GitHub Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification, creators can focus on producing high-quality content while the infrastructure takes care of the rest."
+    },
+    {
+      "question": "What are the benefits of using NOWPayments for payment verification?",
+      "answer": "NOWPayments provides automatic on-chain crypto payment verification, eliminating the need for intermediaries and their associated fees. With a 0.5% fee, creators can retain more profit from their sales, making it an attractive option for those looking to build a sustainable business model."
+    },
+    {
+      "question": "How do I configure my hosting using GitHub Pages or Cloudflare Pages?",
+      "answer": "Configuring hosting using GitHub Pages or Cloudflare Pages involves setting up a repository and linking it to your chosen hosting platform. This will provide a secure and reliable hosting solution for your digital commerce operation."
+    },
+    {
+      "question": "What are the key components of the sovereign digital commerce stack?",
+      "answer": "The core components of the sovereign digital commerce stack include GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification."
+    },
+    {
+      "question": "How do I integrate NOWPayments with my infrastructure?",
+      "answer": "Integrating NOWPayments with your infrastructure involves setting up a webhook that triggers on-chain payment verification. This will ensure seamless operation and automatic payment verification for your digital commerce operation."
+    },
+    {
+      "question": "What is the recommended blockchain network for low fees?",
+      "answer": "Recommended blockchain networks for low fees include BSC, Solana, and TRON, which offer under $0.10 per transaction."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-16",
+    "lastReviewed": "2026-05-16",
+    "nextReviewDue": "2026-07-15"
+  },
+  "social": {
+    "x": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown  https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "linkedIn": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "forum": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "hook": "Understanding Selling Design Assets with Crypto...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4"
+  },
+  "crossPostSummary": {
+    "title": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+    "hook": "Understanding Selling Design Assets with Crypto...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "forum": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "x": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown  https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "linkedIn": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+    "hook50": "Understanding Selling Design Assets with Crypto..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-16T19:01:26.014Z",
+      "dateModified": "2026-05-16T19:01:26.014Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260516-497Y.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4"
+      },
+      "keywords": "sell design assets crypto payments",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does this infrastructure eliminate reliance on platforms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This infrastructure eliminates reliance on platforms by providing a sovereign digital commerce stack that automates the entire sales process. With Cloudflare Pages or GitHub Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification, creators can focus on producing high-quality content while the infrastructure takes care of the rest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the benefits of using NOWPayments for payment verification?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments provides automatic on-chain crypto payment verification, eliminating the need for intermediaries and their associated fees. With a 0.5% fee, creators can retain more profit from their sales, making it an attractive option for those looking to build a sustainable business model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I configure my hosting using GitHub Pages or Cloudflare Pages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Configuring hosting using GitHub Pages or Cloudflare Pages involves setting up a repository and linking it to your chosen hosting platform. This will provide a secure and reliable hosting solution for your digital commerce operation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key components of the sovereign digital commerce stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The core components of the sovereign digital commerce stack include GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, Google Drive or Cloudflare R2 for file delivery, and NOWPayments for automatic on-chain crypto payment verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I integrate NOWPayments with my infrastructure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Integrating NOWPayments with your infrastructure involves setting up a webhook that triggers on-chain payment verification. This will ensure seamless operation and automatic payment verification for your digital commerce operation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the recommended blockchain network for low fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recommended blockchain networks for low fees include BSC, Solana, and TRON, which offer under $0.10 per transaction."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260516-497Y.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260516-497Y.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Understanding Selling Design Assets with Crypto Payments: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/understanding-selling-design-assets-crypto-payments-plain-language-4"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Design assets",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "design assets",
+    "totalWords": 1141,
+    "count": 2,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell design assets crypto payments",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1229,
+    "aiProvider": "cerebras",
+    "aiModel": "llama3.1-8b",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-16T19:01:26.014Z"
+  }
+}
