@@ -1,0 +1,409 @@
+{
+  "id": "post-20260520-1AHJ",
+  "slug": "how-supabase-order-database-digital-stores-works-how-4",
+  "title": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+  "date": "2026-05-20T18:33:35.741Z",
+  "category": "Store Setup",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260520-1AHJ.png",
+  "imageSource": "picsum",
+  "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+  "imageCaption": "Stack 01 or Stack 02 — both deployed under your own accounts, end-to-end tested before handoff.",
+  "canonical": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Zimbabwe, digital creators face a critical barrier: [[LINK:https://coremerch.github.io/store/blog/payment-solutions-zimbabwean-digital-sellers-[[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-digital-downloads|COREMERCH guide to everything]]-about-bitcoin-payments-digital-downloads-guide-leaves|Everything About]]-you-need|payment]] processors like Stripe and PayPal are either unavailable or unreliable. This leaves you unable to sell your digital products—ebooks, courses, templates—to a global audience. The solution isn’t a workaround; it’s sovereign infrastructure. Supabase, a serverless database, acts as the backbone for your order management system, paired with Cloudflare Workers for backend logic and NOWPayments for crypto payments. This stack eliminates dependency on third-party platforms, giving you full control over your commerce pipeline. Deploy once, own forever. No subscriptions. No gatekeepers. This guide walks you through deploying Supabase as your order database, integrated into the Edge Commerce Stack. By the end, you’ll have a fully operational digital store that processes payments in 300+ cryptocurrencies, delivers products instantly, and stores order data securely—all without touching Stripe or PayPal."
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Platforms like Stripe and PayPal fail creators in regions like Zimbabwe by imposing geographic restrictions, currency blocks, and arbitrary account closures. Supabase, as your order database, solves this by operating as a self-hosted, open-source alternative to Firebase. It stores order data securely, scales automatically, and integrates seamlessly with Cloudflare Workers for backend logic. Unlike platforms, Supabase doesn’t gatekeep your data—you own it. Paired with NOWPayments, which processes crypto transactions without KYC or buyer accounts, this stack ensures your store operates on your terms. Cloudflare’s global edge network ensures low-latency delivery, while Supabase’s PostgreSQL backbone handles complex queries for inventory, orders, and customer data. This isn’t a patch; it’s a permanent shift to infrastructure sovereignty."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before deploying, ensure you have a Cloudflare account for hosting and edge logic, a NOWPayments API key for crypto payment processing, and a Supabase project for order storage. You’ll also need a domain (or use Cloudflare’s free workers.dev subdomain) and basic familiarity with JSON and API endpoints. If you’re deploying the Edge Commerce Stack, COREMERCH handles the setup for you—including SPF/DKIM/DMARC configuration for email deliverability. For self-deployment, install the Supabase CLI and authenticate it to your project. Test your payment webhook locally using a tool like ngrok to ensure NOWPayments can communicate with your backend. Finally, prepare your digital products: upload them to Cloudflare R2 or Google Drive, and generate secure, expiring URLs for delivery."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by configuring NOWPayments to send transaction webhooks to your Cloudflare Worker. Set the callback URL to your worker’s endpoint, and select a low-fee network like BSC or Solana. In your Worker, write logic to verify the webhook signature, confirm payment, and insert the order into Supabase. Use Supabase’s built-in RLS (Row Level Security) policies to restrict access to sensitive data. For product delivery, generate a signed URL to your file storage (Cloudflare R2 or Google Drive) and send it to the buyer’s email via Cloudflare’s email API or a third-party service like SendGrid. Test the entire flow: simulate a payment, verify the order appears in Supabase, and confirm the product link is delivered. Automate retries for failed webhooks using Cloudflare Workers’ cron triggers."
+    },
+    {
+      "type": "callout",
+      "text": "Supabase’s real-time database ensures orders are processed the moment payment confirms on-chain."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploy your Cloudflare Worker to the edge, and point your domain to it using a CNAME record. Test the live environment by purchasing a product using a small amount of crypto—BSC or TRON are recommended for fees under $0.10. Monitor Supabase’s real-time database changes to ensure the order is logged correctly. Check your email to confirm the delivery link arrives. Once verified, promote your store. Use Cloudflare’s firewall rules to block malicious traffic and rate-limit API endpoints. For the Edge Commerce Stack, COREMERCH deploys this for you, including end-to-end testing and 30-day support. Self-deployers should set up error logging in Cloudflare Workers and Supabase to debug issues proactively."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "With your store live, focus on scaling efficiently. Use Supabase’s edge functions to offload heavy computations from your Worker. Implement caching for frequently accessed product data using Cloudflare’s KV storage. Monitor transaction volume and adjust NOWPayments’ webhook timeout settings to handle high traffic. For larger catalogs, migrate product metadata to Supabase’s vector search for faster lookups. If you’re using the Edge Commerce Stack, COREMERCH’s scaling playbook provides templates for adding new products, integrating analytics, and optimizing delivery speeds. Self-deployers should regularly audit Supabase’s storage usage and prune old orders to keep costs low. Infrastructure sovereignty means you control the growth—no platform limits, no sudden shutdowns."
+    },
+    {
+      "type": "heading",
+      "text": "How do I build a digital store that accepts crypto payments for free?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Supabase serves as the order database in your digital store by storing transaction details, customer data, and product metadata in a PostgreSQL database. Its real-time capabilities allow instant updates when a payment is confirmed via NOWPayments. Integrated with Cloudflare Workers, it processes orders, generates delivery links, and triggers email notifications. Unlike Firebase or Airtable, Supabase is self-hosted, ensuring you own your data. Its built-in authentication and RLS policies secure access, while its edge functions enable serverless scaling. For creators in Zimbabwe, this means a reliable, platform-independent system that works even when Stripe or PayPal are unavailable."
+    },
+    {
+      "type": "callout",
+      "text": "Cloudflare Workers handle backend logic at the edge, reducing latency for global buyers."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ready to deploy this infrastructure today? The Edge Commerce Stack ($197) includes full deployment of Cloudflare Pages, Workers, Supabase, and NOWPayments—configured, tested, and handed over in 48 hours. You get five products loaded, SPF/DKIM/DMARC setup for email deliverability, and 30-day support. Visit https://coremerch.github.io/products.html to order. For self-deployers, the Sovereign Blueprint ($47) provides complete documentation and source code to build this stack from scratch."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Create a Cloudflare account and Supabase project. 2. Generate a NOWPayments API key and select a low-fee network (BSC/Solana/TRON). 3. Write a Cloudflare Worker to handle payment webhooks and insert orders into Supabase. 4. Configure Supabase’s RLS policies to secure order data. 5. Upload products to Cloudflare R2 or Google Drive and generate signed URLs. 6. Test the pipeline locally using ngrok to simulate payments. 7. Deploy the Worker to Cloudflare’s edge network. 8. Point your domain to the Worker using a CNAME record. 9. Test live transactions and verify order storage in Supabase. 10. Promote your store and monitor performance using Cloudflare’s analytics."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use Supabase without technical expertise?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, if you purchase the Edge Commerce Stack, COREMERCH deploys and configures everything for you, including Supabase. For self-deployment, basic familiarity with JSON, APIs, and command-line tools is required."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if NOWPayments goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments operates on decentralized blockchain networks, making downtime unlikely. However, you can integrate a fallback payment processor by adding another webhook endpoint in your Cloudflare Worker."
+    },
+    {
+      "type": "faq_question",
+      "text": "How secure is my order data in Supabase?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Supabase uses PostgreSQL’s robust security features, including SSL encryption and RLS policies. You control access keys and can restrict data to specific IP ranges or roles."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I add more products after deployment?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Edge Commerce Stack includes templates for adding products. Self-deployers can use Supabase’s dashboard or API to insert new entries and update the Cloudflare Worker logic."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I need to migrate away from Supabase later?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Since Supabase is PostgreSQL-compatible, you can export your data and migrate to another provider. COREMERCH’s stacks are designed for portability—you own the infrastructure."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments’ 0.5% fee and no-KYC policy make crypto payments accessible to anyone, anywhere."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260520-BEDW",
+      "slug": "how-supabase-order-database-digital-stores-complete-infrastructure-2"
+    },
+    {
+      "id": "post-20260520-WP2A",
+      "slug": "supabase-order-database-digital-stores-everything-you-need-3"
+    },
+    {
+      "id": "post-20260518-H7J2",
+      "slug": "nonsense-guide-supabase-order-database-digital-stores-stripe"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use Supabase without technical expertise?",
+      "answer": "Yes, if you purchase the Edge Commerce Stack, COREMERCH deploys and configures everything for you, including Supabase. For self-deployment, basic familiarity with JSON, APIs, and command-line tools is required."
+    },
+    {
+      "question": "What happens if NOWPayments goes down?",
+      "answer": "NOWPayments operates on decentralized blockchain networks, making downtime unlikely. However, you can integrate a fallback payment processor by adding another webhook endpoint in your Cloudflare Worker."
+    },
+    {
+      "question": "How secure is my order data in Supabase?",
+      "answer": "Supabase uses PostgreSQL’s robust security features, including SSL encryption and RLS policies. You control access keys and can restrict data to specific IP ranges or roles."
+    },
+    {
+      "question": "Can I add more products after deployment?",
+      "answer": "Yes. The Edge Commerce Stack includes templates for adding products. Self-deployers can use Supabase’s dashboard or API to insert new entries and update the Cloudflare Worker logic."
+    },
+    {
+      "question": "What if I need to migrate away from Supabase later?",
+      "answer": "Since Supabase is PostgreSQL-compatible, you can export your data and migrate to another provider. COREMERCH’s stacks are designed for portability—you own the infrastructure."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-20",
+    "lastReviewed": "2026-05-20",
+    "nextReviewDue": "2026-07-19"
+  },
+  "social": {
+    "x": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe R https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "linkedIn": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "forum": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "hook": "How Supabase as the Order Database for Digital ...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4"
+  },
+  "crossPostSummary": {
+    "title": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+    "hook": "How Supabase as the Order Database for Digital ...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "forum": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "x": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe R https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "linkedIn": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+    "hook50": "How Supabase as the Order Database for Digital ..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "datePublished": "2026-05-20T18:33:35.742Z",
+      "dateModified": "2026-05-20T18:33:35.742Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-1AHJ.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4"
+      },
+      "keywords": "supabase order database digital store",
+      "articleSection": "Store Setup"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use Supabase without technical expertise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if you purchase the Edge Commerce Stack, COREMERCH deploys and configures everything for you, including Supabase. For self-deployment, basic familiarity with JSON, APIs, and command-line tools is required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if NOWPayments goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments operates on decentralized blockchain networks, making downtime unlikely. However, you can integrate a fallback payment processor by adding another webhook endpoint in your Cloudflare Worker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How secure is my order data in Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Supabase uses PostgreSQL’s robust security features, including SSL encryption and RLS policies. You control access keys and can restrict data to specific IP ranges or roles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add more products after deployment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Edge Commerce Stack includes templates for adding products. Self-deployers can use Supabase’s dashboard or API to insert new entries and update the Cloudflare Worker logic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I need to migrate away from Supabase later?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Since Supabase is PostgreSQL-compatible, you can export your data and migrate to another provider. COREMERCH’s stacks are designed for portability—you own the infrastructure."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "url": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-1AHJ.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-1AHJ.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Store Setup",
+        "url": "https://coremerch.github.io/store/blog/category/store-setup"
+      },
+      {
+        "name": "How Supabase as the Order Database for Digital Stores Works and How to Deploy It Today — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-4"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I build a digital store that accepts crypto payments for free?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "supabase order",
+    "totalWords": 1199,
+    "count": 0,
+    "densityPercent": 0,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "supabase order database digital store",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1267,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I build a digital store that accepts crypto payments for free?",
+      "What is the difference between Stack 01 and Stack 02 in COREMERCH?",
+      "Can I host a digital product store on GitHub Pages or Cloudflare Pages?",
+      "How do I connect NOWPayments to my static site?"
+    ],
+    "relatedSearches": [
+      "github pages digital store crypto payments free hosting",
+      "cloudflare pages workers supabase nowpayments stack",
+      "coremerch edge stack deployment 48 hours",
+      "sovereign starter stack google apps script nowpayments"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-20T18:33:35.743Z"
+  }
+}
