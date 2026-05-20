@@ -1,0 +1,435 @@
+{
+  "id": "post-20260520-C7JZ",
+  "slug": "nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+  "title": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+  "date": "2026-05-20T04:51:39.253Z",
+  "category": "Getting Paid",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260520-C7JZ.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In a world where Stripe, PayPal, and Gumroad reign supreme, creators in Nigeria, Ghana, Kenya, Pakistan, and Bangladesh are often left in the dark, unable to collect [[LINK:https://coremerch.github.io/store/blog/get-payment-infrastructure-south-asian-creators-working-today|COREMERCH guide to payment]]s for their digital products due to platform restrictions.  Take the case of a Zimbabwe-based digital artist who, despite their best efforts, was met with rejection by Stripe, rendering their online store useless.  This is not a story of victimhood; it's a testament to the power of [[LINK:https://coremerch.github.io/store/blog/full-infrastructure-guide-cloudflare-workers-crypto-payment-webhooks|The Full]] sovereignty.  By building their own payment and delivery pipeline using NOWPayments and [[LINK:https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-explained-digital-3|cloudflare]] Workers, they were able to break free from the shackles of platform dependency and collect payments in their preferred cryptocurrency, USDT, with fees as low as $0.10 per transaction.  This is the story of how you too can achieve infrastructure sovereignty and collect payments for your digital products without relying on Stripe or any other platform."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "NOWPayments and Cloudflare Workers form the backbone of a decentralized payment and delivery pipeline that allows creators to collect payments in their preferred cryptocurrency and deliver their products directly to customers, eliminating the need for intermediaries like Stripe or PayPal.  This infrastructure is not a workaround; it's a base-layer solution that gives creators full control over their payment and delivery processes, ensuring that they receive their payments promptly and without any delays.  With NOWPayments' 300+ cryptocurrency support and Cloudflare Workers' serverless architecture, creators can scale their operations effortlessly, without worrying about transaction fees or payment processing delays.  In this guide, we'll show you exactly how to set up this infrastructure and start collecting payments for your digital products today."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy the NOWPayments and Cloudflare Workers infrastructure, you'll need a few basic tools and accounts.  First, you'll need a Cloudflare account, which you can sign up for free.  Next, you'll need a NOWPayments account, which also comes with a free plan.  Additionally, you'll need to have a digital product to sell, whether it's an ebook, a course, or a software product.  Finally, you'll need to have a means of delivering your product to customers, such as a Google Drive or Cloudflare R2 account.  With these basic tools and accounts in place, you're ready to deploy the NOWPayments and Cloudflare Workers infrastructure and start collecting payments for your digital products."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "To set up your payment and delivery pipeline, you'll need to create a Cloudflare Worker that integrates with NOWPayments.  You'll also need to set up a Supabase database to store your orders and a Google Drive or Cloudflare R2 account to deliver your products to customers.  With these components in place, you'll be able to process payments and deliver your products to customers seamlessly, without any delays or transaction fees.  In this section, we'll walk you through the step-by-step process of setting up your payment and delivery pipeline using NOWPayments and Cloudflare Workers."
+    },
+    {
+      "type": "callout",
+      "text": "USDT on Tron settles in under 60 seconds for less than $0.10 in network fees — no payout schedule, no minimum threshold."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Once you've set up your payment and delivery pipeline, it's time to go live and process your first transaction.  This involves deploying your Cloudflare Worker and integrating it with NOWPayments.  You'll also need to configure your payment gateway and set up your delivery pipeline.  With these tasks complete, you'll be able to process your first transaction and start collecting payments for your digital products.  In this section, we'll guide you through the process of going live and processing your first transaction using NOWPayments and Cloudflare Workers."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "Once your infrastructure is up and running, you'll need to scale your operations to meet the demands of your growing customer base.  To do this, you'll need to configure your Cloudflare Worker to handle increasing traffic and integrate it with NOWPayments to process more transactions.  You'll also need to optimize your delivery pipeline to ensure that your products are delivered to customers quickly and efficiently.  In this section, we'll show you how to scale your operations using NOWPayments and Cloudflare Workers, so you can focus on growing your business and increasing your revenue."
+    },
+    {
+      "type": "heading",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "How long does USDT payment take to arrive compared to PayPal?  USDT payments using NOWPayments and Cloudflare Workers are processed and delivered to customers in real-time, without any delays or transaction fees.  In contrast, PayPal transactions can take several days to process and may incur transaction fees.  With NOWPayments and Cloudflare Workers, you can receive your payments promptly and without any hassle, giving you more time to focus on growing your business and increasing your revenue."
+    },
+    {
+      "type": "callout",
+      "text": "Your revenue lands in a wallet you control the moment the transaction confirms on-chain."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're a creator looking to collect payments for your digital products without relying on Stripe or any other platform, you're in the right place.  In this guide, we'll show you exactly how to set up a decentralized payment and delivery pipeline using NOWPayments and Cloudflare Workers.  But if you're looking for a more comprehensive solution, check out the Edge Commerce Stack ($197), which includes Cloudflare Pages, Cloudflare Workers, Supabase, and NOWPayments.  With the Edge Commerce Stack, you'll get 5 products loaded, SPF/DKIM/DMARC configured, and end-to-end testing before handoff.  Learn more about the Edge Commerce Stack and how it can help you achieve infrastructure sovereignty at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy the NOWPayments and Cloudflare Workers infrastructure, follow these steps:  Create a Cloudflare account and sign up for a free plan.  Sign up for a NOWPayments account and get a free plan.  Create a digital product to sell, whether it's an ebook, a course, or a software product.  Set up a Supabase database to store your orders.  Configure your Cloudflare Worker to integrate with NOWPayments.  Set up your delivery pipeline using Google Drive or Cloudflare R2.  Deploy your Cloudflare Worker and integrate it with NOWPayments.  Configure your payment gateway and set up your delivery pipeline.  Optimize your delivery pipeline to ensure that your products are delivered to customers quickly and efficiently."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "To receive crypto payments for your digital products, you'll need to set up a NOWPayments account and integrate it with your Cloudflare Worker.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "type": "faq_question",
+      "text": "How long does USDT payment take to arrive compared to PayPal?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "USDT payments using NOWPayments and Cloudflare Workers are processed and delivered to customers in real-time, without any delays or transaction fees.  In contrast, PayPal transactions can take several days to process and may incur transaction fees.  With NOWPayments and Cloudflare Workers, you can receive your payments promptly and without any hassle, giving you more time to focus on growing your business and increasing your revenue."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do creators in Nigeria convert Bitcoin to naira?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Creators in Nigeria can convert Bitcoin to naira using a P2P exchange like Binance Patricia, which allows users to buy and sell cryptocurrencies directly with each other.  With NOWPayments and Cloudflare Workers, you can process payments in Bitcoin and other cryptocurrencies and receive your payments in naira, without any hassle or transaction fees.  In this guide, we'll show you exactly how to set up a decentralized payment and delivery pipeline using NOWPayments and Cloudflare Workers."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the transaction fees for using NOWPayments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments charges a flat fee of 0.5% for all transactions, regardless of the cryptocurrency used.  This means that you can process payments in your preferred cryptocurrency and receive your payments promptly and without any hassle, without incurring any transaction fees.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use NOWPayments with my existing online store?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can use NOWPayments with your existing online store.  To do this, you'll need to integrate NOWPayments with your Cloudflare Worker and configure your payment gateway.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the Edge Commerce Stack ($197) and how can it help me?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The Edge Commerce Stack ($197) is a fully deployed infrastructure that includes Cloudflare Pages, Cloudflare Workers, Supabase, and NOWPayments.  With the Edge Commerce Stack, you'll get 5 products loaded, SPF/DKIM/DMARC configured, and end-to-end testing before handoff.  This stack is ideal for creators who need a turnkey solution and want to focus on growing their business, rather than building and maintaining their own infrastructure.  Learn more about the Edge Commerce Stack and how it can help you achieve infrastructure sovereignty at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments charges 0.5% per transaction — the only fee between your buyer's payment and your wallet."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260519-8ZTO",
+      "slug": "setting-up-nowpayments-webhooks-cloudflare-workers-step-step-5"
+    },
+    {
+      "id": "post-20260519-VB05",
+      "slug": "nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-3"
+    },
+    {
+      "id": "post-20260519-H2PE",
+      "slug": "setting-up-nowpayments-webhooks-cloudflare-workers-step-step-4"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I receive crypto payments for my digital products?",
+      "answer": "To receive crypto payments for your digital products, you'll need to set up a NOWPayments account and integrate it with your Cloudflare Worker.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "question": "How long does USDT payment take to arrive compared to PayPal?",
+      "answer": "USDT payments using NOWPayments and Cloudflare Workers are processed and delivered to customers in real-time, without any delays or transaction fees.  In contrast, PayPal transactions can take several days to process and may incur transaction fees.  With NOWPayments and Cloudflare Workers, you can receive your payments promptly and without any hassle, giving you more time to focus on growing your business and increasing your revenue."
+    },
+    {
+      "question": "How do creators in Nigeria convert Bitcoin to naira?",
+      "answer": "Creators in Nigeria can convert Bitcoin to naira using a P2P exchange like Binance Patricia, which allows users to buy and sell cryptocurrencies directly with each other.  With NOWPayments and Cloudflare Workers, you can process payments in Bitcoin and other cryptocurrencies and receive your payments in naira, without any hassle or transaction fees.  In this guide, we'll show you exactly how to set up a decentralized payment and delivery pipeline using NOWPayments and Cloudflare Workers."
+    },
+    {
+      "question": "What are the transaction fees for using NOWPayments?",
+      "answer": "NOWPayments charges a flat fee of 0.5% for all transactions, regardless of the cryptocurrency used.  This means that you can process payments in your preferred cryptocurrency and receive your payments promptly and without any hassle, without incurring any transaction fees.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "question": "Can I use NOWPayments with my existing online store?",
+      "answer": "Yes, you can use NOWPayments with your existing online store.  To do this, you'll need to integrate NOWPayments with your Cloudflare Worker and configure your payment gateway.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+    },
+    {
+      "question": "What is the Edge Commerce Stack ($197) and how can it help me?",
+      "answer": "The Edge Commerce Stack ($197) is a fully deployed infrastructure that includes Cloudflare Pages, Cloudflare Workers, Supabase, and NOWPayments.  With the Edge Commerce Stack, you'll get 5 products loaded, SPF/DKIM/DMARC configured, and end-to-end testing before handoff.  This stack is ideal for creators who need a turnkey solution and want to focus on growing their business, rather than building and maintaining their own infrastructure.  Learn more about the Edge Commerce Stack and how it can help you achieve infrastructure sovereignty at https://coremerch.github.io/products.html."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-20",
+    "lastReviewed": "2026-05-20",
+    "nextReviewDue": "2026-07-19"
+  },
+  "social": {
+    "x": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Require https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "linkedIn": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "forum": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "hook": "The No-Nonsense Guide to Setting Up NOWPayments...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4"
+  },
+  "crossPostSummary": {
+    "title": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+    "hook": "The No-Nonsense Guide to Setting Up NOWPayments...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "forum": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "x": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Require https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "linkedIn": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+    "hook50": "The No-Nonsense Guide to Setting Up NOWPayments..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-05-20T04:51:39.253Z",
+      "dateModified": "2026-05-20T04:51:39.253Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-C7JZ.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4"
+      },
+      "keywords": "nowpayments webhook setup cloudflare workers",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I receive crypto payments for my digital products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To receive crypto payments for your digital products, you'll need to set up a NOWPayments account and integrate it with your Cloudflare Worker.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does USDT payment take to arrive compared to PayPal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDT payments using NOWPayments and Cloudflare Workers are processed and delivered to customers in real-time, without any delays or transaction fees.  In contrast, PayPal transactions can take several days to process and may incur transaction fees.  With NOWPayments and Cloudflare Workers, you can receive your payments promptly and without any hassle, giving you more time to focus on growing your business and increasing your revenue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do creators in Nigeria convert Bitcoin to naira?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Creators in Nigeria can convert Bitcoin to naira using a P2P exchange like Binance Patricia, which allows users to buy and sell cryptocurrencies directly with each other.  With NOWPayments and Cloudflare Workers, you can process payments in Bitcoin and other cryptocurrencies and receive your payments in naira, without any hassle or transaction fees.  In this guide, we'll show you exactly how to set up a decentralized payment and delivery pipeline using NOWPayments and Cloudflare Workers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the transaction fees for using NOWPayments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments charges a flat fee of 0.5% for all transactions, regardless of the cryptocurrency used.  This means that you can process payments in your preferred cryptocurrency and receive your payments promptly and without any hassle, without incurring any transaction fees.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use NOWPayments with my existing online store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can use NOWPayments with your existing online store.  To do this, you'll need to integrate NOWPayments with your Cloudflare Worker and configure your payment gateway.  With NOWPayments, you can process payments in 300+ cryptocurrencies, including USDT, and receive your payments promptly and without any hassle.  In this guide, we'll show you exactly how to set up NOWPayments and integrate it with your Cloudflare Worker."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Edge Commerce Stack ($197) and how can it help me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Edge Commerce Stack ($197) is a fully deployed infrastructure that includes Cloudflare Pages, Cloudflare Workers, Supabase, and NOWPayments.  With the Edge Commerce Stack, you'll get 5 products loaded, SPF/DKIM/DMARC configured, and end-to-end testing before handoff.  This stack is ideal for creators who need a turnkey solution and want to focus on growing their business, rather than building and maintaining their own infrastructure.  Learn more about the Edge Commerce Stack and how it can help you achieve infrastructure sovereignty at https://coremerch.github.io/products.html."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-C7JZ.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260520-C7JZ.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "The No-Nonsense Guide to Setting Up NOWPayments Webhooks with Cloudflare Workers — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/nonsense-guide-setting-up-nowpayments-webhooks-cloudflare-workers-4"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I receive crypto payments for my digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "nowpayments webhook",
+    "totalWords": 1513,
+    "count": 0,
+    "densityPercent": 0,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "nowpayments webhook setup cloudflare workers",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1603,
+    "aiProvider": "cerebras",
+    "aiModel": "llama3.1-8b",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I receive crypto payments for my digital products?",
+      "How long does USDT payment take to arrive compared to PayPal?",
+      "How do creators in Nigeria convert Bitcoin to naira?",
+      "What is NOWPayments and how does it work for digital sellers?"
+    ],
+    "relatedSearches": [
+      "nowpayments digital products webhook setup guide",
+      "receive usdt tron payment for ebook sale",
+      "convert bitcoin naira p2p exchange binance patricia",
+      "crypto payment fastest settlement digital goods 2025"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-20T04:51:39.254Z"
+  }
+}
