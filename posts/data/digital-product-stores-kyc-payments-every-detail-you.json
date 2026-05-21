@@ -1,0 +1,415 @@
+{
+  "id": "post-20260521-67ZK",
+  "slug": "digital-product-stores-kyc-payments-every-detail-you",
+  "title": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+  "date": "2026-05-21T21:01:19.660Z",
+  "category": "Selling Digital Products",
+  "contentType": "deep-dive",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260521-67ZK.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "The [[LINK:https://coremerch.[[LINK:https://coremerch.github.io/store/blog/github-pages-free-digital-product-store-hosting-what-8|COREMERCH guide to github]].io/store/blog/digital-product-stores-kyc-payments-explained-digital-creators|Digital Product]] product economy is structurally unfair to creators in restricted markets. The tools that Western creators take for granted — Stripe for [[LINK:https://coremerch.github.io/store/blog/usdt-payment-gateways-digital-products-what-actually-how-7|payment]]s, Gumroad for storefront and delivery, PayPal for international transfers — are either unavailable or functionally broken for creators in Nigeria, Ghana, Kenya, Pakistan, Bangladesh, Zimbabwe, and dozens of other markets. The answer is not finding a better platform. The answer is removing the platform layer entirely. A sovereign digital commerce stack gives you a storefront you host, a payment processor that runs on blockchain rails, and an automated delivery system that sends your product within 30 seconds of payment confirmation. You collect revenue directly into a wallet you control. You convert to local currency through P2P exchanges at near-market rates. The platform cannot suspend you because you are not on any platform."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/real-architecture-behind-automated-digital-product-delivery-crypto. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-digital-product-delivery-crypto",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "The Full Picture Most Guides Leave Out: Digital product"
+    },
+    {
+      "type": "paragraph",
+      "text": "The automated delivery pipeline for digital products follows a specific sequence that eliminates every manual step. A buyer visits the storefront, selects a product, and initiates payment. The checkout displays a QR code with the exact wallet address and payment amount in their chosen cryptocurrency, converted from USD at the current exchange rate via live price feeds. The buyer sends the payment from their wallet. NOWPayments monitors the blockchain and detects the incoming transaction within seconds of broadcast. When the transaction receives sufficient confirmations on-chain, NOWPayments fires a webhook to your Cloudflare Worker or Google Apps Script endpoint. The backend verifies the payment amount, confirms the transaction hash on the blockchain directly, logs the order, generates a receipt, and sends the download link to the buyer's email address."
+    },
+    {
+      "type": "heading",
+      "text": "Every Component and What It Does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pricing digital products in crypto is straightforward because NOWPayments handles the currency conversion automatically. You set your price in USD. The checkout pulls live exchange rates and displays the exact amount in whichever cryptocurrency the buyer selects. For USDT-denominated products, there is no conversion at all — one dollar in equals one dollar received, minus network fees that typically amount to less than $0.10 on Tron or Solana. You receive the crypto equivalent of your USD price in the wallet you configured in your NOWPayments account. COREMERCH never touches these funds at any point — the wallet is yours from the moment of setup and remains yours unconditionally."
+    },
+    {
+      "type": "heading",
+      "text": "The Technical Layer Explained Without Abstraction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product types that work with automated crypto delivery are any digital files that can be stored and delivered via download link: ebooks in PDF or EPUB format, courses packaged as ZIP archives, Notion templates exported as files or share links, font families as ZIP archives of OTF and TTF files, Lightroom or Capture One preset packs, beat files as WAV or MP3 archives, plugin installers, stock photo packs, software license keys, and any other file-based product. The delivery system in Stack 01 uses Google Drive shared links. Stack 02 uses Cloudflare R2 presigned URLs with configurable expiry times — typically 24 to 72 hours — which prevents download links from being shared indefinitely after a single purchase."
+    },
+    {
+      "type": "callout",
+      "text": "Automated delivery means the download link arrives before the buyer navigates away from the payment confirmation page."
+    },
+    {
+      "type": "heading",
+      "text": "Edge Cases, Failures, and How to Handle Them"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "The Complete Deployment Roadmap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payout delays, geographic restrictions, platform fees of 5 to 10 percent, and the permanent risk of account suspension. A sovereign stack has none of these constraints. Your product page loads on Cloudflare Pages. Your buyer pays in USDT or Bitcoin through a NOWPayments checkout with live price feeds and QR code generation. Your backend verifies the payment on-chain and sends the download link within 30 seconds."
+    },
+    {
+      "type": "callout",
+      "text": "Every digital file type — ebooks, fonts, presets, plugins, templates — works with the same automated delivery pipeline."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every digital product type — ebook, course, template, font, preset, beat, plugin, software license — works with the same sovereign commerce infrastructure. You build the product. NOWPayments handles the checkout. Your backend handles the delivery. You keep 99.5% of every sale. The Edge Commerce Stack at $197 has COREMERCH deploy the complete stack under your accounts in 48 hours. The Sovereign Blueprint at $47 gives you everything you need to build it yourself. Both paths lead to a store you own completely. See both at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Build your product before you build your store — the product is the point, not the infrastructure. Once your product is ready and in delivery-ready format, create your NOWPayments account and configure wallet addresses. Choose Stack 01 for self-deployment following the Blueprint, or Stack 02 for COREMERCH deployment. Upload your product file to Google Drive or Cloudflare R2 and note the file path. Configure the product in your backend with the file path, USD price, and delivery email template. Build your product page on the storefront with clear product description, pricing in USD, and the checkout flow. Run a complete mainnet test. Check that the download link works and expires correctly after the configured time period."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the best way to sell digital downloads without platform fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell templates and fonts without using Gumroad or Payhip?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do independent creators sell courses without Teachable or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "callout",
+      "text": "No platform intermediary means no percentage cut, no payout delay, and no content policy that can delist your products."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260521-3SEA",
+      "slug": "digital-product-stores-kyc-payments-explained-digital-creators"
+    },
+    {
+      "id": "post-20260520-LGLP",
+      "slug": "digital-product-stores-kyc-payments-first-principles-definitive-2"
+    },
+    {
+      "id": "post-20260519-0NNM",
+      "slug": "digital-product-stores-kyc-payments-first-principles-definitive"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I sell an ebook online without PayPal or Stripe?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "question": "What is the best way to sell digital downloads without platform fees?",
+      "answer": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "question": "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "question": "How do independent creators sell courses without Teachable or Stripe?",
+      "answer": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "question": "How do I sell an ebook online without PayPal or Stripe?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-21",
+    "lastReviewed": "2026-05-21",
+    "nextReviewDue": "2026-07-20"
+  },
+  "social": {
+    "x": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digit https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "linkedIn": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "forum": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "hook": "Digital Product Stores with No-KYC Payments: Ev...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you"
+  },
+  "crossPostSummary": {
+    "title": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+    "hook": "Digital Product Stores with No-KYC Payments: Ev...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "forum": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "x": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digit https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "linkedIn": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+    "hook50": "Digital Product Stores with No-KYC Payments: Ev..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-21T21:01:19.661Z",
+      "dateModified": "2026-05-21T21:01:19.661Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260521-67ZK.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you"
+      },
+      "keywords": "digital product store no kyc payments",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I sell an ebook online without PayPal or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best way to sell digital downloads without platform fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell templates and fonts without using Gumroad or Payhip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do independent creators sell courses without Teachable or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I sell an ebook online without PayPal or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260521-67ZK.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260521-67ZK.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Digital Product Stores with No-KYC Payments: Every Detail You Need for a Bulletproof Stack for Digital Creators",
+        "url": "https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Full Picture Most Guides Leave Out: Digital product",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Every Component and What It Does",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Technical Layer Explained Without Abstraction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Edge Cases, Failures, and How to Handle Them",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Complete Deployment Roadmap",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "digital product",
+    "totalWords": 1314,
+    "count": 12,
+    "densityPercent": 0.9,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "digital product store no kyc payments",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1399,
+    "aiProvider": "cerebras",
+    "aiModel": "llama3.1-8b",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-21T21:01:19.662Z"
+  }
+}
