@@ -1,0 +1,419 @@
+{
+  "id": "post-20260522-IH2W",
+  "slug": "real-difference-between-choices-how-start-selling-digital-2",
+  "title": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+  "date": "2026-05-22T21:31:50.438Z",
+  "category": "Selling Digital Products",
+  "contentType": "comparison",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260522-IH2W.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "[[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/selling-stock-photos-without-paypal-first-principles-definitive|COREMERCH guide to selling]]-digital-art-without-paypal-explained-digital-creators-2|selling]] a digital product should be a simple transaction. You build something valuable — an ebook, a course, a Notion template, a font family, a preset pack, a beat — and someone pays you for access to it. The file transfers. The transaction completes. But for millions of creators, the payment layer is where [[LINK:https://coremerch.github.io/store/blog/everything-you-need-know-about-financial-sovereignty-digital|Everything You]] breaks down. Stripe is unavailable. PayPal flags the account. Gumroad holds the payout. The workarounds stop working. What actually works is a sovereign commerce stack: a static storefront on GitHub Pages or Cloudflare Pages, automatic payment verification through NOWPayments, and delivery triggered by a webhook the moment the transaction confirms on-chain. No platform intermediary. No payout schedule. No geography filter. The customer owns the storefront code, the order history, the customer list, and the product files. COREMERCH has no access after deployment."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-3. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-3",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What Each Option Actually Offers: Start digital"
+    },
+    {
+      "type": "paragraph",
+      "text": "The automated delivery pipeline for digital products follows a specific sequence that eliminates every manual step. A buyer visits the storefront, selects a product, and initiates payment. The checkout displays a QR code with the exact wallet address and payment amount in their chosen cryptocurrency, converted from USD at the current exchange rate via live price feeds. The buyer sends the payment from their wallet. NOWPayments monitors the blockchain and detects the incoming transaction within seconds of broadcast. When the transaction receives sufficient confirmations on-chain, NOWPayments fires a webhook to your Cloudflare Worker or Google Apps Script endpoint. The backend verifies the payment amount, confirms the transaction hash on the blockchain directly, logs the order, generates a receipt, and sends the download link to the buyer's email address."
+    },
+    {
+      "type": "heading",
+      "text": "How They Handle Restricted Countries"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pricing digital products in crypto is straightforward because NOWPayments handles the currency conversion automatically. You set your price in USD. The checkout pulls live exchange rates and displays the exact amount in whichever cryptocurrency the buyer selects. For USDT-denominated products, there is no conversion at all — one dollar in equals one dollar received, minus network fees that typically amount to less than $0.10 on Tron or Solana. You receive the crypto equivalent of your USD price in the wallet you configured in your NOWPayments account. COREMERCH never touches these funds at any point — the wallet is yours from the moment of setup and remains yours unconditionally."
+    },
+    {
+      "type": "heading",
+      "text": "Payment Speed, Fees, and Real Costs"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product types that work with automated crypto delivery are any digital files that can be stored and delivered via download link: ebooks in PDF or EPUB format, courses packaged as ZIP archives, Notion templates exported as files or share links, font families as ZIP archives of OTF and TTF files, Lightroom or Capture One preset packs, beat files as WAV or MP3 archives, plugin installers, stock photo packs, software license keys, and any other file-based product. The delivery system in Stack 01 uses Google Drive shared links. Stack 02 uses Cloudflare R2 presigned URLs with configurable expiry times — typically 24 to 72 hours — which prevents download links from being shared indefinitely after a single purchase."
+    },
+    {
+      "type": "callout",
+      "text": "Automated delivery means the download link arrives before the buyer navigates away from the payment confirmation page."
+    },
+    {
+      "type": "heading",
+      "text": "Ownership, Automation, and Delivery"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "Which Architecture to Choose Based on Your Situation"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "Do I need an LLC to sell digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting points, generate your API key, and set the webhook endpoint URL. Second, choose your stack: Stack 01 uses GitHub Pages plus Google Apps Script and takes most creators four to six hours following the Sovereign Blueprint at $47; Stack 02 uses Cloudflare Pages plus Workers plus Supabase and is deployed by COREMERCH in 48 hours with the Edge Commerce Stack at $197. Third, upload your product files, set your prices in USD, and run a complete mainnet test transaction before promoting."
+    },
+    {
+      "type": "callout",
+      "text": "Every digital file type — ebooks, fonts, presets, plugins, templates — works with the same automated delivery pipeline."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Digital creators selling ebooks, courses, templates, fonts, presets, and beats often reach this infrastructure question after hitting payout restrictions or platform policy problems on Gumroad, Payhip, or Lemon Squeezy. The difference with a sovereign stack is structural: there is no platform relationship to manage, no content policy to comply with, and no payout schedule to wait on. The Edge Commerce Stack at $197 deploys the complete infrastructure in 48 hours under your own accounts. The Sovereign Blueprint at $47 documents the build process for creators who prefer to self-deploy. Both are available at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prepare your product files in delivery-ready format — PDF for ebooks, ZIP archives for multi-file products, exported files for Notion templates, OTF and TTF archives for font families. Set your prices in USD and let NOWPayments handle the crypto equivalent calculation automatically at transaction time. Deploy your stack and configure the product list with file paths, USD prices, and delivery settings. Configure your storefront with product pages and checkout flow. Test the checkout on both desktop and mobile — confirm QR codes generate correctly and live price feeds display accurately. Complete a real mainnet test transaction and confirm the delivery email arrives with a working download link. Check your order database and confirm the test transaction appears with all correct fields."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need an LLC to sell digital products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I really need an LLC for crypto?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the most sold digital product?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I start selling digital products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "type": "callout",
+      "text": "No platform intermediary means no percentage cut, no payout delay, and no content policy that can delist your products."
+    },
+    {
+      "type": "cta",
+      "text": "The Sovereign Blueprint — $47. Complete documentation for all 5 stacks. Full source code. NOWPayments integration guide. Scaling playbook. Instant download.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "The Sovereign Blueprint",
+      "price": "$47"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260521-NGIS",
+      "slug": "how-start-selling-digital-products-crypto-which-architecture-2"
+    },
+    {
+      "id": "post-20260521-SLKZ",
+      "slug": "how-how-start-selling-digital-products-crypto-works-5"
+    },
+    {
+      "id": "post-20260520-GYGI",
+      "slug": "how-start-selling-digital-products-crypto-step-step-2"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Do I need an LLC to sell digital products?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "question": "Do I really need an LLC for crypto?",
+      "answer": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "question": "What is the most sold digital product?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    },
+    {
+      "question": "How do I start selling digital products?",
+      "answer": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+    },
+    {
+      "question": "How do I sell an ebook online without PayPal or Stripe?",
+      "answer": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-22",
+    "lastReviewed": "2026-05-22",
+    "nextReviewDue": "2026-07-21"
+  },
+  "social": {
+    "x": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No  https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "linkedIn": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\nThe Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "forum": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "hook": "The Real Difference Between Your Choices for Ho...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2"
+  },
+  "crossPostSummary": {
+    "title": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+    "hook": "The Real Difference Between Your Choices for Ho...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "forum": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "x": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No  https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "linkedIn": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+    "hook50": "The Real Difference Between Your Choices for Ho..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-22T21:31:50.438Z",
+      "dateModified": "2026-05-22T21:31:50.438Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-IH2W.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2"
+      },
+      "keywords": "how to start selling digital products with crypto",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need an LLC to sell digital products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I really need an LLC for crypto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the most sold digital product?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I start selling digital products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payou..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I sell an ebook online without PayPal or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest path to your first sovereign digital product sale is a three-step process. First, create a NOWPayments account — configure your wallet addresses for USDT on Tron and Bitcoin as starting po..."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-IH2W.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-IH2W.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "The Real Difference Between Your Choices for How to Start Selling Digital Products with Crypto — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/real-difference-between-choices-how-start-selling-digital-2"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What Each Option Actually Offers: Start digital",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How They Handle Restricted Countries",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Payment Speed, Fees, and Real Costs",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Ownership, Automation, and Delivery",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Which Architecture to Choose Based on Your Situation",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Do I need an LLC to sell digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "start digital",
+    "totalWords": 1338,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to start selling digital products with crypto",
+    "serpSource": "serpapi",
+    "imageSource": "picsum",
+    "wordCount": 1401,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "Do I need an LLC to sell digital products?",
+      "Do I really need an LLC for crypto?",
+      "What is the most sold digital product?",
+      "How do I start selling digital products?"
+    ],
+    "relatedSearches": [
+      "How to start selling digital products with crypto reddit",
+      "How to start selling digital products with crypto in usa",
+      "How to start selling digital products with crypto pdf",
+      "Most profitable digital products",
+      "How to sell digital products for free",
+      "Selling digital products for beginners",
+      "How to create digital products for free",
+      "Digital products list"
+    ],
+    "product": "The Sovereign Blueprint",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-22T21:31:50.439Z"
+  }
+}
