@@ -1,0 +1,419 @@
+{
+  "id": "post-20260523-B90G",
+  "slug": "full-infrastructure-guide-selling-fonts-online-without-paypal",
+  "title": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+  "date": "2026-05-23T04:44:02.867Z",
+  "category": "Platform Restrictions",
+  "contentType": "deep-dive",
+  "author": "COREMERCH",
+  "excerpt": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260523-B90G.png",
+  "imageSource": "picsum",
+  "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria",
+  "imageCaption": "Sovereign infrastructure routes around Stripe and PayPal restrictions permanently — not a workaround, a different architecture.",
+  "canonical": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "[[LINK:https://coremerch.github.io/store/blog/why-[[LINK:https://coremerch.github.io/store/blog/selling-fonts-online-without-paypal-what-actually-how|Selling Fonts]]-design-assets-[[LINK:https://coremerch.github.io/store/blog/crypto-payments-tanzanian-online-sellers-which-architecture-actually|COREMERCH guide to crypto]]-payments-only-real-3|selling]] fonts online should be straightforward. You design, you list, you get paid. But for digital creators in Nigeria, the reality is different. Stripe and PayPal block transactions. Conventional platforms reject your country. You need a system that doesn’t depend on permission from Silicon Valley. This guide explains how to build sovereign commerce infrastructure for selling fonts — no payment processors required. We’ll cover every component, from hosting to crypto payment verification, using tools you own and control. The result: a fully operational font store that works anywhere, even when global platforms fail. This is not a workaround. It’s base-layer infrastructure designed for creators who need ownership, not rental."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: The Complete Guide to Selling Digital Products Without Stripe at https://coremerch.github.io/store/blog/comparing-real-options-selling-digital-products-without-stripe-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/comparing-real-options-selling-digital-products-without-stripe-2",
+      "title": "The Complete Guide to Selling Digital Products Without Stripe"
+    },
+    {
+      "type": "heading",
+      "text": "The Full Picture Most Guides Leave Out: Fonts online"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most guides to selling digital products online assume you have access to Stripe, PayPal, or similar platforms. They ignore the structural exclusion faced by creators in Nigeria, Ghana, and other regions. These platforms block transactions based on geography, not risk. They lock you out of global commerce. Sovereign commerce infrastructure solves this by removing intermediaries. Instead of renting a platform, you own the stack. Your store runs on GitHub Pages or Cloudflare Pages for hosting, Google Apps Script or Cloudflare Workers for backend logic, and Supabase or Google Sheets for order storage. Payments are processed via NOWPayments, which verifies crypto transactions on-chain without requiring buyer accounts or KYC. This architecture is permissionless. It doesn’t depend on any single company or country. You control every layer, from file delivery to payment verification. The system is designed to withstand the failures of conventional platforms — currency collapses, payment rejections, and financial isolation."
+    },
+    {
+      "type": "heading",
+      "text": "Every Component and What It Does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s how each component works together to create a sovereign font store: 1. **Hosting**: GitHub Pages or Cloudflare Pages serve your storefront. Both are free and globally distributed. 2. **Backend Logic**: Google Apps Script or Cloudflare Workers handle order processing and payment verification. These tools run serverless, so you pay nothing for idle time. 3. **Order Storage**: Supabase or Google Sheets store customer orders and payment details. Supabase offers a free tier with robust SQL queries, while Google Sheets is simpler but sufficient for small stores. 4. **File Delivery**: Google Drive or Cloudflare R2 hosts your font files. Customers receive secure, expiring download links after payment. 5. **Payment Processing**: NOWPayments verifies crypto payments on-chain. It supports 300+ cryptocurrencies and charges a 0.5% fee. No buyer accounts or KYC required. 6. **Email Delivery**: Gmail or SendGrid sends purchase confirmations and download links. Configure SPF/DKIM/DMARC to ensure emails land in inboxes, not spam folders. Each component is replaceable. If one tool fails, swap it out without rebuilding the entire system. This modularity is the core of infrastructure sovereignty."
+    },
+    {
+      "type": "heading",
+      "text": "The Technical Layer Explained Without Abstraction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Let’s break down the technical implementation. When a customer buys a font, the process is as follows: 1. The storefront (GitHub Pages or Cloudflare Pages) displays your products. 2. The customer selects a font and pays via NOWPayments. 3. NOWPayments verifies the transaction on-chain and sends a webhook to your backend (Google Apps Script or Cloudflare Workers). 4. The backend logs the order in Supabase or Google Sheets, generates a secure download link for the font file, and sends a confirmation email via Gmail or SendGrid. 5. The customer receives the email, clicks the link, and downloads the font. Every step is automated. You don’t need to manually verify payments or send files. The system is designed for hands-off operation. For example, if a customer pays in Solana, the transaction confirms in under 3 seconds. The webhook fires instantly, and the download link is sent within 10 seconds. This speed is possible because the system doesn’t rely on third-party APIs that can fail or throttle requests."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure removes the need for Stripe, PayPal, or any other intermediary."
+    },
+    {
+      "type": "heading",
+      "text": "Edge Cases, Failures, and How to Handle Them"
+    },
+    {
+      "type": "paragraph",
+      "text": "Even sovereign infrastructure has failure modes. Here’s how to handle them: 1. **Payment Verification Delays**: If a crypto transaction takes longer than expected to confirm, the webhook might not fire immediately. Solution: Use a retry mechanism in your backend logic to check payment status every 30 seconds until confirmation. 2. **File Delivery Failures**: If a customer’s download link expires or fails, they’ll need a new one. Solution: Include a link in the confirmation email to request a new download link. Automate this process using your backend logic. 3. **Email Delivery Issues**: If confirmation emails land in spam, customers won’t receive their purchase. Solution: Configure SPF/DKIM/DMARC for your email sender domain. Test deliverability using tools like Mail-Tester. 4. **Order Storage Corruption**: If your Supabase or Google Sheets database becomes corrupted, you’ll lose order history. Solution: Back up your database daily to Google Drive or Cloudflare R2. Automate backups using your backend logic. 5. **Hosting Outages**: If GitHub Pages or Cloudflare Pages goes down, your storefront becomes inaccessible. Solution: Use both platforms for redundancy. If one fails, the other continues serving your store. These edge cases are rare but solvable. The key is to design your system with failure in mind, not as an afterthought."
+    },
+    {
+      "type": "heading",
+      "text": "The Complete Deployment Roadmap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploying your sovereign font store takes 48 hours. Here’s the roadmap: 1. **Day 1**: Set up hosting on GitHub Pages or Cloudflare Pages. Design your storefront using HTML/CSS or a static site generator. 2. **Day 1**: Configure NOWPayments for crypto payments. Choose low-fee networks like BSC, Solana, or TRON. Test payments using a testnet. 3. **Day 2**: Build backend logic using Google Apps Script or Cloudflare Workers. Integrate NOWPayments webhooks to verify payments and generate download links. 4. **Day 2**: Set up order storage in Supabase or Google Sheets. Create tables for orders, customers, and products. 5. **Day 2**: Configure file delivery using Google Drive or Cloudflare R2. Test download links to ensure they expire after 24 hours. 6. **Day 2**: Set up email delivery using Gmail or SendGrid. Configure SPF/DKIM/DMARC for your sender domain. Test email deliverability. 7. **Day 3**: Test the entire system end-to-end. Simulate a purchase, verify payment, receive the confirmation email, and download the font file. 8. **Day 3**: Launch your store. Share the link with your audience and start selling fonts globally. This roadmap assumes basic technical skills. If you’re not comfortable with coding, consider purchasing The Sovereign Blueprint ($47) for complete documentation and source code."
+    },
+    {
+      "type": "heading",
+      "text": "Where can I sell my fonts online?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell fonts online without PayPal or Stripe, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, Google Apps Script or Cloudflare Workers for backend logic, Supabase or Google Sheets for order storage, and NOWPayments for crypto payment verification. This architecture removes dependency on blocked platforms and gives you full control over your store. The Sovereign Blueprint ($47) provides complete documentation and source code to build this stack."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments verifies crypto payments on-chain with a 0.5% fee and no buyer accounts required."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re ready to deploy your sovereign font store, The Sovereign Blueprint ($47) includes complete documentation, source code, and a scaling playbook. It’s the fastest way to build a commerce stack that doesn’t depend on Stripe, PayPal, or any other intermediary. Visit https://coremerch.github.io/products.html to learn more."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose a hosting platform: GitHub Pages or Cloudflare Pages. 2. Set up NOWPayments for crypto payments. Select low-fee networks like BSC, Solana, or TRON. 3. Build backend logic using Google Apps Script or Cloudflare Workers. Integrate NOWPayments webhooks. 4. Configure order storage in Supabase or Google Sheets. 5. Set up file delivery using Google Drive or Cloudflare R2. 6. Configure email delivery using Gmail or SendGrid. Set up SPF/DKIM/DMARC. 7. Test the entire system end-to-end. 8. Launch your store and start selling fonts globally."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, but basic technical skills are required. If you’re not comfortable with coding, purchase The Sovereign Blueprint ($47) for complete documentation and source code. It includes step-by-step instructions and templates to deploy your store without writing code from scratch."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if a customer’s payment fails?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "If a payment fails, NOWPayments will not send a webhook. Your backend logic should include a retry mechanism to check payment status periodically. If the payment still fails, the customer will need to try again or contact support."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle refunds?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Refunds are processed manually. Since payments are in crypto, you can send the refund directly to the customer’s wallet address. Update your order storage to mark the order as refunded."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell products other than fonts?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, this system works for any digital product, including ebooks, courses, templates, and software. The file delivery mechanism is the same, regardless of the product type."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if GitHub Pages or Cloudflare Pages goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "If one hosting platform fails, the other will continue serving your store. Always deploy to both platforms for redundancy. This ensures your store remains accessible even if one service experiences an outage."
+    },
+    {
+      "type": "callout",
+      "text": "The Sovereign Blueprint ($47) includes complete documentation and source code to deploy your stack."
+    },
+    {
+      "type": "cta",
+      "text": "The Sovereign Blueprint — $47. Complete documentation for all 5 stacks. Full source code. NOWPayments integration guide. Scaling playbook. Instant download.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "The Sovereign Blueprint",
+      "price": "$47"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260522-LW34",
+      "slug": "selling-fonts-online-without-paypal-what-actually-how"
+    },
+    {
+      "id": "post-20260522-YX79",
+      "slug": "selling-fonts-online-without-paypal-explained-digital-creators"
+    },
+    {
+      "id": "post-20260521-UZ1T",
+      "slug": "selling-fonts-online-without-paypal-which-architecture-actually"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this system if I’m not a developer?",
+      "answer": "Yes, but basic technical skills are required. If you’re not comfortable with coding, purchase The Sovereign Blueprint ($47) for complete documentation and source code. It includes step-by-step instructions and templates to deploy your store without writing code from scratch."
+    },
+    {
+      "question": "What happens if a customer’s payment fails?",
+      "answer": "If a payment fails, NOWPayments will not send a webhook. Your backend logic should include a retry mechanism to check payment status periodically. If the payment still fails, the customer will need to try again or contact support."
+    },
+    {
+      "question": "How do I handle refunds?",
+      "answer": "Refunds are processed manually. Since payments are in crypto, you can send the refund directly to the customer’s wallet address. Update your order storage to mark the order as refunded."
+    },
+    {
+      "question": "Can I sell products other than fonts?",
+      "answer": "Yes, this system works for any digital product, including ebooks, courses, templates, and software. The file delivery mechanism is the same, regardless of the product type."
+    },
+    {
+      "question": "What if GitHub Pages or Cloudflare Pages goes down?",
+      "answer": "If one hosting platform fails, the other will continue serving your store. Always deploy to both platforms for redundancy. This ensures your store remains accessible even if one service experiences an outage."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-23",
+    "lastReviewed": "2026-05-23",
+    "nextReviewDue": "2026-07-22"
+  },
+  "social": {
+    "x": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "linkedIn": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\nThe Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "forum": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "hook": "The Full Infrastructure Guide to Selling Fonts ...",
+    "bullets": [
+      "→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.",
+      "→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal"
+  },
+  "crossPostSummary": {
+    "title": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+    "hook": "The Full Infrastructure Guide to Selling Fonts ...",
+    "bullets": [
+      "→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.",
+      "→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "forum": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "x": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "linkedIn": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+    "hook50": "The Full Infrastructure Guide to Selling Fonts ..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "datePublished": "2026-05-23T04:44:02.867Z",
+      "dateModified": "2026-05-23T04:44:02.867Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-B90G.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal"
+      },
+      "keywords": "sell fonts online without paypal",
+      "articleSection": "Platform Restrictions"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but basic technical skills are required. If you’re not comfortable with coding, purchase The Sovereign Blueprint ($47) for complete documentation and source code. It includes step-by-step instructions and templates to deploy your store without writing code from scratch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a customer’s payment fails?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If a payment fails, NOWPayments will not send a webhook. Your backend logic should include a retry mechanism to check payment status periodically. If the payment still fails, the customer will need to try again or contact support."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Refunds are processed manually. Since payments are in crypto, you can send the refund directly to the customer’s wallet address. Update your order storage to mark the order as refunded."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell products other than fonts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, this system works for any digital product, including ebooks, courses, templates, and software. The file delivery mechanism is the same, regardless of the product type."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if GitHub Pages or Cloudflare Pages goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If one hosting platform fails, the other will continue serving your store. Always deploy to both platforms for redundancy. This ensures your store remains accessible even if one service experiences an outage."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-B90G.png",
+      "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-B90G.png",
+      "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Platform Restrictions",
+        "url": "https://coremerch.github.io/store/blog/category/platform-restrictions"
+      },
+      {
+        "name": "The Full Infrastructure Guide to Selling Fonts Online Without PayPal — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Full Picture Most Guides Leave Out: Fonts online",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Every Component and What It Does",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Technical Layer Explained Without Abstraction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Edge Cases, Failures, and How to Handle Them",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Complete Deployment Roadmap",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Where can I sell my fonts online?",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "fonts online",
+    "totalWords": 1524,
+    "count": 4,
+    "densityPercent": 0.3,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell fonts online without paypal",
+    "serpSource": "serpapi",
+    "imageSource": "picsum",
+    "wordCount": 1583,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "Where can I sell my fonts online?",
+      "What is the 3 font rule?",
+      "Can I make money selling fonts?",
+      "How do I sell my own font?"
+    ],
+    "relatedSearches": [
+      "Sell fonts online without paypal free",
+      "Sell fonts online without paypal reddit",
+      "Best place to sell fonts online without paypal",
+      "Where to sell fonts online",
+      "How to sell fonts on Etsy",
+      "Creative Market",
+      "Can you make money selling fonts",
+      "Font marketplace"
+    ],
+    "product": "The Sovereign Blueprint",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-23T04:44:02.868Z"
+  }
+}
