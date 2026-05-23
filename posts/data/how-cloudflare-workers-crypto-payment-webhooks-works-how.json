@@ -1,0 +1,419 @@
+{
+  "id": "post-20260523-AB65",
+  "slug": "how-cloudflare-workers-crypto-payment-webhooks-works-how",
+  "title": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+  "date": "2026-05-23T07:42:59.980Z",
+  "category": "Getting Paid",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260523-AB65.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Gumroad's payout schedule means you wait a week or a month to access money you already earned. PayPal's conversion rates take 3 to 5 percent of every international transfer. Wire transfers cost $20 to $50 each way and take three to seven business days. These are not small frictions — they are structural extraction from creators already operating in harder markets. USDT on Tron eliminates all of this. Settlement in under 60 seconds. Fee under $0.10. The full USD equivalent of your product price lands in your wallet the moment the on-chain transaction confirms. NOW[[LINK:https://coremerch.github.io/store/blog/usdt-[[LINK:https://coremerch.github.io/store/blog/payment-methods-filipino-digital-creators-explained-digital-creators-2|COREMERCH guide to payment]]-gateways-digital-products-how-one-creator|USDT Payment]]s converts the buyer's chosen [[LINK:https://coremerch.github.io/store/blog/crypto-payments-tanzanian-online-sellers-which-architecture-actually|crypto]] to your configured wallet address automatically. No manual verification. No waiting. P2P conversion to local currency at near-market rates completes the pipeline — typically within 30 minutes of the original sale."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail: Cloudflare workers"
+    },
+    {
+      "type": "paragraph",
+      "text": "NOWPayments supports over 300 cryptocurrencies across multiple blockchain networks. For practical digital product sales, the most operationally useful options are USDT on Tron — fastest settlement under 60 seconds, fees under $0.10, widely held in restricted markets — USDT on Ethereum — higher fees but the most widely supported chain globally — Bitcoin — highest global recognition, 10 to 60 minute confirmation depending on network congestion — Solana — fast settlement, fees of fractions of a cent, growing adoption — and BNB on Binance Smart Chain — popular in Southeast Asia and widely available through Binance."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Converting crypto to local currency is the operational step that determines whether crypto payments are practically useful for a creator in a restricted market. In Nigeria, the most established route is USDT to naira through Binance P2P or local exchanges including Patricia and Quidax. Rates are consistently within 2 to 5 percent of the parallel market rate. In Ghana, cedis conversion happens through Binance P2P and active local P2P communities. In Kenya, USDT to Kenyan shilling is available through M-Pesa integrations on several exchanges. Average conversion time across all these markets is 20 to 30 minutes."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "The settlement speed difference between crypto and conventional platforms is categorical rather than incremental. USDT on Tron settles in under 60 seconds. Solana settles in under 10 seconds. On-chain Bitcoin settles in 10 to 60 minutes depending on network congestion. Compare this to PayPal's 3 to 5 business day bank transfer, Gumroad's weekly or monthly payout cycles, or wire transfers that take 3 to 7 days and cost $20 to $50 in bank fees each way. For a creator who needs to pay for tools, services, or cover operating expenses, the difference between settlement in 60 seconds and a payout cycle of 30 days is a real cash flow constraint that affects what you can build and when."
+    },
+    {
+      "type": "callout",
+      "text": "USDT on Tron settles in under 60 seconds for less than $0.10 in network fees — no payout schedule, no minimum threshold."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fee structure of NOWPayments is fundamentally different from conventional platform fees. NOWPayments charges 0.5% per transaction. There is no monthly fee, no setup fee, no payout fee, and no minimum transaction volume requirement. Network fees for the underlying blockchain transaction are paid by the buyer and vary by network — Tron fees are under $0.10, Solana fees are fractions of a cent, Bitcoin fees average $1 to $5 for most transactions. For a $97 product sold through the Sovereign Starter Stack, the total transaction cost is approximately $0.49 to NOWPayments plus network fees typically under $0.10 on Tron. Compare this to Gumroad's 10% fee on the same transaction — $9.70."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "The transaction log in a COREMERCH deployment provides a complete, independently verifiable audit trail of every payment. Each entry includes the transaction hash, which links directly to the public blockchain record. You can verify any transaction independently on Tronscan, Etherscan, Solscan, or the relevant blockchain explorer — no platform intermediary required. If a buyer claims they paid but the transaction does not appear in your order log, you check the blockchain directly. This level of cryptographic verifiability is structurally impossible with conventional payment processors."
+    },
+    {
+      "type": "heading",
+      "text": "What are the downsides of Cloudflare workers?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically into your wallet without any action required from you. The transaction hash in your order log is cryptographic proof of every payment. When you want to convert to local currency, you transfer USDT from your wallet to your exchange account and post a P2P sell order. The buyer sends local currency to your bank account or mobile money account and you release the USDT. Most P2P transactions complete in under 30 minutes."
+    },
+    {
+      "type": "callout",
+      "text": "Your revenue lands in a wallet you control the moment the transaction confirms on-chain."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "The complete payment pipeline — from buyer checkout to local currency in your account — involves three components: NOWPayments for on-chain verification, your sovereign stack backend for order processing and delivery, and a P2P exchange for conversion to local currency. The Edge Commerce Stack at $197 deploys the first two components under your accounts in 48 hours. The Sovereign Blueprint at $47 documents the complete process including P2P conversion guidance for Nigeria, Ghana, Kenya, Pakistan, and Bangladesh. Both available at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Configure your payout destination before configuring your store. Your self-custody wallet address goes into NOWPayments as the destination for each coin you accept — this is where funds land when a transaction confirms on-chain. Never use an exchange wallet address as your NOWPayments destination — use a self-custody wallet where you control the private keys. Set up Binance P2P or a local exchange and verify the conversion process for your local currency pair. Deploy your stack and run a mainnet test. After the first real sale confirms, wait for the transaction to fully clear in NOWPayments, then transfer from your self-custody wallet to your exchange for conversion."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the downsides of Cloudflare workers?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are webhooks in a payment gateway?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+    },
+    {
+      "type": "faq_question",
+      "text": "Does Stripe use Cloudflare?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How to get Stripe webhook secret key?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments charges 0.5% per transaction — the only fee between your buyer's payment and your wallet."
+    },
+    {
+      "type": "cta",
+      "text": "The Sovereign Blueprint — $47. Complete documentation for all 5 stacks. Full source code. NOWPayments integration guide. Scaling playbook. Instant download.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "The Sovereign Blueprint",
+      "price": "$47"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260523-21KI",
+      "slug": "understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-5"
+    },
+    {
+      "id": "post-20260522-F4JZ",
+      "slug": "cloudflare-workers-crypto-payment-webhooks-what-actually-how-3"
+    },
+    {
+      "id": "post-20260522-U7ZF",
+      "slug": "cloudflare-workers-crypto-payment-webhooks-explained-digital-creators-4"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What are the downsides of Cloudflare workers?",
+      "answer": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    },
+    {
+      "question": "What are webhooks in a payment gateway?",
+      "answer": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+    },
+    {
+      "question": "Does Stripe use Cloudflare?",
+      "answer": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    },
+    {
+      "question": "How to get Stripe webhook secret key?",
+      "answer": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+    },
+    {
+      "question": "How do I receive crypto payments for my digital products?",
+      "answer": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-23",
+    "lastReviewed": "2026-05-23",
+    "nextReviewDue": "2026-07-22"
+  },
+  "social": {
+    "x": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeep https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "linkedIn": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\nThe Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "forum": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "hook": "How Cloudflare Workers Crypto Payment Webhooks ...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how"
+  },
+  "crossPostSummary": {
+    "title": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+    "hook": "How Cloudflare Workers Crypto Payment Webhooks ...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "forum": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "x": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeep https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "linkedIn": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+    "hook50": "How Cloudflare Workers Crypto Payment Webhooks ..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-05-23T07:42:59.981Z",
+      "dateModified": "2026-05-23T07:42:59.981Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-AB65.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how"
+      },
+      "keywords": "cloudflare workers crypto payment webhook",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the downsides of Cloudflare workers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are webhooks in a payment gateway?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Stripe use Cloudflare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to get Stripe webhook secret key?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Getting paid in crypto is operationally simpler than it appears. You configure your wallet address in NOWPayments once — this takes under 30 minutes. From that point, every sale deposits automatically..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I receive crypto payments for my digital products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDT is the most practical starting point for digital product sales because it eliminates price volatility from the equation. Your buyer pays in USDT and you receive USDT — one dollar in equals one do..."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-AB65.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-AB65.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "How Cloudflare Workers Crypto Payment Webhooks Works and How to Deploy It Today Without the Gatekeepers",
+        "url": "https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail: Cloudflare workers",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What are the downsides of Cloudflare workers?",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "cloudflare workers",
+    "totalWords": 1258,
+    "count": 2,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "cloudflare workers crypto payment webhook",
+    "serpSource": "serpapi",
+    "imageSource": "picsum",
+    "wordCount": 1314,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "What are the downsides of Cloudflare workers?",
+      "What are webhooks in a payment gateway?",
+      "Does Stripe use Cloudflare?",
+      "How to get Stripe webhook secret key?"
+    ],
+    "relatedSearches": [
+      "Cloudflare workers crypto payment webhook github",
+      "Cloudflare webhook",
+      "Cloudflare Stripe webhook",
+      "Cloudflare images webhook",
+      "Cloudflare tus",
+      "Cloudflare WebRTC",
+      "Cloudflare DRM",
+      "Cloudflare video"
+    ],
+    "product": "The Sovereign Blueprint",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-23T07:42:59.981Z"
+  }
+}
