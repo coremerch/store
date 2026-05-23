@@ -1,0 +1,413 @@
+{
+  "id": "post-20260522-RZJX",
+  "slug": "why-deploying-digital-store-cloudflare-pages-free-keeps",
+  "title": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+  "date": "2026-05-23T02:21:59.066Z",
+  "category": "Store Setup",
+  "contentType": "problem-solution",
+  "author": "COREMERCH",
+  "excerpt": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260522-RZJX.png",
+  "imageSource": "picsum",
+  "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+  "imageCaption": "Stack 01 or Stack 02 — both deployed under your own accounts, end-to-end tested before handoff.",
+  "canonical": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Setting up a sovereign digital store is a four-step sequence that most creators overcomplicate by [[LINK:https://coremerch.github.io/store/blog/how-start-selling-digital-products-crypto-step-step-3|COREMERCH guide to start]]ing in the wrong order. Step one is the backend: Cloudflare Workers or [[LINK:https://coremerch.github.io/store/blog/google-apps-script-digital-commerce-automation-explained-digital-6|Google Apps]] Apps Script handles payment verification, order logging, and product delivery. Step two is the payment layer: NOWPayments connects your wallet addresses to the checkout flow — no KYC required from you or your buyer. Step three is the storefront: Cloudflare Pages or GitHub Pages serves your store for free with no server management. Step four is testing: complete a real mainnet transaction, confirm the webhook fires, the order logs, and the delivery email arrives with a working download link. Only after step four passes cleanly should you promote the store. COREMERCH deploys the complete Edge Stack — Cloudflare Pages plus Workers plus [[LINK:https://coremerch.github.io/store/blog/supabase-order-database-digital-stores-everything-you-need-5|supabase]] plus NOWPayments — in 48 hours, end-to-end tested before handoff."
+    },
+    {
+      "type": "heading",
+      "text": "The Real Reason This Problem Exists"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 01 — the Sovereign Starter Stack — uses GitHub Pages for storefront hosting, Google Apps Script as the backend Web App, Google Sheets as the order database, Google Drive for product file storage, and Gmail for delivery email. The entire stack costs nothing per month. Google Apps Script runs in response to webhook events from NOWPayments, validates the payment, logs the order to Google Sheets, generates a receipt, and sends a Gmail delivery email with a Google Drive shared link. The daily limits on the free tier are adequate for most creators at the early and growth stages."
+    },
+    {
+      "type": "heading",
+      "text": "Why the Obvious Fixes Do Not Work"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 02 — the Edge Commerce Stack — uses Cloudflare Pages for storefront hosting, Cloudflare Workers for backend webhook handling, Supabase for order storage, Cloudflare R2 for product file delivery, and Resend for transactional email. The entire stack costs nothing per month up to significant volume thresholds — Cloudflare Workers provides 100,000 requests per day free, Supabase provides 500MB of PostgreSQL storage free, Cloudflare R2 provides 10GB storage and zero egress fees free, and Resend provides 3,000 emails per month free. SPF, DKIM, and DMARC are configured during COREMERCH deployment."
+    },
+    {
+      "type": "heading",
+      "text": "The Infrastructure That Solves It at the Base Layer"
+    },
+    {
+      "type": "paragraph",
+      "text": "The NOWPayments configuration sequence is the same regardless of which stack you are deploying. Create a NOWPayments account — no KYC required, no document upload, no bank account needed. Navigate to the wallet settings and add the wallet addresses for each cryptocurrency you want to accept. USDT on Tron and Bitcoin are the practical starting point for most creators in restricted markets. Generate an API key from the NOWPayments dashboard. Set the webhook endpoint URL in the NOWPayments IPN settings pointing to your Cloudflare Worker or Apps Script Web App. Set the webhook secret key — a string you generate that both NOWPayments and your backend know."
+    },
+    {
+      "type": "callout",
+      "text": "Deploying a sovereign digital commerce stack provides creators with the freedom to own and control their digital store infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "How to Implement the Solution Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To implement the solution today, creators can follow the Sovereign Blueprint, which provides a step-by-step guide on how to deploy a sovereign digital commerce stack using Stack 01, which includes GitHub Pages, Cloudflare Apps Script, and NOWPayments, and can be deployed in 4-6 hours, or opt for Stack 02, which is deployed by COREMERCH in 48 hours and includes Cloudflare Pages, Workers, Supabase, and NOWPayments."
+    },
+    {
+      "type": "heading",
+      "text": "What Your Store Looks Like After the Fix"
+    },
+    {
+      "type": "paragraph",
+      "text": "The post-deployment ownership transfer is explicit in every COREMERCH deployment. When the build is complete and the end-to-end test passes, COREMERCH provides the credentials and configuration details for every component under the customer's accounts. The GitHub or Cloudflare repository is under the customer's account from the start. The Supabase or Google Sheets database is under the customer's account. The NOWPayments account is under the customer's email. COREMERCH removes collaborator access upon delivery. From that point, the store runs entirely under the customer's own accounts."
+    },
+    {
+      "type": "heading",
+      "text": "Does Cloudflare pages free?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The setup sequence matters because each component depends on the previous one being correctly configured. Start with NOWPayments: create your account, configure wallet addresses for each coin you want to accept, generate the API key, and note the IPN secret key you will set. Then configure the backend: in Stack 01, deploy the Google Apps Script Web App and note its URL; in Stack 02, deploy the Cloudflare Worker and note its URL. Set that URL as the webhook endpoint in your NOWPayments IPN settings. Then configure the storefront. Then run a real mainnet test — send actual crypto to your configured wallet address, confirm NOWPayments detects it, confirm the webhook fires, and confirm the delivery email arrives with a working download link."
+    },
+    {
+      "type": "callout",
+      "text": "Stack 02 provides a more comprehensive infrastructure solution than Stack 01, but requires COREMERCH to deploy it in 48 hours."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're looking for more information on deploying a digital store on Cloudflare Pages, check out the Complete Builder Kit, which provides all 6 blueprints and 7 templates needed to build, deploy, and scale a sovereign digital commerce stack, and can be purchased for $197, or visit the COREMERCH shop at https://coremerch.github.io/products.html to learn more about the Sovereign Starter Stack and Edge Commerce Stack."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital commerce stack using Stack 01, follow these steps: Follow the Sovereign Blueprint to deploy GitHub Pages, Cloudflare Apps Script, and NOWPayments, which can be done in 4-6 hours; Configure the payment layer using NOWPayments, which provides automatic payment processing and order management; Test the store on mainnet to ensure everything is working correctly; Promote the store to attract customers and drive sales."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the benefits of deploying a sovereign digital commerce stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Deploying a sovereign digital commerce stack provides creators with a scalable, secure, and cost-effective infrastructure for payment processing, order management, and data storage, allowing them to own and control their digital store infrastructure."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use Stack 01 or Stack 02 to deploy my digital store?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can use either Stack 01, which includes GitHub Pages, Cloudflare Apps Script, and NOWPayments, or Stack 02, which is deployed by COREMERCH in 48 hours and includes Cloudflare Pages, Workers, Supabase, and NOWPayments."
+    },
+    {
+      "type": "faq_question",
+      "text": "How long does it take to deploy Stack 01?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Stack 01 can be deployed in 4-6 hours using the Sovereign Blueprint."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the cost of deploying a sovereign digital commerce stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The cost of deploying a sovereign digital commerce stack is zero upfront costs, with a 0.5% fee on payments processed using NOWPayments."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I purchase a Complete Builder Kit to help me deploy my digital store?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can purchase the Complete Builder Kit, which provides all 6 blueprints and 7 templates needed to build, deploy, and scale a sovereign digital commerce stack, for $197."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments provides automatic payment processing and order management, reducing the complexity and cost of deploying a digital store."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260522-4YTN",
+      "slug": "how-deploying-digital-store-cloudflare-pages-free-works-7"
+    },
+    {
+      "id": "post-20260522-G3L7",
+      "slug": "how-deploying-digital-store-cloudflare-pages-free-works-6"
+    },
+    {
+      "id": "post-20260522-0UM6",
+      "slug": "deploying-digital-store-cloudflare-pages-free-step-step-6"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What are the benefits of deploying a sovereign digital commerce stack?",
+      "answer": "Deploying a sovereign digital commerce stack provides creators with a scalable, secure, and cost-effective infrastructure for payment processing, order management, and data storage, allowing them to own and control their digital store infrastructure."
+    },
+    {
+      "question": "Can I use Stack 01 or Stack 02 to deploy my digital store?",
+      "answer": "Yes, you can use either Stack 01, which includes GitHub Pages, Cloudflare Apps Script, and NOWPayments, or Stack 02, which is deployed by COREMERCH in 48 hours and includes Cloudflare Pages, Workers, Supabase, and NOWPayments."
+    },
+    {
+      "question": "How long does it take to deploy Stack 01?",
+      "answer": "Stack 01 can be deployed in 4-6 hours using the Sovereign Blueprint."
+    },
+    {
+      "question": "What is the cost of deploying a sovereign digital commerce stack?",
+      "answer": "The cost of deploying a sovereign digital commerce stack is zero upfront costs, with a 0.5% fee on payments processed using NOWPayments."
+    },
+    {
+      "question": "Can I purchase a Complete Builder Kit to help me deploy my digital store?",
+      "answer": "Yes, you can purchase the Complete Builder Kit, which provides all 6 blueprints and 7 templates needed to build, deploy, and scale a sovereign digital commerce stack, for $197."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-23",
+    "lastReviewed": "2026-05-23",
+    "nextReviewDue": "2026-07-22"
+  },
+  "social": {
+    "x": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works  https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "linkedIn": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "forum": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "hook": "Why Deploying a Digital Store on Cloudflare Pag...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps"
+  },
+  "crossPostSummary": {
+    "title": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+    "hook": "Why Deploying a Digital Store on Cloudflare Pag...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "forum": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "x": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works  https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "linkedIn": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+    "hook50": "Why Deploying a Digital Store on Cloudflare Pag..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "datePublished": "2026-05-23T02:21:59.067Z",
+      "dateModified": "2026-05-23T02:21:59.067Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-RZJX.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps"
+      },
+      "keywords": "deploy digital store cloudflare pages free",
+      "articleSection": "Store Setup"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the benefits of deploying a sovereign digital commerce stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Deploying a sovereign digital commerce stack provides creators with a scalable, secure, and cost-effective infrastructure for payment processing, order management, and data storage, allowing them to own and control their digital store infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Stack 01 or Stack 02 to deploy my digital store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can use either Stack 01, which includes GitHub Pages, Cloudflare Apps Script, and NOWPayments, or Stack 02, which is deployed by COREMERCH in 48 hours and includes Cloudflare Pages, Workers, Supabase, and NOWPayments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to deploy Stack 01?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stack 01 can be deployed in 4-6 hours using the Sovereign Blueprint."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cost of deploying a sovereign digital commerce stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cost of deploying a sovereign digital commerce stack is zero upfront costs, with a 0.5% fee on payments processed using NOWPayments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I purchase a Complete Builder Kit to help me deploy my digital store?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can purchase the Complete Builder Kit, which provides all 6 blueprints and 7 templates needed to build, deploy, and scale a sovereign digital commerce stack, for $197."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "url": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-RZJX.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260522-RZJX.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Store Setup",
+        "url": "https://coremerch.github.io/store/blog/category/store-setup"
+      },
+      {
+        "name": "Why Deploying a Digital Store on Cloudflare Pages for Free Keeps Failing — and the Stack That Works in 2025",
+        "url": "https://coremerch.github.io/store/blog/why-deploying-digital-store-cloudflare-pages-free-keeps"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Real Reason This Problem Exists",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Why the Obvious Fixes Do Not Work",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Infrastructure That Solves It at the Base Layer",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Implement the Solution Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What Your Store Looks Like After the Fix",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Does Cloudflare pages free?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "digital store",
+    "totalWords": 1088,
+    "count": 5,
+    "densityPercent": 0.5,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "deploy digital store cloudflare pages free",
+    "serpSource": "serpapi",
+    "imageSource": "picsum",
+    "wordCount": 1176,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "Does Cloudflare pages free?",
+      "Are Cloudflare pages being deprecated?",
+      "How easy is it to deploy with Cloudflare Pages?",
+      "Why does the FBI use Cloudflare?"
+    ],
+    "relatedSearches": [
+      "Deploy digital store cloudflare pages free reddit",
+      "Deploy digital store cloudflare pages free github",
+      "Cloudflare Pages pricing",
+      "Is Cloudflare Pages free",
+      "Cloudflare Pages free domain",
+      "Cloudflare Pages free for commercial use",
+      "Cloudflare deploy website",
+      "Cloudflare Pages custom domain"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-23T02:21:59.070Z"
+  }
+}
