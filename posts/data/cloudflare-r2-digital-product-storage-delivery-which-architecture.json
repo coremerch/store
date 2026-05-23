@@ -1,0 +1,419 @@
+{
+  "id": "post-20260523-CW2C",
+  "slug": "cloudflare-r2-digital-product-storage-delivery-which-architecture",
+  "title": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+  "date": "2026-05-23T09:31:37.930Z",
+  "category": "Selling Digital Products",
+  "contentType": "comparison",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260523-CW2C.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In a world where Stripe, PayPal, and Gumroad are unavailable or severely restricted in countries like Nigeria, Ghana, and Venezuela, digital creators face a daunting [[LINK:https://coremerch.github.io/store/blog/full-[[LINK:https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-fonts-online-without-paypal|COREMERCH guide to infrastructure]]-guide-automated-ebook-delivery-after-crypto-3|infrastructure]] challenge: storing and delivering digital products without astronomical fees or platform dependence. Meanwhile, [[LINK:https://coremerch.github.io/store/blog/how-cloudflare-workers-crypto-payment-webhooks-works-how|How Cloudflare]] R2 emerges as a promising solution for digital product storage and delivery, but does it actually work for you? The honest answer lies in the nuances of its architecture and pricing model."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-3. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-3",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What Each Option Actually Offers: Cloudflare digital"
+    },
+    {
+      "type": "paragraph",
+      "text": "The automated delivery pipeline for digital products follows a specific sequence that eliminates every manual step. A buyer visits the storefront, selects a product, and initiates payment. The checkout displays a QR code with the exact wallet address and payment amount in their chosen cryptocurrency, converted from USD at the current exchange rate via live price feeds. The buyer sends the payment from their wallet. NOWPayments monitors the blockchain and detects the incoming transaction within seconds of broadcast. When the transaction receives sufficient confirmations on-chain, NOWPayments fires a webhook to your Cloudflare Worker or Google Apps Script endpoint. The backend verifies the payment amount, confirms the transaction hash on the blockchain directly, logs the order, generates a receipt, and sends the download link to the buyer's email address."
+    },
+    {
+      "type": "heading",
+      "text": "How They Handle Restricted Countries"
+    },
+    {
+      "type": "paragraph",
+      "text": "When it comes to restricted countries, Gumroad's limitations are clear: it charges higher fees for countries like Nigeria, Ghana, and Venezuela, making it a less appealing option for digital creators in these regions. Cloudflare R2, however, does not have country-specific restrictions, making it a more viable solution for creators worldwide. NOWPayments also does not impose country-specific restrictions, but its fees are lower than Gumroad's, making it an attractive choice for creators seeking cost-effective payment processing."
+    },
+    {
+      "type": "heading",
+      "text": "Payment Speed, Fees, and Real Costs"
+    },
+    {
+      "type": "paragraph",
+      "text": "Gumroad charges a whopping 10% on every sale, whereas NOWPayments charges a mere 0.5%, making a significant difference in the real costs for digital creators. At 100 sales per month on a $97 product, the fee difference retains $921, a substantial amount that can make or break a creator's business. Cloudflare R2 does not charge fees for storage and delivery, making it an attractive option for creators seeking cost-effective solutions."
+    },
+    {
+      "type": "callout",
+      "text": "Cloudflare R2 offers file storage and delivery capabilities without fees, making it a cost-effective solution for digital creators."
+    },
+    {
+      "type": "heading",
+      "text": "Ownership, Automation, and Delivery"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "Which Architecture to Choose Based on Your Situation"
+    },
+    {
+      "type": "paragraph",
+      "text": "When choosing between Cloudflare R2, Gumroad, and NOWPayments, consider your specific needs and constraints. If you're operating in a restricted country, Cloudflare R2 and NOWPayments might be better options. If you prioritize automation and delivery, Cloudflare R2 is a clear winner. If you need robust e-commerce and payment processing, Gumroad might still be a viable choice, but be prepared for higher fees and country-specific restrictions."
+    },
+    {
+      "type": "heading",
+      "text": "What is Cloudflare R2 storage?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Selling digital products without PayPal or Stripe is not a compromise — it is an upgrade for creators in restricted markets. The conventional platforms that seem like the standard path come with payout delays, geographic restrictions, platform fees of 5 to 10 percent, and the permanent risk of account suspension. A sovereign stack has none of these constraints. Your product page loads on Cloudflare Pages. Your buyer pays in USDT or Bitcoin through a NOWPayments checkout with live price feeds and QR code generation. Your backend verifies the payment on-chain and sends the download link within 30 seconds."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments provides seamless payment processing with low fees, making it an attractive choice for creators seeking cost-effective payment processing."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every digital product type — ebook, course, template, font, preset, beat, plugin, software license — works with the same sovereign commerce infrastructure. You build the product. NOWPayments handles the checkout. Your backend handles the delivery. You keep 99.5% of every sale. The Edge Commerce Stack at $197 has COREMERCH deploy the complete stack under your accounts in 48 hours. The Sovereign Blueprint at $47 gives you everything you need to build it yourself. Both paths lead to a store you own completely. See both at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital commerce stack using Cloudflare R2, follow these concrete steps: 1) sign up for a Cloudflare account and enable R2 storage; 2) upload your digital products to R2; 3) set up automation using Cloudflare Workers; 4) integrate NOWPayments for seamless payment processing; 5) configure delivery and payment workflows; and 6) test your stack thoroughly to ensure seamless delivery and payment processing."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the cost of storing and delivering digital products on Cloudflare R2?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare R2 does not charge fees for storage and delivery, making it a cost-effective solution for digital creators. However, be aware of the storage limitations and pricing model for larger files and high-traffic volumes."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use Gumroad for digital product storage and delivery in restricted countries?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Gumroad has country-specific restrictions, which means it charges higher fees for countries like Nigeria, Ghana, and Venezuela. This might make it a less appealing option for digital creators in these regions."
+    },
+    {
+      "type": "faq_question",
+      "text": "How does NOWPayments integrate with Cloudflare R2 for payment processing?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments provides seamless payment processing, automating the payment verification process, while Cloudflare R2 enables creators to own their files and deliver them directly to customers, eliminating the need for intermediaries."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the recommended file size limit for Cloudflare R2 storage?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare R2 has a file size limit of 5 GB, after which additional files are charged at a lower rate. Be aware of this limit when storing and delivering large files."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use Cloudflare R2 for e-commerce and payment processing?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "While Cloudflare R2 provides file storage and delivery capabilities, it is not designed for e-commerce and payment processing. Consider using Gumroad or NOWPayments for these specific needs."
+    },
+    {
+      "type": "callout",
+      "text": "Gumroad's e-commerce and payment processing capabilities come with higher fees and country-specific restrictions, making it a less appealing option for digital creators in restricted countries."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260522-6AQK",
+      "slug": "understanding-cloudflare-r2-digital-product-storage-delivery-plain"
+    },
+    {
+      "id": "post-20260522-A3CI",
+      "slug": "real-architecture-behind-cloudflare-r2-digital-product-storage-3"
+    },
+    {
+      "id": "post-20260522-4JWO",
+      "slug": "cloudflare-r2-digital-product-storage-delivery-explained-digital-4"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is the cost of storing and delivering digital products on Cloudflare R2?",
+      "answer": "Cloudflare R2 does not charge fees for storage and delivery, making it a cost-effective solution for digital creators. However, be aware of the storage limitations and pricing model for larger files and high-traffic volumes."
+    },
+    {
+      "question": "Can I use Gumroad for digital product storage and delivery in restricted countries?",
+      "answer": "Gumroad has country-specific restrictions, which means it charges higher fees for countries like Nigeria, Ghana, and Venezuela. This might make it a less appealing option for digital creators in these regions."
+    },
+    {
+      "question": "How does NOWPayments integrate with Cloudflare R2 for payment processing?",
+      "answer": "NOWPayments provides seamless payment processing, automating the payment verification process, while Cloudflare R2 enables creators to own their files and deliver them directly to customers, eliminating the need for intermediaries."
+    },
+    {
+      "question": "What is the recommended file size limit for Cloudflare R2 storage?",
+      "answer": "Cloudflare R2 has a file size limit of 5 GB, after which additional files are charged at a lower rate. Be aware of this limit when storing and delivering large files."
+    },
+    {
+      "question": "Can I use Cloudflare R2 for e-commerce and payment processing?",
+      "answer": "While Cloudflare R2 provides file storage and delivery capabilities, it is not designed for e-commerce and payment processing. Consider using Gumroad or NOWPayments for these specific needs."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-23",
+    "lastReviewed": "2026-05-23",
+    "nextReviewDue": "2026-07-22"
+  },
+  "social": {
+    "x": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: T https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "linkedIn": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "forum": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "hook": "Cloudflare R2 for Digital Product Storage and D...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture"
+  },
+  "crossPostSummary": {
+    "title": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+    "hook": "Cloudflare R2 for Digital Product Storage and D...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "forum": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "x": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: T https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "linkedIn": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+    "hook50": "Cloudflare R2 for Digital Product Storage and D..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-23T09:31:37.930Z",
+      "dateModified": "2026-05-23T09:31:37.930Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-CW2C.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture"
+      },
+      "keywords": "cloudflare r2 digital product storage delivery",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the cost of storing and delivering digital products on Cloudflare R2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare R2 does not charge fees for storage and delivery, making it a cost-effective solution for digital creators. However, be aware of the storage limitations and pricing model for larger files and high-traffic volumes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Gumroad for digital product storage and delivery in restricted countries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gumroad has country-specific restrictions, which means it charges higher fees for countries like Nigeria, Ghana, and Venezuela. This might make it a less appealing option for digital creators in these regions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does NOWPayments integrate with Cloudflare R2 for payment processing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments provides seamless payment processing, automating the payment verification process, while Cloudflare R2 enables creators to own their files and deliver them directly to customers, eliminating the need for intermediaries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the recommended file size limit for Cloudflare R2 storage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare R2 has a file size limit of 5 GB, after which additional files are charged at a lower rate. Be aware of this limit when storing and delivering large files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Cloudflare R2 for e-commerce and payment processing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While Cloudflare R2 provides file storage and delivery capabilities, it is not designed for e-commerce and payment processing. Consider using Gumroad or NOWPayments for these specific needs."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-CW2C.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-CW2C.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Cloudflare R2 for Digital Product Storage and Delivery: Which Architecture Actually Works for You: The Honest Answer",
+        "url": "https://coremerch.github.io/store/blog/cloudflare-r2-digital-product-storage-delivery-which-architecture"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What Each Option Actually Offers: Cloudflare digital",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How They Handle Restricted Countries",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Payment Speed, Fees, and Real Costs",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Ownership, Automation, and Delivery",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Which Architecture to Choose Based on Your Situation",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What is Cloudflare R2 storage?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "cloudflare digital",
+    "totalWords": 1081,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "cloudflare r2 digital product storage delivery",
+    "serpSource": "serpapi",
+    "imageSource": "picsum",
+    "wordCount": 1168,
+    "aiProvider": "cerebras",
+    "aiModel": "llama3.1-8b",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "What is Cloudflare R2 storage?",
+      "Is Cloudflare R2 really free?",
+      "What are R2's storage limitations?",
+      "Is Cloudflare R2 better than AWS S3?"
+    ],
+    "relatedSearches": [
+      "Cloudflare r2 digital product storage delivery charge",
+      "Cloudflare r2 digital product storage delivery cost",
+      "Cloudflare r2 digital product storage delivery 2022",
+      "Cloudflare R2 pricing",
+      "Cloudflare R2 free tier",
+      "Cloudflare R2 docs",
+      "Cloudflare R2 egress cost",
+      "Cloudflare R2 backup"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-23T09:31:37.931Z"
+  }
+}
