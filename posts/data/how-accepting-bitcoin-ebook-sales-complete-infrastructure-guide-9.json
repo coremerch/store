@@ -1,0 +1,415 @@
+{
+  "id": "post-20260524-D5AF",
+  "slug": "how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+  "title": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+  "date": "2026-05-24T06:41:54.436Z",
+  "category": "Selling Digital Products",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260524-D5AF.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Zimbabwe, where PayPal and Stripe are restricted, digital [[LINK:https://coremerch.github.io/store/blog/how-[[LINK:https://coremerch.github.io/store/blog/how-creators-ghana-get-paid-online-what-actually|How Creators]]-ghana-get-paid-online-trap-most|creators]] cannot sell ebooks, courses, and digital products without using expensive and unreliable platforms. Gumroad, for example, charges 10% on every sale, while NOWPayments charges a mere 0.5%, retaining $921 on 100 sales per month on a $97 product. This infrastructure guide shows you how to accept Bitcoin for ebook sales using a [[LINK:https://coremerch.github.io/store/blog/sovereign-commerce-infrastructure-digital-creators-honest-side-side-2|COREMERCH guide to sovereign]] digital commerce stack, without relying on Stripe or any other platform."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-5. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-5",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail: Bitcoin ebook"
+    },
+    {
+      "type": "paragraph",
+      "text": "The automated delivery pipeline for digital products follows a specific sequence that eliminates every manual step. A buyer visits the storefront, selects a product, and initiates payment. The checkout displays a QR code with the exact wallet address and payment amount in their chosen cryptocurrency, converted from USD at the current exchange rate via live price feeds. The buyer sends the payment from their wallet. NOWPayments monitors the blockchain and detects the incoming transaction within seconds of broadcast. When the transaction receives sufficient confirmations on-chain, NOWPayments fires a webhook to your Cloudflare Worker or Google Apps Script endpoint. The backend verifies the payment amount, confirms the transaction hash on the blockchain directly, logs the order, generates a receipt, and sends the download link to the buyer's email address."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Pricing digital products in crypto is straightforward because NOWPayments handles the currency conversion automatically. You set your price in USD. The checkout pulls live exchange rates and displays the exact amount in whichever cryptocurrency the buyer selects. For USDT-denominated products, there is no conversion at all — one dollar in equals one dollar received, minus network fees that typically amount to less than $0.10 on Tron or Solana. You receive the crypto equivalent of your USD price in the wallet you configured in your NOWPayments account. COREMERCH never touches these funds at any point — the wallet is yours from the moment of setup and remains yours unconditionally."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product types that work with automated crypto delivery are any digital files that can be stored and delivered via download link: ebooks in PDF or EPUB format, courses packaged as ZIP archives, Notion templates exported as files or share links, font families as ZIP archives of OTF and TTF files, Lightroom or Capture One preset packs, beat files as WAV or MP3 archives, plugin installers, stock photo packs, software license keys, and any other file-based product. The delivery system in Stack 01 uses Google Drive shared links. Stack 02 uses Cloudflare R2 presigned URLs with configurable expiry times — typically 24 to 72 hours — which prevents download links from being shared indefinitely after a single purchase."
+    },
+    {
+      "type": "callout",
+      "text": "You can sell ebooks and digital products without using PayPal or Stripe by using a sovereign digital commerce stack."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Can I sell ebooks and digital products without using PayPal or Stripe? Yes, you can sell ebooks and digital products without using PayPal or Stripe by using a sovereign digital commerce stack, which includes GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for automatic on-chain crypto payment verification. This stack allows you to collect payments directly from customers without intermediaries or platform fees."
+    },
+    {
+      "type": "callout",
+      "text": "You can retain up to 99.5% of your revenue on every sale by using NOWPayments instead of Gumroad."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're looking for more ways to sell digital downloads without platform fees, consider using a sovereign digital commerce stack, which includes the Complete Builder Kit ($197) from COREMERCH. The kit provides everything you need to build, deploy, and scale a sovereign digital commerce stack. You can also shop for more products and services at https://coremerch.github.io/products.html"
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital commerce stack, follow these steps: 1. Purchase the Complete Builder Kit ($197) from COREMERCH. 2. Create a NOWPayments account, which requires no KYC or buyer account setup. 3. Set up a GitHub Pages or Cloudflare Pages account for hosting your digital products. 4. Configure Cloudflare Workers or Google Apps Script to verify payments and automatically deliver digital products to customers. 5. Set up a Supabase or Google Sheets account for order storage and a Google Drive or Cloudflare R2 account for file delivery."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "What is a sovereign digital commerce stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "A sovereign digital commerce stack is a base-layer infrastructure that gives digital creators full control over their digital commerce operations. It includes GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for automatic on-chain crypto payment verification."
+    },
+    {
+      "type": "faq_question",
+      "text": "Why is NOWPayments a better option than Gumroad?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments charges a mere 0.5% on every sale, compared to Gumroad's 10% fee. This means that you retain more revenue on every sale, which can add up to significant savings over time."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use a sovereign digital commerce stack with other payment methods?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can integrate NOWPayments with other payment methods, such as credit cards or bank transfers, to give your customers more options for payment."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I scale a sovereign digital commerce stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Scaling a sovereign digital commerce stack is straightforward. Once your infrastructure is running, you can simply add more products, integrate with more payment methods, and increase your marketing efforts to grow your sales."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the Complete Builder Kit from COREMERCH?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The Complete Builder Kit from COREMERCH is a comprehensive package that includes all 6 blueprints plus all 7 templates necessary to build, deploy, and scale a sovereign digital commerce stack."
+    },
+    {
+      "type": "callout",
+      "text": "A sovereign digital commerce stack gives you full control over your digital commerce operations, allowing you to scale quickly and efficiently without relying on intermediaries or platform fees."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260524-2N43",
+      "slug": "accepting-bitcoin-ebook-sales-everything-you-need-get-4"
+    },
+    {
+      "id": "post-20260523-MUVR",
+      "slug": "comparing-real-options-accepting-bitcoin-ebook-sales-stripe-3"
+    },
+    {
+      "id": "post-20260523-0LF1",
+      "slug": "accepting-bitcoin-ebook-sales-step-step-deployment-guide-5"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is a sovereign digital commerce stack?",
+      "answer": "A sovereign digital commerce stack is a base-layer infrastructure that gives digital creators full control over their digital commerce operations. It includes GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for automatic on-chain crypto payment verification."
+    },
+    {
+      "question": "Why is NOWPayments a better option than Gumroad?",
+      "answer": "NOWPayments charges a mere 0.5% on every sale, compared to Gumroad's 10% fee. This means that you retain more revenue on every sale, which can add up to significant savings over time."
+    },
+    {
+      "question": "Can I use a sovereign digital commerce stack with other payment methods?",
+      "answer": "Yes, you can integrate NOWPayments with other payment methods, such as credit cards or bank transfers, to give your customers more options for payment."
+    },
+    {
+      "question": "How do I scale a sovereign digital commerce stack?",
+      "answer": "Scaling a sovereign digital commerce stack is straightforward. Once your infrastructure is running, you can simply add more products, integrate with more payment methods, and increase your marketing efforts to grow your sales."
+    },
+    {
+      "question": "What is the Complete Builder Kit from COREMERCH?",
+      "answer": "The Complete Builder Kit from COREMERCH is a comprehensive package that includes all 6 blueprints plus all 7 templates necessary to build, deploy, and scale a sovereign digital commerce stack."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-24",
+    "lastReviewed": "2026-05-24",
+    "nextReviewDue": "2026-07-23"
+  },
+  "social": {
+    "x": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "linkedIn": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "forum": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "hook": "How to Accepting Bitcoin for Ebook Sales: The C...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9"
+  },
+  "crossPostSummary": {
+    "title": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+    "hook": "How to Accepting Bitcoin for Ebook Sales: The C...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "forum": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "x": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "linkedIn": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+    "hook50": "How to Accepting Bitcoin for Ebook Sales: The C..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-24T06:41:54.437Z",
+      "dateModified": "2026-05-24T06:41:54.437Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-D5AF.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9"
+      },
+      "keywords": "how to accept bitcoin for ebook sales",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a sovereign digital commerce stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A sovereign digital commerce stack is a base-layer infrastructure that gives digital creators full control over their digital commerce operations. It includes GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for automatic on-chain crypto payment verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is NOWPayments a better option than Gumroad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments charges a mere 0.5% on every sale, compared to Gumroad's 10% fee. This means that you retain more revenue on every sale, which can add up to significant savings over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use a sovereign digital commerce stack with other payment methods?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can integrate NOWPayments with other payment methods, such as credit cards or bank transfers, to give your customers more options for payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I scale a sovereign digital commerce stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scaling a sovereign digital commerce stack is straightforward. Once your infrastructure is running, you can simply add more products, integrate with more payment methods, and increase your marketing efforts to grow your sales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Complete Builder Kit from COREMERCH?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Complete Builder Kit from COREMERCH is a comprehensive package that includes all 6 blueprints plus all 7 templates necessary to build, deploy, and scale a sovereign digital commerce stack."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-D5AF.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-D5AF.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "How to Accepting Bitcoin for Ebook Sales: The Complete Infrastructure Guide — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-accepting-bitcoin-ebook-sales-complete-infrastructure-guide-9"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail: Bitcoin ebook",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "bitcoin ebook",
+    "totalWords": 1168,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to accept bitcoin for ebook sales",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1242,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-24T06:41:54.438Z"
+  }
+}
