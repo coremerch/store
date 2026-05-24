@@ -1,0 +1,415 @@
+{
+  "id": "post-20260524-NH0X",
+  "slug": "everything-you-need-know-about-selling-beats-online-3",
+  "title": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+  "date": "2026-05-24T22:45:46.089Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260524-NH0X.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve produced beats that could fuel a movement. But when you try to sell them online, the [[LINK:https://coremerch.github.io/store/blog/payment-options-ethiopian-digital-creators-explained-digital-creators|payment]] gates slam shut. Stripe and PayPal don’t operate in Kenya. Conventional platforms lock you out. This isn’t a business problem—it’s an [[LINK:https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-notion-templates-crypto-stripe|COREMERCH guide to infrastructure]] problem. COREMERCH solves it by deploying sovereign commerce stacks that let you sell beats directly to buyers worldwide. No platforms. No subscriptions. No gatekeepers. Your stack. Your rules. Your revenue. This post explains the architecture, the components, and the deployment process. By the end, you’ll understand how to own your entire commerce pipeline—from [[LINK:https://coremerch.github.io/store/blog/crypto-payments-tanzanian-online-sellers-my-unfiltered-take|Crypto Payments]] payment to automated delivery—without depending on any third party."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-5. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-5",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Beats online"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is not a workaround. It’s base-layer infrastructure. Your beats are hosted on GitHub Pages or Cloudflare Pages—both free and globally distributed. Payments are processed via NOWPayments, which accepts 300+ cryptocurrencies with a 0.5% fee and no KYC. Once payment confirms on-chain, a Cloudflare Worker or Google Apps Script automatically delivers the beat files. Orders are logged in Supabase or Google Sheets. You own every component. No platform can shut you down. No subscription can expire. This architecture is pressure-tested in Zimbabwe against currency collapse and financial isolation. It’s built for creators in regions where conventional payment systems fail. Your buyers don’t need accounts. They pay in crypto. You get USD equivalent at transaction time. The system is automated, instant, and sovereign."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s the flow: A buyer selects your beat and pays in crypto via NOWPayments. The payment confirms on-chain within minutes. A webhook fires, triggering a Cloudflare Worker or Google Apps Script. This script verifies the payment, logs the order in Supabase or Google Sheets, and sends a secure download link to the buyer’s email. The beat files are stored on Google Drive or Cloudflare R2—both free and scalable. You configure pricing in USD. NOWPayments converts the crypto payment to USD at the moment of transaction. The system is stateless: no databases to manage, no servers to maintain. Everything runs on edge infrastructure. Cloudflare’s global network ensures fast delivery. GitHub Pages or Cloudflare Pages serve your storefront. The entire stack is open source. You own the code. You control the deployment."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is built for digital creators in Kenya, Nigeria, Ghana, Pakistan, and other regions where Stripe and PayPal are unavailable. If you sell beats, ebooks, courses, or templates and cannot collect payment through conventional platforms, this is your solution. It’s also for creators who refuse to rent infrastructure. You’re not building on someone else’s platform. You’re deploying your own stack. The Complete Builder Kit ($197) gives you all six blueprints and seven templates. Deploy in 48 hours. No coding required. The system is designed for scale. Start with three beats. Add hundreds later. The architecture doesn’t change. Your buyers pay in crypto. You get paid in USD equivalent. No chargebacks. No buyer accounts. Just sovereign commerce."
+    },
+    {
+      "type": "callout",
+      "text": "Your beats. Your rules. Your revenue. No platforms. No gatekeepers."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "GitHub Pages or Cloudflare Pages hosts your storefront for free. Cloudflare Workers or Google Apps Script handles backend logic—payment verification, order logging, file delivery. Supabase or Google Sheets stores order data. Google Drive or Cloudflare R2 stores your beat files. NOWPayments processes crypto payments with a 0.5% fee. Email delivery is handled via SMTP or Cloudflare’s email API. SPF/DKIM/DMARC is configured to ensure emails land in inboxes, not spam folders. Every component is free or low-cost. You pay only the NOWPayments fee and any crypto transaction fees. Recommended networks for low fees: BSC, Solana, TRON—under $0.10 per transaction. The system is modular. Swap components as needed. Upgrade as you grow. The core principle doesn’t change: you own the infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with the Complete Builder Kit ($197). It includes all six blueprints, seven templates, and instant access to the source code. Deploy Stack 01 or Stack 02 in 48 hours. Stack 01 uses GitHub Pages and Google Apps Script. Stack 02 uses Cloudflare Pages, Workers, and Supabase. Both include NOWPayments integration. Load your beats, configure pricing, and launch. The kit includes a scaling playbook to handle growth. Need support? The Edge Commerce Stack ($197) includes 30-day support, SPF/DKIM/DMARC configuration, and end-to-end testing. This isn’t a course. It’s a deployment. You end up with a live, operational store. Your beats. Your rules. Your revenue. No platforms. No gatekeepers. Just sovereign infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell beats online without Stripe or PayPal, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, NOWPayments for crypto payments, and Cloudflare Workers or Google Apps Script for automated delivery. Store beat files on Google Drive or Cloudflare R2. Log orders in Supabase or Google Sheets. The Complete Builder Kit ($197) provides all blueprints and templates for instant deployment. Your buyers pay in crypto. You receive USD equivalent. No platforms. No gatekeepers. Full ownership."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy in 48 hours. Own your entire commerce pipeline."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ready to deploy your own sovereign commerce stack? The Complete Builder Kit ($197) includes all six blueprints, seven templates, and instant access to the source code. Deploy in 48 hours. Sell beats globally. Own your infrastructure. No platforms. No gatekeepers. Just sovereign commerce."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your stack: GitHub Pages + Apps Script (Stack 01) or Cloudflare Pages + Workers + Supabase (Stack 02). 2. Purchase the Complete Builder Kit ($197) for blueprints and templates. 3. Set up NOWPayments for crypto payment processing. 4. Configure GitHub Pages or Cloudflare Pages for storefront hosting. 5. Write backend logic in Cloudflare Workers or Google Apps Script for payment verification and file delivery. 6. Store beat files on Google Drive or Cloudflare R2. 7. Log orders in Supabase or Google Sheets. 8. Test end-to-end: simulate a purchase, verify payment, and confirm file delivery. 9. Launch your store. 10. Scale using the included playbook."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can buyers pay with any cryptocurrency?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "YES. NOWPayments accepts 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON—under $0.10 per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need to code to deploy this?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NO. The Complete Builder Kit ($197) includes templates and blueprints. Deploy in 48 hours with no coding required. The Edge Commerce Stack ($197) includes 30-day support if needed."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if a payment fails?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system is stateless. If payment fails, the buyer is not charged. They can retry. Successful payments trigger automatic delivery. No manual intervention required."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell other digital products besides beats?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "YES. The architecture works for ebooks, courses, templates, fonts, presets, plugins, and software. Automated delivery via Cloudflare Workers or Google Apps Script."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I want to scale to hundreds of products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system is designed for scale. Start with three products. Add more later. The architecture doesn’t change. The Complete Builder Kit includes a scaling playbook."
+    },
+    {
+      "type": "callout",
+      "text": "Crypto payments. Automated delivery. Sovereign infrastructure."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260524-THEV",
+      "slug": "selling-beats-online-crypto-payments-explained-digital-creators-5"
+    },
+    {
+      "id": "post-20260524-UXD7",
+      "slug": "selling-beats-online-crypto-payments-explained-digital-creators-4"
+    },
+    {
+      "id": "post-20260523-9QFH",
+      "slug": "nonsense-guide-selling-beats-online-crypto-payments"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can buyers pay with any cryptocurrency?",
+      "answer": "YES. NOWPayments accepts 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON—under $0.10 per transaction."
+    },
+    {
+      "question": "Do I need to code to deploy this?",
+      "answer": "NO. The Complete Builder Kit ($197) includes templates and blueprints. Deploy in 48 hours with no coding required. The Edge Commerce Stack ($197) includes 30-day support if needed."
+    },
+    {
+      "question": "What happens if a payment fails?",
+      "answer": "The system is stateless. If payment fails, the buyer is not charged. They can retry. Successful payments trigger automatic delivery. No manual intervention required."
+    },
+    {
+      "question": "Can I sell other digital products besides beats?",
+      "answer": "YES. The architecture works for ebooks, courses, templates, fonts, presets, plugins, and software. Automated delivery via Cloudflare Workers or Google Apps Script."
+    },
+    {
+      "question": "What if I want to scale to hundreds of products?",
+      "answer": "The system is designed for scale. Start with three products. Add more later. The architecture doesn’t change. The Complete Builder Kit includes a scaling playbook."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-24",
+    "lastReviewed": "2026-05-24",
+    "nextReviewDue": "2026-07-23"
+  },
+  "social": {
+    "x": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "linkedIn": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "forum": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "hook": "Everything You Need to Know About Selling Beats...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3"
+  },
+  "crossPostSummary": {
+    "title": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+    "hook": "Everything You Need to Know About Selling Beats...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "forum": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "x": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "linkedIn": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+    "hook50": "Everything You Need to Know About Selling Beats..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-24T22:45:46.090Z",
+      "dateModified": "2026-05-24T22:45:46.090Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-NH0X.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3"
+      },
+      "keywords": "sell beats online accept crypto",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can buyers pay with any cryptocurrency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YES. NOWPayments accepts 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON—under $0.10 per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to code to deploy this?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NO. The Complete Builder Kit ($197) includes templates and blueprints. Deploy in 48 hours with no coding required. The Edge Commerce Stack ($197) includes 30-day support if needed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a payment fails?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system is stateless. If payment fails, the buyer is not charged. They can retry. Successful payments trigger automatic delivery. No manual intervention required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell other digital products besides beats?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YES. The architecture works for ebooks, courses, templates, fonts, presets, plugins, and software. Automated delivery via Cloudflare Workers or Google Apps Script."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I want to scale to hundreds of products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system is designed for scale. Start with three products. Add more later. The architecture doesn’t change. The Complete Builder Kit includes a scaling playbook."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-NH0X.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260524-NH0X.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Everything You Need to Know About Selling Beats Online with Crypto Payments — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-selling-beats-online-3"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Beats online",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "beats online",
+    "totalWords": 1188,
+    "count": 2,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell beats online accept crypto",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1256,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-24T22:45:46.091Z"
+  }
+}
