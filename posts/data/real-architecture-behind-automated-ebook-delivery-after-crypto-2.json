@@ -1,0 +1,415 @@
+{
+  "id": "post-20260523-9SW5",
+  "slug": "real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+  "title": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+  "date": "2026-05-24T02:51:11.173Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260523-9SW5.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Digital creators in regions like Nigeria, Ghana, and Kenya struggle to sell ebooks, courses, and templates online due to platform restrictions on Stripe and PayPal. For instance, the 10% fees charged by Gumroad can add up quickly, with a $921 difference at 100 monthly sales on a $97 product. The solution lies in designing infrastructure that grants full control and lower fees, like the [[LINK:https://coremerch.github.io/store/blog/nowpayments-integration-static-site-[[LINK:https://coremerch.github.io/store/blog/crypto-payment-gateways-digital-products-first-principles-definitive|COREMERCH guide to crypto]]-payments-explained-digital-4|nowpayments]] integration with [[LINK:https://coremerch.github.io/store/blog/cloudflare-webhook-driven-crypto-payment-fulfillment-what-actually-3|Cloudflare Webhook-Driven]] Workers or Google Apps Script."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-5. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-5",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Automated ebook"
+    },
+    {
+      "type": "paragraph",
+      "text": "This post delves into the real architecture behind automated ebook delivery after crypto payment, built specifically for creators who want to bypass traditional payment platforms like Stripe and PayPal. By leveraging NOWPayments and Cloudflare Workers or Google Apps Script, creators can process crypto payments in 300+ currencies with a mere 0.5% fee, compared to Gumroad's 10%. The sovereignty of the digital commerce stack allows creators to own their data and scale their business without relying on external platforms."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The architecture is built around NOWPayments, which integrates seamlessly with Cloudflare Workers or Google Apps Script to automate crypto payment processing. When a customer makes a payment, NOWPayments fires a webhook that triggers the Cloudflare Workers or Google Apps Script to deliver the ebook instantly. This decentralized approach eliminates the need for traditional payment gateways and enables creators to store and manage their data independently."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This architecture is tailored for digital creators who want to sell ebooks, courses, and templates without relying on external payment platforms. By deploying a sovereign digital commerce stack, creators can break free from platform fees, maintain control over their data, and scale their business more efficiently. The Complete Builder Kit ($197) provides all the necessary blueprints and templates for a hassle-free deployment."
+    },
+    {
+      "type": "callout",
+      "text": "This architecture is not a workaround, but a base-layer infrastructure solution."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most important question is how to deploy this architecture, and the answer is to follow the checklist provided and shop for the Complete Builder Kit ($197) at https://coremerch.github.io/products.html. With this kit, creators can break free from platform fees and maintain control over their data, all while scaling their business more efficiently."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments processes 300+ cryptocurrencies, eliminating the need for traditional payment gateways."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're searching for ways to sell ebooks and templates without relying on traditional payment platforms, this post is a game-changer. By leveraging the NOWPayments integration with Cloudflare Workers or Google Apps Script, creators can process crypto payments in 300+ currencies with a mere 0.5% fee. If you're looking for a comprehensive solution, consider the Complete Builder Kit ($197), which includes all the necessary blueprints and templates for a hassle-free deployment."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy a sovereign digital commerce stack, follow these concrete steps: shop for the Complete Builder Kit ($197) at https://coremerch.github.io/products.html, download the kit, and review the blueprints and templates for a sovereign digital commerce stack. Set up NOWPayments and Cloudflare Workers or Google Apps Script, configure the payment processing, and deploy the infrastructure to ensure seamless ebook delivery. Configure Supabase or Google Sheets for order storage and ensure that the Cloudflare Workers or Google Apps Script handle the backend logic for instant ebook delivery."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How does NOWPayments integrate with Cloudflare Workers or Google Apps Script?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments integrates seamlessly with Cloudflare Workers or Google Apps Script to automate crypto payment processing. When a customer makes a payment, NOWPayments fires a webhook that triggers the Cloudflare Workers or Google Apps Script to deliver the ebook instantly."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the difference between Gumroad's 10% fees and NOWPayments' 0.5% fee?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "At 100 monthly sales on a $97 product, Gumroad's 10% fees can add up to $921, whereas NOWPayments' 0.5% fee is significantly lower."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this architecture for selling physical products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No, this architecture is specifically designed for digital products like ebooks, courses, and templates. However, you can use a similar approach for physical products, but it would require additional infrastructure components."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I configure Supabase or Google Sheets for order storage?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Configure Supabase or Google Sheets to store orders securely and ensure that the Cloudflare Workers or Google Apps Script handle the backend logic for instant ebook delivery."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the Complete Builder Kit ($197)?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The Complete Builder Kit ($197) is a comprehensive solution that includes all the necessary blueprints and templates for a hassle-free deployment of a sovereign digital commerce stack."
+    },
+    {
+      "type": "callout",
+      "text": "By deploying a sovereign digital commerce stack, creators can break free from platform fees and scale their business more efficiently."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260523-71Y5",
+      "slug": "automated-ebook-delivery-after-crypto-payment-every-detail-2"
+    },
+    {
+      "id": "post-20260523-E5MQ",
+      "slug": "automated-ebook-delivery-after-crypto-payment-explained-digital-3"
+    },
+    {
+      "id": "post-20260523-V9A9",
+      "slug": "get-automated-ebook-delivery-after-crypto-payment-working"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How does NOWPayments integrate with Cloudflare Workers or Google Apps Script?",
+      "answer": "NOWPayments integrates seamlessly with Cloudflare Workers or Google Apps Script to automate crypto payment processing. When a customer makes a payment, NOWPayments fires a webhook that triggers the Cloudflare Workers or Google Apps Script to deliver the ebook instantly."
+    },
+    {
+      "question": "What is the difference between Gumroad's 10% fees and NOWPayments' 0.5% fee?",
+      "answer": "At 100 monthly sales on a $97 product, Gumroad's 10% fees can add up to $921, whereas NOWPayments' 0.5% fee is significantly lower."
+    },
+    {
+      "question": "Can I use this architecture for selling physical products?",
+      "answer": "No, this architecture is specifically designed for digital products like ebooks, courses, and templates. However, you can use a similar approach for physical products, but it would require additional infrastructure components."
+    },
+    {
+      "question": "How do I configure Supabase or Google Sheets for order storage?",
+      "answer": "Configure Supabase or Google Sheets to store orders securely and ensure that the Cloudflare Workers or Google Apps Script handle the backend logic for instant ebook delivery."
+    },
+    {
+      "question": "What is the Complete Builder Kit ($197)?",
+      "answer": "The Complete Builder Kit ($197) is a comprehensive solution that includes all the necessary blueprints and templates for a hassle-free deployment of a sovereign digital commerce stack."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-24",
+    "lastReviewed": "2026-05-24",
+    "nextReviewDue": "2026-07-23"
+  },
+  "social": {
+    "x": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "linkedIn": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "forum": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "hook": "The Real Architecture Behind Automated Ebook De...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2"
+  },
+  "crossPostSummary": {
+    "title": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+    "hook": "The Real Architecture Behind Automated Ebook De...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "forum": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "x": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "linkedIn": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+    "hook50": "The Real Architecture Behind Automated Ebook De..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-24T02:51:11.174Z",
+      "dateModified": "2026-05-24T02:51:11.174Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-9SW5.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2"
+      },
+      "keywords": "automated ebook delivery after crypto payment",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does NOWPayments integrate with Cloudflare Workers or Google Apps Script?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments integrates seamlessly with Cloudflare Workers or Google Apps Script to automate crypto payment processing. When a customer makes a payment, NOWPayments fires a webhook that triggers the Cloudflare Workers or Google Apps Script to deliver the ebook instantly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Gumroad's 10% fees and NOWPayments' 0.5% fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At 100 monthly sales on a $97 product, Gumroad's 10% fees can add up to $921, whereas NOWPayments' 0.5% fee is significantly lower."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this architecture for selling physical products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, this architecture is specifically designed for digital products like ebooks, courses, and templates. However, you can use a similar approach for physical products, but it would require additional infrastructure components."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I configure Supabase or Google Sheets for order storage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Configure Supabase or Google Sheets to store orders securely and ensure that the Cloudflare Workers or Google Apps Script handle the backend logic for instant ebook delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Complete Builder Kit ($197)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Complete Builder Kit ($197) is a comprehensive solution that includes all the necessary blueprints and templates for a hassle-free deployment of a sovereign digital commerce stack."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-9SW5.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260523-9SW5.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "The Real Architecture Behind Automated Ebook Delivery After Crypto Payment — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-ebook-delivery-after-crypto-2"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Automated ebook",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "automated ebook",
+    "totalWords": 985,
+    "count": 2,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "automated ebook delivery after crypto payment",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1065,
+    "aiProvider": "cerebras",
+    "aiModel": "llama3.1-8b",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-24T02:51:11.177Z"
+  }
+}
