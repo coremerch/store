@@ -1,0 +1,415 @@
+{
+  "id": "post-20260525-6T9I",
+  "slug": "real-architecture-behind-github-pages-free-digital-product-5",
+  "title": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+  "date": "2026-05-25T11:41:34.640Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260525-6T9I.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Imagine trying to sell ebooks or courses in Zimbabwe or Venezuela, where platforms like Stripe and PayPal are unavailable or severely restricted. You're forced to choose between outrageous fees or abandoning your online business altogether. This is the infrastructure problem that COREMERCH solves, with a sovereign [[LINK:https://coremerch.github.io/store/blog/why-[[LINK:https://coremerch.github.io/store/blog/digital-product-[[LINK:https://coremerch.github.io/store/blog/why-payment-methods-filipino-digital-creators-costing-you|COREMERCH guide to payment]]-solutions-west-africa-explained-digital-2|Digital Product]]-product-payment-solutions-west-africa-costing|digital]] commerce stack that gives you full control over your online store, payment processing, and customer data, all without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-what-actually-how-4. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-what-actually-how-4",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Github pages"
+    },
+    {
+      "type": "paragraph",
+      "text": "At its core, this is a solution for digital creators in restricted regions who want to sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without the limitations of platforms like Stripe, PayPal, or Gumroad. It's not a workaround, but a base-layer infrastructure that empowers creators to take control of their online businesses, complete with automatic crypto payment processing, instant product delivery, and full data ownership."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Our solution is built on a combination of free and paid tools that work together seamlessly. GitHub Pages or Cloudflare Pages handle hosting, while Cloudflare Workers or Google Apps Script power the backend logic. Supabase or Google Sheets store orders, and Google Drive or Cloudflare R2 handle file delivery. NOWPayments handles automatic on-chain crypto payment verification, with a fee of just 0.5%. This architecture allows creators to build, deploy, and scale their online stores without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "The product types that work with automated crypto delivery are any digital files that can be stored and delivered via download link: ebooks in PDF or EPUB format, courses packaged as ZIP archives, Notion templates exported as files or share links, font families as ZIP archives of OTF and TTF files, Lightroom or Capture One preset packs, beat files as WAV or MP3 archives, plugin installers, stock photo packs, software license keys, and any other file-based product. The delivery system in Stack 01 uses Google Drive shared links. Stack 02 uses Cloudflare R2 presigned URLs with configurable expiry times — typically 24 to 72 hours — which prevents download links from being shared indefinitely after a single purchase."
+    },
+    {
+      "type": "callout",
+      "text": "Our solution empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The order management layer gives you complete visibility into every transaction your store processes. In Stack 01, every order is logged to a Google Sheet with the buyer's email, product purchased, payment amount in crypto and USD equivalent, transaction hash for on-chain verification, and delivery status. In Stack 02, orders are stored in a Supabase PostgreSQL database with the same fields plus additional metadata. Both can be exported as CSV at any time. The transaction hash provides cryptographic proof of every payment that does not depend on any platform's records — you can verify any transaction independently on a public blockchain explorer."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling a sovereign digital store requires no infrastructure changes at any realistic volume level for most individual creators. Cloudflare Workers processes each webhook event independently — ten simultaneous orders are handled as ten separate processes with no queue congestion. Supabase handles hundreds of concurrent database operations on the free tier. Resend delivers 3,000 emails per month on the free tier — enough for significant daily sales volume. Cloudflare Pages serves the storefront to any number of concurrent visitors without capacity constraints. NOWPayments processes payment volume without per-transaction approval delays."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The most important thing to know is that our solution is not a workaround, but a base-layer infrastructure that empowers digital creators to take control of their online businesses. By using our sovereign digital commerce stack, creators can sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "callout",
+      "text": "By using our sovereign digital commerce stack, creators can sell digital downloads without relying on platforms like Stripe, PayPal, or Gumroad."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're looking for a way to sell ebooks, courses, or other digital products without relying on platforms like Stripe, PayPal, or Gumroad, then our sovereign digital commerce stack is the solution for you. You can learn more about our solution and how it works by visiting our shop at https://coremerch.github.io/products.html, where you can purchase our Complete Builder Kit ($197) and start building your own sovereign digital commerce stack today."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy our solution today, follow these concrete steps: choose the tools you want to use from our recommended stack, set up your GitHub Pages or Cloudflare Pages hosting, write your Cloudflare Workers or Google Apps Script backend logic, configure your Supabase or Google Sheets order storage, set up your Google Drive or Cloudflare R2 file delivery, and integrate NOWPayments for automatic on-chain crypto payment verification."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "You can sell an ebook online without PayPal or Stripe by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the best way to sell digital downloads without platform fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The best way to sell digital downloads without platform fees is to use our sovereign digital commerce stack, which allows creators to sell digital downloads without relying on platforms like Stripe, PayPal, or Gumroad."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell templates and fonts without using Gumroad or Payhip?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can sell templates and fonts without using Gumroad or Payhip by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the fee difference between Gumroad and NOWPayments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The fee difference between Gumroad and NOWPayments is significant, with Gumroad charging 10% on every sale and NOWPayments charging just 0.5%. This means that at 100 sales per month on a $97 product, the fee difference retains $921."
+    },
+    {
+      "type": "faq_question",
+      "text": "How can I learn more about your solution and get started?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "You can learn more about our solution and get started by visiting our shop at https://coremerch.github.io/products.html, where you can purchase our Complete Builder Kit ($197) and start building your own sovereign digital commerce stack today."
+    },
+    {
+      "type": "callout",
+      "text": "Our solution is not a workaround, but a base-layer infrastructure that enables automatic crypto payment processing, instant product delivery, and full data ownership for digital creators."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260524-O3ZH",
+      "slug": "github-pages-free-digital-product-store-hosting-explained-3"
+    },
+    {
+      "id": "post-20260523-FL5O",
+      "slug": "real-architecture-behind-github-pages-free-digital-product-4"
+    },
+    {
+      "id": "post-20260523-1V7Q",
+      "slug": "github-pages-free-digital-product-store-hosting-everything"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I sell an ebook online without PayPal or Stripe?",
+      "answer": "You can sell an ebook online without PayPal or Stripe by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "question": "What is the best way to sell digital downloads without platform fees?",
+      "answer": "The best way to sell digital downloads without platform fees is to use our sovereign digital commerce stack, which allows creators to sell digital downloads without relying on platforms like Stripe, PayPal, or Gumroad."
+    },
+    {
+      "question": "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "answer": "Yes, you can sell templates and fonts without using Gumroad or Payhip by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+    },
+    {
+      "question": "What is the fee difference between Gumroad and NOWPayments?",
+      "answer": "The fee difference between Gumroad and NOWPayments is significant, with Gumroad charging 10% on every sale and NOWPayments charging just 0.5%. This means that at 100 sales per month on a $97 product, the fee difference retains $921."
+    },
+    {
+      "question": "How can I learn more about your solution and get started?",
+      "answer": "You can learn more about our solution and get started by visiting our shop at https://coremerch.github.io/products.html, where you can purchase our Complete Builder Kit ($197) and start building your own sovereign digital commerce stack today."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-25",
+    "lastReviewed": "2026-05-25",
+    "nextReviewDue": "2026-07-24"
+  },
+  "social": {
+    "x": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Require https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "linkedIn": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "forum": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "hook": "The Real Architecture Behind GitHub Pages for F...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5"
+  },
+  "crossPostSummary": {
+    "title": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+    "hook": "The Real Architecture Behind GitHub Pages for F...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "forum": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "x": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Require https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "linkedIn": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+    "hook50": "The Real Architecture Behind GitHub Pages for F..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-25T11:41:34.641Z",
+      "dateModified": "2026-05-25T11:41:34.641Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260525-6T9I.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5"
+      },
+      "keywords": "github pages digital product store free hosting",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I sell an ebook online without PayPal or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can sell an ebook online without PayPal or Stripe by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best way to sell digital downloads without platform fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best way to sell digital downloads without platform fees is to use our sovereign digital commerce stack, which allows creators to sell digital downloads without relying on platforms like Stripe, PayPal, or Gumroad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell templates and fonts without using Gumroad or Payhip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can sell templates and fonts without using Gumroad or Payhip by using our sovereign digital commerce stack, which empowers digital creators to take control of their online businesses and sell ebooks, courses, templates, fonts, presets, beats, plugins, and software without relying on blocked platforms or exorbitant fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the fee difference between Gumroad and NOWPayments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fee difference between Gumroad and NOWPayments is significant, with Gumroad charging 10% on every sale and NOWPayments charging just 0.5%. This means that at 100 sales per month on a $97 product, the fee difference retains $921."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I learn more about your solution and get started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can learn more about our solution and get started by visiting our shop at https://coremerch.github.io/products.html, where you can purchase our Complete Builder Kit ($197) and start building your own sovereign digital commerce stack today."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260525-6T9I.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260525-6T9I.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "The Real Architecture Behind GitHub Pages for Free Digital Product Store Hosting — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/real-architecture-behind-github-pages-free-digital-product-5"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Github pages",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "github pages",
+    "totalWords": 1123,
+    "count": 3,
+    "densityPercent": 0.3,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "github pages digital product store free hosting",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1207,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-25T11:41:34.649Z"
+  }
+}
