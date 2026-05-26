@@ -1,0 +1,415 @@
+{
+  "id": "post-20260526-8PDX",
+  "slug": "how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+  "title": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+  "date": "2026-05-26T07:32:43.618Z",
+  "category": "Getting Paid",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260526-8PDX.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Pakistan, digital [[LINK:https://coremerch.github.io/store/blog/how-creators-ghana-get-paid-online-step-step|COREMERCH guide to creators]] face a stark reality: [[LINK:https://coremerch.github.io/store/blog/stripe-alternatives-nigerian-creators-which-architecture-actually-works-5|stripe]] and PayPal are not options. Your audience wants your ebooks, courses, or templates, but conventional payment gateways lock you out. This guide solves that. You will deploy a sovereign commerce stack using Cloudflare Workers and NOWPayments webhooks. No platform dependencies. No subscriptions. Full ownership. By the end, you’ll process USDT payments on Tron or Solana for under $0.10 per transaction, deliver products instantly, and own every component of your infrastructure. This is not a workaround—it’s base-layer architecture built for regions where [[LINK:https://coremerch.github.io/store/blog/financial-sovereignty-digital-creators-crypto-which-architecture-actually-5|Financial Sovereignty]] isolation is the norm."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Platforms fail creators in Pakistan through restriction, delay, or collapse. Stripe’s unavailability and Gumroad’s payout delays are symptoms of a system not built for you. This stack replaces dependency with ownership. Cloudflare Workers handle backend logic without servers. Supabase stores orders without databases you manage. NOWPayments verifies crypto payments on-chain, firing webhooks the moment USDT confirms. File delivery happens via Cloudflare R2, not Google Drive. Every component is chosen for sovereignty: no single point of failure, no platform lock-in. You deploy once, own forever. The Edge Commerce Stack ($197) deploys this architecture in 48 hours, configured for your first five products. This is infrastructure as a permanent asset, not a rented service."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with a Cloudflare account—free tier suffices. Register a domain or use a subdomain you control. Set up a NOWPayments account to generate API keys for USDT on Tron or Solana. Choose Tron for sub-$0.01 transactions or Solana for sub-$0.10 with faster finality. Create a Supabase project for order storage and generate its API keys. Install Wrangler CLI to manage Cloudflare Workers locally. Ensure your product files are uploaded to Cloudflare R2 or Google Drive, with shareable links ready. If using R2, configure its bucket permissions for public read access. Test your payment flow manually: send USDT to your NOWPayments address and verify the webhook payload structure. Document your API keys and endpoints—you’ll hardcode these into your Worker scripts."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Write your Cloudflare Worker script to handle three tasks: payment verification, order storage, and file delivery. Use NOWPayments’ webhook payload to extract the payment ID and amount. Verify the transaction on-chain via NOWPayments’ API. If confirmed, write the order to Supabase using its REST API. Simultaneously, generate a signed URL for the product file in Cloudflare R2 or retrieve the Google Drive link. Return this URL to the buyer via email or redirect. Example: `const paymentVerified = await fetch(\\`https://api.nowpayments.io/v1/payment/\\${paymentId}\\`, { headers: { 'x-api-key': NOWPAYMENTS_API_KEY } });`. Deploy this Worker using Wrangler: `wrangler publish`. Test end-to-end by purchasing a product with USDT and verifying file delivery. Debug using Cloudflare’s logs and Supabase’s dashboard."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments charges a flat 0.5% fee—no hidden costs, no KYC."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Point your domain to Cloudflare Pages or Workers. Configure DNS records for `A` and `CNAME` to ensure your site resolves correctly. Set up SPF, DKIM, and DMARC for transactional emails if using the Edge Commerce Stack ($197)—this comes pre-configured. Test your live environment by purchasing a product with USDT on Tron or Solana. Verify that NOWPayments’ webhook triggers your Worker, Supabase logs the order, and the buyer receives the file. Monitor transaction fees: Tron should remain under $0.01, Solana under $0.10. If fees spike, switch networks via NOWPayments’ dashboard. Document your first successful transaction for reference. Share your store link with your audience—your infrastructure is now live, sovereign, and operational."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scale by adding products to your Supabase database and updating your Worker script to handle new SKUs. Use Cloudflare’s edge caching to serve product pages faster globally. For high-volume stores, upgrade to Cloudflare’s paid Workers plan for increased request limits. Integrate P2P exchanges like Paxful or LocalBitcoins to convert USDT to local currency in Pakistan. Automate this conversion using their APIs or manual processes. Monitor NOWPayments’ 0.5% fee structure—it remains consistent regardless of volume. Back up your Supabase database weekly and version-control your Worker scripts. For advanced scaling, deploy the Complete Builder Kit ($197) to access all blueprints and templates. Your infrastructure is now a scalable asset, not a bottleneck."
+    },
+    {
+      "type": "heading",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To set up NOWPayments webhooks with Cloudflare Workers, register a NOWPayments account and generate API keys for USDT on Tron or Solana. Write a Worker script to verify payments via NOWPayments’ API, store orders in Supabase, and deliver files from Cloudflare R2. Deploy the Worker using Wrangler CLI. Test end-to-end by sending USDT and verifying file delivery. Point your domain to Cloudflare and configure DNS. Monitor transaction fees and scale by adding products or integrating P2P exchanges for local currency conversion."
+    },
+    {
+      "type": "callout",
+      "text": "Tron transactions cost under $0.01; Solana under $0.10. Choose your network."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Edge Commerce Stack ($197) deploys this architecture in 48 hours, configured for your first five products. It includes Cloudflare Workers, Supabase integration, NOWPayments setup, and end-to-end testing. You receive a fully operational store with SPF/DKIM/DMARC configured for secure email delivery. This stack is built for creators in Pakistan and similar regions, ensuring you own every component after deployment. No subscriptions. No platform dependencies. Lifetime access."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Register a Cloudflare account and NOWPayments account. 2. Set up Supabase for order storage and generate API keys. 3. Install Wrangler CLI for local Worker development. 4. Upload product files to Cloudflare R2 or Google Drive. 5. Write a Cloudflare Worker script to verify payments, store orders, and deliver files. 6. Test the payment flow manually using USDT on Tron or Solana. 7. Deploy the Worker using `wrangler publish`. 8. Point your domain to Cloudflare and configure DNS records. 9. Test live transactions and verify file delivery. 10. Document successful deployments and monitor fees."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m based in Pakistan?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. This stack is designed for creators in Pakistan and similar regions where Stripe and PayPal are unavailable. It uses NOWPayments for USDT transactions on low-fee networks like Tron and Solana, ensuring you can collect payments globally."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if USDT transaction fees spike?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Switch networks via NOWPayments’ dashboard. Tron fees typically remain under $0.01, while Solana stays under $0.10. Monitor fees during high network congestion and adjust as needed."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I convert USDT to local currency?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Integrate P2P exchanges like Paxful or LocalBitcoins. These platforms allow you to convert USDT to PKR or other local currencies directly, often with minimal fees."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need to manage servers?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. Cloudflare Workers and Supabase handle backend logic and order storage without servers. You focus on your products, not infrastructure maintenance."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I need to scale beyond five products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Add products to your Supabase database and update your Worker script. For advanced scaling, deploy the Complete Builder Kit ($197) to access all blueprints and templates."
+    },
+    {
+      "type": "callout",
+      "text": "Own every component after deployment. No platform lock-in, ever."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260525-80G8",
+      "slug": "how-setting-up-nowpayments-webhooks-cloudflare-workers-works-3"
+    },
+    {
+      "id": "post-20260525-E3EV",
+      "slug": "setting-up-nowpayments-webhooks-cloudflare-workers-everything-you-4"
+    },
+    {
+      "id": "post-20260524-DZVL",
+      "slug": "setting-up-nowpayments-webhooks-cloudflare-workers-everything-you-3"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m based in Pakistan?",
+      "answer": "Yes. This stack is designed for creators in Pakistan and similar regions where Stripe and PayPal are unavailable. It uses NOWPayments for USDT transactions on low-fee networks like Tron and Solana, ensuring you can collect payments globally."
+    },
+    {
+      "question": "What happens if USDT transaction fees spike?",
+      "answer": "Switch networks via NOWPayments’ dashboard. Tron fees typically remain under $0.01, while Solana stays under $0.10. Monitor fees during high network congestion and adjust as needed."
+    },
+    {
+      "question": "How do I convert USDT to local currency?",
+      "answer": "Integrate P2P exchanges like Paxful or LocalBitcoins. These platforms allow you to convert USDT to PKR or other local currencies directly, often with minimal fees."
+    },
+    {
+      "question": "Do I need to manage servers?",
+      "answer": "No. Cloudflare Workers and Supabase handle backend logic and order storage without servers. You focus on your products, not infrastructure maintenance."
+    },
+    {
+      "question": "What if I need to scale beyond five products?",
+      "answer": "Add products to your Supabase database and update your Worker script. For advanced scaling, deploy the Complete Builder Kit ($197) to access all blueprints and templates."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-26",
+    "lastReviewed": "2026-05-26",
+    "nextReviewDue": "2026-07-25"
+  },
+  "social": {
+    "x": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide —  https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "linkedIn": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "forum": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "hook": "How to Setting Up NOWPayments Webhooks with Clo...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6"
+  },
+  "crossPostSummary": {
+    "title": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+    "hook": "How to Setting Up NOWPayments Webhooks with Clo...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "forum": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "x": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide —  https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "linkedIn": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+    "hook50": "How to Setting Up NOWPayments Webhooks with Clo..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-05-26T07:32:43.619Z",
+      "dateModified": "2026-05-26T07:32:43.619Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-8PDX.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6"
+      },
+      "keywords": "nowpayments webhook setup cloudflare workers",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m based in Pakistan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. This stack is designed for creators in Pakistan and similar regions where Stripe and PayPal are unavailable. It uses NOWPayments for USDT transactions on low-fee networks like Tron and Solana, ensuring you can collect payments globally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if USDT transaction fees spike?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Switch networks via NOWPayments’ dashboard. Tron fees typically remain under $0.01, while Solana stays under $0.10. Monitor fees during high network congestion and adjust as needed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert USDT to local currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Integrate P2P exchanges like Paxful or LocalBitcoins. These platforms allow you to convert USDT to PKR or other local currencies directly, often with minimal fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to manage servers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Cloudflare Workers and Supabase handle backend logic and order storage without servers. You focus on your products, not infrastructure maintenance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I need to scale beyond five products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Add products to your Supabase database and update your Worker script. For advanced scaling, deploy the Complete Builder Kit ($197) to access all blueprints and templates."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-8PDX.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-8PDX.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "How to Setting Up NOWPayments Webhooks with Cloudflare Workers: The Complete Infrastructure Guide — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-webhooks-cloudflare-workers-complete-6"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I receive crypto payments for my digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "nowpayments webhook",
+    "totalWords": 1178,
+    "count": 2,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "nowpayments webhook setup cloudflare workers",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1248,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I receive crypto payments for my digital products?",
+      "How long does USDT payment take to arrive compared to PayPal?",
+      "How do creators in Nigeria convert Bitcoin to naira?",
+      "What is NOWPayments and how does it work for digital sellers?"
+    ],
+    "relatedSearches": [
+      "nowpayments digital products webhook setup guide",
+      "receive usdt tron payment for ebook sale",
+      "convert bitcoin naira p2p exchange binance patricia",
+      "crypto payment fastest settlement digital goods 2025"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-26T07:32:43.620Z"
+  }
+}
