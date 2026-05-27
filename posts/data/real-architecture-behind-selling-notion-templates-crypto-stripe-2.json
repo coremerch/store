@@ -1,0 +1,415 @@
+{
+  "id": "post-20260526-LCB6",
+  "slug": "real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+  "title": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+  "date": "2026-05-27T00:25:40.685Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260526-LCB6.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve built a Notion template. It’s polished, functional, and ready to sell. But when you try to set up payments, the wall appears. Stripe is unavailable in Kenya. PayPal flags your account. Gumroad blocks your region. The platforms that work elsewhere fail here. This isn’t a temporary glitch — it’s structural exclusion. Your audience exists, your product is ready, but the payment layer collapses. This post solves that problem at the infrastructure level. We’ll unpack the exact architecture used to sell digital products like Notion templates without relying on Stripe, PayPal, or any centralized payment processor. The solution is sovereign commerce infrastructure: a stack of tools you own, control, and deploy. No subscriptions. No platform lock-in. No geographic restrictions. By the end of this post, you’ll understand how to build a system that accepts [[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/how-crypto-payments-tanzanian-online-sellers-complete-infrastructure-2|COREMERCH guide to crypto]]-payments-tanzanian-online-sellers-what-actually-how-2|Crypto Payments]]-payments-tanzanian-online-sellers-broken-here-infrastructure|crypto]] payments, delivers products automatically, and operates entirely on infrastructure you control."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-about-automated-digital-product-delivery-crypto-guide-3. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-about-automated-digital-product-delivery-crypto-guide-3",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Notion templates"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is not a workaround. It’s a complete commerce stack built on sovereign infrastructure. The core components are GitHub Pages for hosting, Cloudflare Workers for backend logic, Supabase for order storage, and NOWPayments for crypto payment processing. Each piece is independent, open, and under your control. The system works like this: a buyer sends crypto to your payment address. NOWPayments verifies the transaction on-chain. Once confirmed, Cloudflare Workers triggers product delivery via a secure link. The entire process is automated, instant, and doesn’t require a third-party platform. Why does this matter? Because it removes the single point of failure that platforms like Stripe introduce. When you own the infrastructure, no one can shut you down, restrict your region, or change the rules mid-game. This is commerce architecture built for permanence, not permission."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s the technical breakdown. The storefront is hosted on GitHub Pages — a free, globally distributed platform. When a buyer selects your Notion template, they’re redirected to a NOWPayments invoice. NOWPayments supports 300+ cryptocurrencies and charges a flat 0.5% fee. Once payment is confirmed on-chain, a webhook fires to Cloudflare Workers. This serverless function verifies the payment, logs the order in Supabase, and generates a secure, expiring download link. The link is sent to the buyer’s email using Cloudflare’s email API. The template file itself is stored in Cloudflare R2 — a low-cost, high-performance object storage solution. No databases are exposed, no files are left unsecured. Every step is automated, from payment verification to product delivery. The system is designed to handle scale without manual intervention. You deploy it once, and it runs indefinitely."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This architecture is built for digital creators in regions where conventional payment processors are unavailable or unreliable. If you’re selling Notion templates, ebooks, courses, or software in Kenya, Nigeria, Zimbabwe, or similar markets, this is your solution. It’s also for creators who refuse to rent their commerce infrastructure. When you use Stripe or PayPal, you’re leasing access to a system that can revoke your privileges at any time. With this stack, you own the codebase, the data, and the deployment. There are no monthly fees, no transaction limits, and no geographic restrictions. The system is designed to work in the hardest markets — places where currency collapse, payment rejection, and financial isolation are real threats. It’s not just a tool; it’s a statement of infrastructure sovereignty."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure removes platform dependency permanently."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each component in this stack serves a specific purpose. GitHub Pages provides static hosting for your storefront. It’s free, fast, and integrates seamlessly with GitHub’s version control. Cloudflare Workers handles backend logic — payment verification, order logging, and link generation. It’s serverless, meaning you pay only for what you use. Supabase, a PostgreSQL-compatible database, stores order data securely. Cloudflare R2 stores your digital products, ensuring fast, reliable delivery. NOWPayments handles crypto payments, converting USD prices to the chosen cryptocurrency at transaction time. The email delivery system uses Cloudflare’s API, ensuring high deliverability rates. All these tools are either free or low-cost, with no hidden fees. Together, they form a stack that’s greater than the sum of its parts. Each component is replaceable, but the default configuration is optimized for speed, security, and cost-efficiency."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by mapping your product flow. Identify the Notion templates you’ll sell, set your prices in USD, and decide which cryptocurrencies to accept (BSC, Solana, and TRON are recommended for low fees). Next, deploy the storefront to GitHub Pages. Use the Complete Builder Kit ($197) for pre-built templates and step-by-step guides. Configure NOWPayments to generate invoices and fire webhooks. Connect Cloudflare Workers to handle payment verification and product delivery. Set up Supabase to log orders and Cloudflare R2 to store template files. Test the entire flow end-to-end before going live. Once deployed, promote your store to your audience. The system will handle payments, deliveries, and order tracking automatically. You focus on creating; the infrastructure handles the rest. This isn’t a temporary fix — it’s a permanent solution to a permanent problem."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell Notion templates for crypto without Stripe, deploy a sovereign commerce stack using GitHub Pages for hosting, Cloudflare Workers for backend logic, Supabase for order storage, and NOWPayments for crypto processing. The buyer pays in crypto, NOWPayments verifies the transaction, and Cloudflare Workers automates product delivery via a secure link. The entire system is serverless, region-independent, and under your full control. No platform fees, no geographic restrictions, and no single point of failure."
+    },
+    {
+      "type": "callout",
+      "text": "Crypto payments via NOWPayments ensure instant, global transactions with no KYC."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re ready to deploy this architecture today, the Complete Builder Kit ($197) includes all the blueprints, templates, and step-by-step guides you need. It’s the fastest way to launch a sovereign commerce stack without starting from scratch. Every component is documented, every integration is pre-configured, and every deployment is yours to own. Visit https://coremerch.github.io/products.html to get started."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Map your product flow: Identify templates, set USD prices, choose cryptocurrencies (BSC, Solana, TRON recommended).\n2. Deploy storefront: Use GitHub Pages with pre-built templates from the Complete Builder Kit.\n3. Set up payments: Configure NOWPayments for invoices and webhooks.\n4. Build backend logic: Use Cloudflare Workers to verify payments and trigger deliveries.\n5. Store data: Set up Supabase for order logging and Cloudflare R2 for file storage.\n6. Test end-to-end: Simulate purchases to ensure every step works flawlessly.\n7. Launch: Promote your store and let the infrastructure handle the rest."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m not technical?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Complete Builder Kit includes pre-built templates and step-by-step guides. While basic technical understanding helps, the kit is designed for non-developers to deploy successfully."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if crypto prices fluctuate?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments converts USD prices to crypto at transaction time, locking in the rate. Fluctuations after purchase don’t affect your revenue."
+    },
+    {
+      "type": "faq_question",
+      "text": "How secure is the file delivery system?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Files are stored in Cloudflare R2, and download links are secure, expiring after a single use. No direct access to storage is exposed."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the ongoing costs?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "GitHub Pages, Cloudflare Workers, and Supabase’s free tier are sufficient for most creators. NOWPayments charges 0.5% per transaction. Cloudflare R2 costs are minimal."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I add more products later?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The system is designed to scale. Add new products by updating your storefront and backend logic — no need to rebuild the entire stack."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy once, own forever — no subscriptions, no geographic restrictions."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260526-S7DM",
+      "slug": "selling-notion-templates-crypto-explained-digital-creators-stripe-2"
+    },
+    {
+      "id": "post-20260526-F8H7",
+      "slug": "understanding-selling-notion-templates-crypto-plain-language-infrastructure-9"
+    },
+    {
+      "id": "post-20260526-NDCI",
+      "slug": "selling-notion-templates-crypto-what-actually-how-works-5"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m not technical?",
+      "answer": "Yes. The Complete Builder Kit includes pre-built templates and step-by-step guides. While basic technical understanding helps, the kit is designed for non-developers to deploy successfully."
+    },
+    {
+      "question": "What if crypto prices fluctuate?",
+      "answer": "NOWPayments converts USD prices to crypto at transaction time, locking in the rate. Fluctuations after purchase don’t affect your revenue."
+    },
+    {
+      "question": "How secure is the file delivery system?",
+      "answer": "Files are stored in Cloudflare R2, and download links are secure, expiring after a single use. No direct access to storage is exposed."
+    },
+    {
+      "question": "What are the ongoing costs?",
+      "answer": "GitHub Pages, Cloudflare Workers, and Supabase’s free tier are sufficient for most creators. NOWPayments charges 0.5% per transaction. Cloudflare R2 costs are minimal."
+    },
+    {
+      "question": "Can I add more products later?",
+      "answer": "Yes. The system is designed to scale. Add new products by updating your storefront and backend logic — no need to rebuild the entire stack."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-27",
+    "lastReviewed": "2026-05-27",
+    "nextReviewDue": "2026-07-26"
+  },
+  "social": {
+    "x": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "linkedIn": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "forum": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "hook": "The Real Architecture Behind Selling Notion Tem...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2"
+  },
+  "crossPostSummary": {
+    "title": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+    "hook": "The Real Architecture Behind Selling Notion Tem...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "forum": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "x": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "linkedIn": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+    "hook50": "The Real Architecture Behind Selling Notion Tem..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-27T00:25:40.690Z",
+      "dateModified": "2026-05-27T00:25:40.690Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-LCB6.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2"
+      },
+      "keywords": "sell notion templates for crypto",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m not technical?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Complete Builder Kit includes pre-built templates and step-by-step guides. While basic technical understanding helps, the kit is designed for non-developers to deploy successfully."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if crypto prices fluctuate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments converts USD prices to crypto at transaction time, locking in the rate. Fluctuations after purchase don’t affect your revenue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How secure is the file delivery system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Files are stored in Cloudflare R2, and download links are secure, expiring after a single use. No direct access to storage is exposed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the ongoing costs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GitHub Pages, Cloudflare Workers, and Supabase’s free tier are sufficient for most creators. NOWPayments charges 0.5% per transaction. Cloudflare R2 costs are minimal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I add more products later?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The system is designed to scale. Add new products by updating your storefront and backend logic — no need to rebuild the entire stack."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-LCB6.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260526-LCB6.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "The Real Architecture Behind Selling Notion Templates for Crypto — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/real-architecture-behind-selling-notion-templates-crypto-stripe-2"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Notion templates",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "notion templates",
+    "totalWords": 1288,
+    "count": 5,
+    "densityPercent": 0.4,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell notion templates for crypto",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1350,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-27T00:25:40.690Z"
+  }
+}
