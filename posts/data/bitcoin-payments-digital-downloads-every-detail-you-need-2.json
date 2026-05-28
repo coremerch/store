@@ -1,0 +1,415 @@
+{
+  "id": "post-20260528-PA0D",
+  "slug": "bitcoin-payments-digital-downloads-every-detail-you-need-2",
+  "title": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+  "date": "2026-05-28T12:02:41.062Z",
+  "category": "Selling Digital Products",
+  "contentType": "deep-dive",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260528-PA0D.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Kenya, digital creators face a stark reality: global [[LINK:https://coremerch.github.io/store/blog/usdt-[[LINK:https://coremerch.github.io/store/blog/payment-options-ethiopian-digital-creators-first-principles-definitive-2|COREMERCH guide to payment]]-gateways-digital-products-every-detail-you|USDT Payment]] platforms like Stripe and PayPal are either unavailable or unreliable. This leaves you with two choices: abandon your audience or build infrastructure that cannot be [[LINK:https://coremerch.github.io/store/blog/blocked-earning-real-payment-gateways-cameroon-digital-products-4|blocked]]. This guide is for those who choose the latter. We will detail every component required to sell digital products—ebooks, courses, templates—using Bitcoin payments. No third-party platforms. No subscriptions. Full ownership of your stack. From hosting to payment verification, we cover the technical, operational, and edge cases that ensure your system remains operational under any condition. This is not a workaround. It is base-layer infrastructure designed to withstand the same pressures that COREMERCH was built under in Zimbabwe—actual payment rejection, currency collapse, and financial isolation."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/complete-deep-dive-automated-digital-product-delivery-crypto. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/complete-deep-dive-automated-digital-product-delivery-crypto",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "The Full Picture Most Guides Leave Out: Bitcoin payment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most guides focus on superficial solutions—a payment gateway here, a hosting service there. They ignore the critical interplay between components. A bulletproof stack requires three layers: hosting, backend logic, and payment verification. Hosting must be decentralized to avoid takedowns. Backend logic must automate product delivery without manual intervention. Payment verification must be on-chain to eliminate chargebacks. Each layer must operate independently but integrate seamlessly. For example, using GitHub Pages for hosting ensures your storefront remains live even if your backend fails. Google Apps Script or Cloudflare Workers handle order processing and file delivery. NOWPayments verifies Bitcoin transactions on-chain, triggering instant delivery. This architecture ensures that no single point of failure exists. If one component fails, the others continue to function. This is not optional—it is the difference between a system that works today and one that works under any condition."
+    },
+    {
+      "type": "heading",
+      "text": "Every Component and What It Does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here is the breakdown of each component and its role: 1. **Hosting**: GitHub Pages or Cloudflare Pages. Both are free and serve your storefront. GitHub Pages uses Jekyll for static sites; Cloudflare Pages supports modern frameworks like React. 2. **Backend Logic**: Google Apps Script or Cloudflare Workers. Apps Script is JavaScript-based and integrates with Google Sheets for order storage. Cloudflare Workers run on the edge, reducing latency for global audiences. 3. **Order Storage**: Google Sheets or Supabase. Sheets is simpler for small catalogs; Supabase offers a scalable database with real-time updates. 4. **File Delivery**: Google Drive or Cloudflare R2. Drive is familiar but has rate limits; R2 provides unlimited storage and bandwidth. 5. **Payment Verification**: NOWPayments. Supports 300+ cryptocurrencies with a 0.5% fee. No KYC. No buyer accounts required. Each component is selected for its reliability, cost, and ease of integration. Together, they form a stack that is both lightweight and robust."
+    },
+    {
+      "type": "heading",
+      "text": "The Technical Layer Explained Without Abstraction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here is how the stack operates end-to-end: 1. A customer lands on your storefront hosted on GitHub Pages or Cloudflare Pages. 2. They select a product, and the frontend sends a request to your backend (Apps Script or Cloudflare Worker). 3. The backend generates a unique payment link via NOWPayments API, priced in USD but paid in Bitcoin. 4. NOWPayments verifies the transaction on-chain. Once confirmed, it sends a webhook to your backend. 5. The backend updates the order status in Google Sheets or Supabase, retrieves the product file from Google Drive or R2, and sends a download link to the customer. 6. The customer downloads the product instantly. Every step is automated. No manual intervention. No third-party dependencies. The system operates 24/7 without requiring your presence. This is the definition of infrastructure sovereignty."
+    },
+    {
+      "type": "callout",
+      "text": "Infrastructure sovereignty is not optional—it is the only way to ensure your business cannot be blocked."
+    },
+    {
+      "type": "heading",
+      "text": "Edge Cases, Failures, and How to Handle Them"
+    },
+    {
+      "type": "paragraph",
+      "text": "Every system has failure modes. Here are the critical ones and how to handle them: 1. **Payment Not Verified**: If NOWPayments does not receive a webhook, the backend retries every 5 minutes for 24 hours. If still unconfirmed, the order is marked as failed. 2. **File Delivery Failure**: If Google Drive or R2 returns an error, the backend logs the issue and sends an alert to your email. The customer is notified to retry later. 3. **Backend Crash**: If Apps Script or Cloudflare Worker fails, the frontend displays a maintenance message. Orders are queued and processed once the backend is restored. 4. **Hosting Takedown**: If GitHub Pages or Cloudflare Pages is blocked, the backend redirects traffic to a backup domain. 5. **Currency Volatility**: Bitcoin prices are locked at the time of purchase. Fluctuations do not affect the transaction. Each failure mode is addressed with redundancy and automation. The system is designed to self-heal or notify you when manual intervention is required."
+    },
+    {
+      "type": "heading",
+      "text": "The Complete Deployment Roadmap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploying this stack requires precision. Here is the step-by-step roadmap: 1. **Choose Your Stack**: Select GitHub Pages + Apps Script for simplicity or Cloudflare Pages + Workers for performance. 2. **Set Up Hosting**: Deploy your storefront. Use Jekyll for GitHub Pages or a modern framework for Cloudflare Pages. 3. **Configure Backend**: Write scripts to handle order processing, payment verification, and file delivery. Test each function independently. 4. **Integrate NOWPayments**: Create an API key, configure webhooks, and test payment flows. Use BSC, Solana, or TRON for low transaction fees. 5. **Load Products**: Upload files to Google Drive or R2. Map each product to its file path in your order storage. 6. **Test End-to-End**: Simulate purchases, verify file delivery, and check order logs. Fix any issues before going live. 7. **Launch and Monitor**: Deploy your stack and monitor performance. Set up alerts for failures. This roadmap is not theoretical. It is the same process used to deploy stacks for creators in Zimbabwe, Venezuela, and Pakistan. It works under pressure."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To accept Bitcoin payments for digital downloads without Stripe or PayPal, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, Google Apps Script or Cloudflare Workers for backend logic, and NOWPayments for on-chain payment verification. Store orders in Google Sheets or Supabase and deliver files via Google Drive or Cloudflare R2. This architecture ensures automatic product delivery, eliminates chargebacks, and gives you full ownership of your infrastructure. The Complete Builder Kit ($197) provides all blueprints and templates for instant deployment."
+    },
+    {
+      "type": "callout",
+      "text": "Every component in this stack is selected for reliability, cost, and ease of integration."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you are ready to deploy this stack today, the Complete Builder Kit ($197) includes all six blueprints, seven templates, and instant download access. It is the fastest way to launch a sovereign commerce stack without building from scratch. Every component is documented, every edge case addressed. This is not a tutorial—it is a deployment package designed for creators who need infrastructure that works under any condition."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose hosting: GitHub Pages or Cloudflare Pages. 2. Set up backend: Google Apps Script or Cloudflare Workers. 3. Configure order storage: Google Sheets or Supabase. 4. Upload products: Google Drive or Cloudflare R2. 5. Integrate payment verification: NOWPayments API. 6. Test payment flow: Simulate purchases and verify file delivery. 7. Deploy storefront: Push code to hosting platform. 8. Monitor performance: Set up alerts for failures. 9. Scale as needed: Add more products or upgrade components. 10. Own your stack: No subscriptions, no third-party dependencies."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I have no coding experience?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "While some technical knowledge is required, the Complete Builder Kit provides templates and blueprints that minimize coding. Google Apps Script uses JavaScript, and Cloudflare Workers support modern languages like Rust and Go. Start with the templates and learn as you deploy."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Bitcoin’s price drops after a purchase?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Prices are locked at the time of purchase. Fluctuations do not affect the transaction. NOWPayments converts the payment to USD based on the exchange rate at the moment of verification."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle refunds?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Refunds are processed manually by sending Bitcoin from your wallet to the customer’s address. The system does not automate refunds to prevent abuse. Document your refund policy clearly to manage expectations."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell physical products with this stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "This stack is designed for digital products. Physical products require shipping integration, which introduces additional dependencies. For digital downloads, this architecture is optimal."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if my hosting platform blocks my site?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "If GitHub Pages or Cloudflare Pages blocks your site, redirect traffic to a backup domain. The backend logic remains operational, ensuring orders are processed and files delivered. Decentralized hosting minimizes this risk."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy once, own forever. No subscriptions. No third-party dependencies."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260527-YQXG",
+      "slug": "understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-7"
+    },
+    {
+      "id": "post-20260527-KGKA",
+      "slug": "bitcoin-payments-digital-downloads-explained-digital-creators-stripe-5"
+    },
+    {
+      "id": "post-20260527-HGKG",
+      "slug": "bitcoin-payments-digital-downloads-explained-digital-creators-stripe-4"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I have no coding experience?",
+      "answer": "While some technical knowledge is required, the Complete Builder Kit provides templates and blueprints that minimize coding. Google Apps Script uses JavaScript, and Cloudflare Workers support modern languages like Rust and Go. Start with the templates and learn as you deploy."
+    },
+    {
+      "question": "What happens if Bitcoin’s price drops after a purchase?",
+      "answer": "Prices are locked at the time of purchase. Fluctuations do not affect the transaction. NOWPayments converts the payment to USD based on the exchange rate at the moment of verification."
+    },
+    {
+      "question": "How do I handle refunds?",
+      "answer": "Refunds are processed manually by sending Bitcoin from your wallet to the customer’s address. The system does not automate refunds to prevent abuse. Document your refund policy clearly to manage expectations."
+    },
+    {
+      "question": "Can I sell physical products with this stack?",
+      "answer": "This stack is designed for digital products. Physical products require shipping integration, which introduces additional dependencies. For digital downloads, this architecture is optimal."
+    },
+    {
+      "question": "What if my hosting platform blocks my site?",
+      "answer": "If GitHub Pages or Cloudflare Pages blocks your site, redirect traffic to a backup domain. The backend logic remains operational, ensuring orders are processed and files delivered. Decentralized hosting minimizes this risk."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-28",
+    "lastReviewed": "2026-05-28",
+    "nextReviewDue": "2026-07-27"
+  },
+  "social": {
+    "x": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Re https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "linkedIn": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "forum": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "hook": "Bitcoin Payments for Digital Downloads: Every D...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2"
+  },
+  "crossPostSummary": {
+    "title": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+    "hook": "Bitcoin Payments for Digital Downloads: Every D...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "forum": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "x": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Re https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "linkedIn": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+    "hook50": "Bitcoin Payments for Digital Downloads: Every D..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-28T12:02:41.069Z",
+      "dateModified": "2026-05-28T12:02:41.069Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260528-PA0D.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2"
+      },
+      "keywords": "bitcoin payment for digital downloads",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I have no coding experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While some technical knowledge is required, the Complete Builder Kit provides templates and blueprints that minimize coding. Google Apps Script uses JavaScript, and Cloudflare Workers support modern languages like Rust and Go. Start with the templates and learn as you deploy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Bitcoin’s price drops after a purchase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prices are locked at the time of purchase. Fluctuations do not affect the transaction. NOWPayments converts the payment to USD based on the exchange rate at the moment of verification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Refunds are processed manually by sending Bitcoin from your wallet to the customer’s address. The system does not automate refunds to prevent abuse. Document your refund policy clearly to manage expectations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell physical products with this stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This stack is designed for digital products. Physical products require shipping integration, which introduces additional dependencies. For digital downloads, this architecture is optimal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my hosting platform blocks my site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If GitHub Pages or Cloudflare Pages blocks your site, redirect traffic to a backup domain. The backend logic remains operational, ensuring orders are processed and files delivered. Decentralized hosting minimizes this risk."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260528-PA0D.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260528-PA0D.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Bitcoin Payments for Digital Downloads: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/bitcoin-payments-digital-downloads-every-detail-you-need-2"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Full Picture Most Guides Leave Out: Bitcoin payment",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Every Component and What It Does",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Technical Layer Explained Without Abstraction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Edge Cases, Failures, and How to Handle Them",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Complete Deployment Roadmap",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "bitcoin payment",
+    "totalWords": 1420,
+    "count": 3,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "bitcoin payment for digital downloads",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1491,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-28T12:02:41.070Z"
+  }
+}
