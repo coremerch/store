@@ -1,0 +1,415 @@
+{
+  "id": "post-20260531-V5ZY",
+  "slug": "everything-you-need-know-about-cloudflare-r2-digital-10",
+  "title": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+  "date": "2026-05-31T22:42:26.388Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260531-V5ZY.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve built a digital product—an ebook, a course, or a set of templates. Now you need to deliver it to customers. But in Kenya, Stripe and PayPal are not options. Traditional platforms lock you out. What do you do? Cloudflare R2 offers a solution. It’s object storage designed for the open internet, not walled gardens. This post explains how R2 fits into sovereign commerce infrastructure—specifically, how it stores and delivers your digital products without relying on payment processors that reject you. By the end, you’ll understand the [[LINK:https://coremerch.github.io/store/blog/real-[[LINK:https://coremerch.github.io/store/blog/real-[[LINK:https://coremerch.github.io/store/blog/real-architecture-behind-google-apps-script-digital-commerce-12|COREMERCH guide to architecture]]-behind-github-pages-free-digital-product-9|The Real]]-behind-digital-product-stores-kyc-payments-4|architecture]], the components, and how to deploy it today. No workarounds. No subscriptions. Just infrastructure you own."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-7. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-7",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Cloudflare digital"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cloudflare R2 is object storage built on Backblaze’s infrastructure, priced at $0.015 per GB stored and $0.01 per GB retrieved. It’s not a file-sharing service like Google Drive. It’s a developer tool for storing and serving files at scale. The key advantage? R2 is integrated into Cloudflare’s global network, meaning your product files are delivered from the edge location closest to your customer. This cuts latency and accelerates downloads. For digital creators in Kenya, this matters because it removes the need for third-party platforms that restrict access based on geography or currency. You control the storage, the delivery, and the payment process—all without touching Stripe or PayPal. R2 is the foundation for automated, sovereign product delivery."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s how it works: Your customer completes a crypto payment via NOWPayments. A Cloudflare Worker or Google Apps Script verifies the transaction on-chain. Once confirmed, the script generates a pre-signed URL for the product file stored in R2. This URL expires after a single use or a set time, preventing unauthorized access. The file is then delivered directly from Cloudflare’s edge network to the customer’s device. No middlemen. No platform fees. The architecture is stateless—each component performs one task and nothing more. R2 handles storage. Cloudflare Workers handle logic. NOWPayments handles payments. The result is a system that’s both lightweight and resilient, designed to operate in regions where financial infrastructure is unreliable or hostile."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is built for digital creators who sell ebooks, courses, templates, fonts, presets, beats, plugins, or software in regions where Stripe, PayPal, and similar platforms are unavailable or restrictive. If you’re in Kenya, Nigeria, Zimbabwe, or any other region facing payment rejection, this is for you. It’s also for creators who refuse to rent infrastructure. With R2 and the accompanying tools, you own the stack. No platform can shut you down. No subscription can expire. You deploy once, and the system runs indefinitely. It’s not a workaround—it’s base-layer infrastructure designed to withstand the pressures of financial isolation and currency collapse."
+    },
+    {
+      "type": "callout",
+      "text": "Cloudflare R2 delivers files from the edge location closest to your customer, cutting latency."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack consists of five core components: 1. **Cloudflare R2** for file storage. 2. **Cloudflare Workers** or **Google Apps Script** for backend logic. 3. **NOWPayments** for crypto payment verification. 4. **GitHub Pages** or **Cloudflare Pages** for hosting. 5. **Supabase** or **Google Sheets** for order tracking. Each component is either free or low-cost. R2 charges only for storage and retrieval. NOWPayments takes 0.5% per transaction. The rest is free. These tools integrate seamlessly because they’re built on open standards. No proprietary APIs. No vendor lock-in. You deploy the stack, load your products, and it runs automatically. The customer pays in crypto, receives the product instantly, and the system logs the order—all without you touching a line of code after deployment."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by mapping your product delivery flow. Identify the files you’ll store in R2, the payment currencies you’ll accept via NOWPayments, and the logic you’ll write in Workers or Apps Script. Use the **Complete Builder Kit** ($197) for step-by-step blueprints and templates. Deploy R2 through Cloudflare’s dashboard, upload your product files, and configure CORS to allow your domain. Write the script to verify payments, generate pre-signed URLs, and log orders. Test end-to-end before going live. Once deployed, the system requires no maintenance. It’s stateless, serverless, and sovereign. You own it. Your customers get their products. No platform stands between you and your revenue."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cloudflare R2 is object storage integrated into Cloudflare’s global network, designed for low-cost, high-performance file storage and delivery. It’s ideal for digital creators who need to deliver products without relying on Stripe, PayPal, or other restricted platforms. R2 works with Cloudflare Workers or Google Apps Script to automate delivery after crypto payment verification via NOWPayments. The system is stateless, serverless, and fully owned by the creator. No subscriptions. No platform fees. Just infrastructure you control."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments verifies crypto payments on-chain with a 0.5% fee and no KYC requirements."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ready to deploy this architecture today? The **Complete Builder Kit** ($197) provides all the blueprints, templates, and guides you need to build your sovereign commerce stack. It includes step-by-step instructions for integrating Cloudflare R2, NOWPayments, and other components. Visit https://coremerch.github.io/products.html to get started."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. **Map Your Flow**: Identify product files, payment currencies, and delivery logic. 2. **Set Up R2**: Create a bucket in Cloudflare R2 and upload your product files. 3. **Configure NOWPayments**: Set up a crypto payment gateway with BSC, Solana, or TRON for low fees. 4. **Write the Script**: Use Cloudflare Workers or Google Apps Script to verify payments and generate pre-signed R2 URLs. 5. **Test End-to-End**: Simulate a purchase to ensure file delivery works seamlessly. 6. **Deploy Live**: Host the frontend on GitHub Pages or Cloudflare Pages and monitor orders via Supabase or Google Sheets."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use R2 without Cloudflare Workers?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can use Google Apps Script instead of Cloudflare Workers. Both tools can generate pre-signed URLs for R2 and handle payment verification logic. Choose based on your familiarity and cost preferences."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies does NOWPayments support?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, Ethereum, USDT, and stablecoins on BSC, Solana, and TRON networks. These networks are recommended for their low transaction fees, typically under $0.10 per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "How secure is R2 for storing digital products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "R2 is secure by default. Pre-signed URLs expire after one use or a set time, preventing unauthorized access. Additionally, R2 integrates with Cloudflare’s security features, including DDoS protection and SSL encryption."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use R2 if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, the **Complete Builder Kit** provides templates and blueprints that require no coding. Follow the step-by-step guides to deploy the stack using Cloudflare’s dashboard and pre-written scripts."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Cloudflare goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare’s global network is designed for high availability, with no single point of failure. However, you can mitigate risk by storing backups in another provider or using multi-cloud strategies."
+    },
+    {
+      "type": "callout",
+      "text": "The Complete Builder Kit includes all blueprints and templates for instant deployment."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260531-OATF",
+      "slug": "cloudflare-r2-digital-product-storage-delivery-what-actually-9"
+    },
+    {
+      "id": "post-20260531-YSUJ",
+      "slug": "cloudflare-r2-digital-product-storage-delivery-what-actually-8"
+    },
+    {
+      "id": "post-20260531-09ZE",
+      "slug": "understanding-cloudflare-r2-digital-product-storage-delivery-plain-8"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use R2 without Cloudflare Workers?",
+      "answer": "Yes, you can use Google Apps Script instead of Cloudflare Workers. Both tools can generate pre-signed URLs for R2 and handle payment verification logic. Choose based on your familiarity and cost preferences."
+    },
+    {
+      "question": "What cryptocurrencies does NOWPayments support?",
+      "answer": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, Ethereum, USDT, and stablecoins on BSC, Solana, and TRON networks. These networks are recommended for their low transaction fees, typically under $0.10 per transaction."
+    },
+    {
+      "question": "How secure is R2 for storing digital products?",
+      "answer": "R2 is secure by default. Pre-signed URLs expire after one use or a set time, preventing unauthorized access. Additionally, R2 integrates with Cloudflare’s security features, including DDoS protection and SSL encryption."
+    },
+    {
+      "question": "Can I use R2 if I’m not a developer?",
+      "answer": "Yes, the **Complete Builder Kit** provides templates and blueprints that require no coding. Follow the step-by-step guides to deploy the stack using Cloudflare’s dashboard and pre-written scripts."
+    },
+    {
+      "question": "What happens if Cloudflare goes down?",
+      "answer": "Cloudflare’s global network is designed for high availability, with no single point of failure. However, you can mitigate risk by storing backups in another provider or using multi-cloud strategies."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-05-31",
+    "lastReviewed": "2026-05-31",
+    "nextReviewDue": "2026-07-30"
+  },
+  "social": {
+    "x": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "linkedIn": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "forum": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "hook": "Everything You Need to Know About Cloudflare R2...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10"
+  },
+  "crossPostSummary": {
+    "title": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+    "hook": "Everything You Need to Know About Cloudflare R2...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "forum": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "x": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "linkedIn": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+    "hook50": "Everything You Need to Know About Cloudflare R2..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-05-31T22:42:26.389Z",
+      "dateModified": "2026-05-31T22:42:26.389Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260531-V5ZY.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10"
+      },
+      "keywords": "cloudflare r2 digital product storage delivery",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use R2 without Cloudflare Workers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can use Google Apps Script instead of Cloudflare Workers. Both tools can generate pre-signed URLs for R2 and handle payment verification logic. Choose based on your familiarity and cost preferences."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies does NOWPayments support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, Ethereum, USDT, and stablecoins on BSC, Solana, and TRON networks. These networks are recommended for their low transaction fees, typically under $0.10 per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How secure is R2 for storing digital products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "R2 is secure by default. Pre-signed URLs expire after one use or a set time, preventing unauthorized access. Additionally, R2 integrates with Cloudflare’s security features, including DDoS protection and SSL encryption."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use R2 if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the **Complete Builder Kit** provides templates and blueprints that require no coding. Follow the step-by-step guides to deploy the stack using Cloudflare’s dashboard and pre-written scripts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Cloudflare goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare’s global network is designed for high availability, with no single point of failure. However, you can mitigate risk by storing backups in another provider or using multi-cloud strategies."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260531-V5ZY.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260531-V5ZY.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Everything You Need to Know About Cloudflare R2 for Digital Product Storage and Delivery — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-r2-digital-10"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Cloudflare digital",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "cloudflare digital",
+    "totalWords": 1179,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "cloudflare r2 digital product storage delivery",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1244,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-05-31T22:42:26.390Z"
+  }
+}
