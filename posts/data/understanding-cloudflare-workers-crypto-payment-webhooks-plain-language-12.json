@@ -1,0 +1,415 @@
+{
+  "id": "post-20260604-48R9",
+  "slug": "understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+  "title": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+  "date": "2026-06-04T21:22:32.400Z",
+  "category": "Getting Paid",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260604-48R9.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Pakistan, [[LINK:https://coremerch.github.io/store/blog/digital-product-stores-kyc-payments-every-detail-you-4|Digital Product]] [[LINK:https://coremerch.github.io/store/blog/how-creator-built-payment-methods-filipino-digital-creators|COREMERCH guide to creator]]s face a stark reality: Stripe and PayPal are not options. Traditional payment gateways lock you out, leaving you dependent on unreliable workarounds. This is not a minor inconvenience—it’s a barrier to earning. What if you could own your commerce infrastructure instead of renting it? [[LINK:https://coremerch.github.io/store/blog/cloudflare-webhook-driven-crypto-payment-fulfillment-every-detail|cloudflare]] Workers, combined with crypto payment webhooks, offer a sovereign solution. This is not a patch; it’s a base-layer system. No subscriptions. No third-party control. Full ownership. Here’s how it works, why it matters, and how to deploy it today."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cloudflare Workers Crypto Payment Webhooks are a serverless, edge-computed solution for processing cryptocurrency payments without relying on centralized payment processors. Unlike Stripe or PayPal, which can block or delay payouts, this system verifies transactions directly on the blockchain. When a buyer sends USDT on Tron or Solana, a webhook triggers instantly, confirming payment and delivering the product. The creator retains full control—no platform fees, no payout delays, no geographic restrictions. This is infrastructure sovereignty: you own the code, the data, and the process. For creators in Pakistan, where conventional payment systems fail, this is not an alternative—it’s the foundation for sustainable digital commerce."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The system starts with Cloudflare Workers, a serverless runtime that executes code at the edge. When a payment is made, NOWPayments verifies the transaction on-chain and fires a webhook to your Worker. The Worker checks the payment status, updates the order in Supabase, and triggers file delivery via Cloudflare R2. All this happens in milliseconds, with no server management required. The blockchain handles payment verification, while the Worker orchestrates the logic. This architecture is stateless, scalable, and resilient to regional outages. Because it runs on Cloudflare’s global network, latency is minimized, and performance is consistent—even in regions with unreliable internet."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is built for digital creators who sell ebooks, courses, templates, or software but cannot access Stripe or PayPal. If you’re in Pakistan, Nigeria, Ghana, or Kenya, you know the pain of payout delays, currency devaluation, and P2P conversion risks. This infrastructure solves those problems by eliminating middlemen. You collect payments directly in USDT, which can be converted to local currency via P2P exchanges. The Edge Commerce Stack ($197) deploys this architecture in 48 hours, complete with SPF/DKIM/DMARC email configuration and end-to-end testing. It’s not a workaround—it’s a permanent solution for creators who refuse to be locked out of global commerce."
+    },
+    {
+      "type": "callout",
+      "text": "Own your commerce infrastructure—no subscriptions, no lock-ins."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "Four core components power this system: Cloudflare Workers for backend logic, Supabase for order storage, Cloudflare R2 for file delivery, and NOWPayments for crypto processing. Workers handle the webhook logic, ensuring payments are verified and products delivered instantly. Supabase stores order data in a scalable, SQL-based database. R2 serves files with high availability and low latency. NOWPayments processes 300+ cryptocurrencies with a flat 0.5% fee, no KYC, and no buyer account requirements. Together, these tools form a stack that’s both lightweight and enterprise-grade. The Edge Commerce Stack includes all these components, pre-configured and deployed to your domain, so you can start selling immediately."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy this system, start by purchasing the Edge Commerce Stack ($197) from https://coremerch.github.io/products.html. Within 48 hours, COREMERCH will set up your Cloudflare Workers, Supabase database, and NOWPayments integration. Load your first five products, and we’ll configure SPF/DKIM/DMARC to ensure email deliverability. Once deployed, you’ll own the entire stack—no ongoing fees, no platform lock-in. Use USDT on Tron or Solana for low-fee transactions, and leverage P2P exchanges to convert crypto to local currency. This is not a temporary fix; it’s a permanent upgrade to your commerce infrastructure. Sell globally, settle locally, and retain full control over your business."
+    },
+    {
+      "type": "heading",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Cloudflare Workers Crypto Payment Webhooks are a serverless solution for processing cryptocurrency payments without relying on centralized gateways like Stripe or PayPal. They use blockchain verification and edge computing to instantly confirm transactions, deliver products, and store order data. This system is ideal for creators in regions like Pakistan, where traditional payment processors are unavailable or unreliable. By owning this infrastructure, you eliminate payout delays, platform fees, and geographic restrictions, gaining full control over your digital commerce."
+    },
+    {
+      "type": "callout",
+      "text": "Process USDT payments on Tron or Solana for fees under $0.10."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re ready to deploy this architecture, the Edge Commerce Stack ($197) provides a complete, pre-configured solution. It includes Cloudflare Workers, Supabase, NOWPayments integration, and five products loaded. Visit https://coremerch.github.io/products.html to get started. This stack is designed for creators who need sovereign commerce infrastructure, not temporary workarounds."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Purchase the Edge Commerce Stack ($197) from https://coremerch.github.io/products.html. 2. Provide your domain and product details for deployment. 3. Receive your fully configured stack within 48 hours. 4. Load your products and test the payment flow. 5. Use USDT on Tron or Solana for low-fee transactions. 6. Convert crypto to local currency via P2P exchanges. 7. Retain full ownership and control of your commerce infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’m not technical?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Edge Commerce Stack is deployed and configured for you. You’ll receive a fully functional store with no coding required. After deployment, managing products and orders is straightforward."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies are supported?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports over 300 cryptocurrencies, including USDT, USDC, Bitcoin, and Ethereum. For low fees, we recommend USDT on Tron or Solana, with transactions under $0.10."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I convert crypto to local currency?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Use P2P exchanges like Binance P2P or Paxful to convert USDT to Pakistani Rupees. These platforms offer competitive rates and fast settlements."
+    },
+    {
+      "type": "faq_question",
+      "text": "Is there a monthly fee?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. After deployment, you own the infrastructure. There are no subscriptions or platform fees. The only cost is NOWPayments’ 0.5% transaction fee."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Cloudflare or Supabase goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare’s global edge network ensures high availability. Supabase is built on PostgreSQL, a proven, scalable database. Both services have robust uptime records, and your data remains under your control."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy the Edge Commerce Stack in 48 hours and start selling globally."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260604-49Q7",
+      "slug": "real-architecture-behind-cloudflare-workers-crypto-payment-webhooks-6"
+    },
+    {
+      "id": "post-20260603-JHIB",
+      "slug": "understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-11"
+    },
+    {
+      "id": "post-20260603-X2EN",
+      "slug": "understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-10"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this system if I’m not technical?",
+      "answer": "Yes. The Edge Commerce Stack is deployed and configured for you. You’ll receive a fully functional store with no coding required. After deployment, managing products and orders is straightforward."
+    },
+    {
+      "question": "What cryptocurrencies are supported?",
+      "answer": "NOWPayments supports over 300 cryptocurrencies, including USDT, USDC, Bitcoin, and Ethereum. For low fees, we recommend USDT on Tron or Solana, with transactions under $0.10."
+    },
+    {
+      "question": "How do I convert crypto to local currency?",
+      "answer": "Use P2P exchanges like Binance P2P or Paxful to convert USDT to Pakistani Rupees. These platforms offer competitive rates and fast settlements."
+    },
+    {
+      "question": "Is there a monthly fee?",
+      "answer": "No. After deployment, you own the infrastructure. There are no subscriptions or platform fees. The only cost is NOWPayments’ 0.5% transaction fee."
+    },
+    {
+      "question": "What happens if Cloudflare or Supabase goes down?",
+      "answer": "Cloudflare’s global edge network ensures high availability. Supabase is built on PostgreSQL, a proven, scalable database. Both services have robust uptime records, and your data remains under your control."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-04",
+    "lastReviewed": "2026-06-04",
+    "nextReviewDue": "2026-08-03"
+  },
+  "social": {
+    "x": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown  https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "linkedIn": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "forum": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "hook": "Understanding Cloudflare Workers Crypto Payment...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12"
+  },
+  "crossPostSummary": {
+    "title": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+    "hook": "Understanding Cloudflare Workers Crypto Payment...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "forum": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "x": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown  https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "linkedIn": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+    "hook50": "Understanding Cloudflare Workers Crypto Payment..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-06-04T21:22:32.401Z",
+      "dateModified": "2026-06-04T21:22:32.401Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-48R9.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12"
+      },
+      "keywords": "cloudflare workers crypto payment webhook",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’m not technical?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Edge Commerce Stack is deployed and configured for you. You’ll receive a fully functional store with no coding required. After deployment, managing products and orders is straightforward."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports over 300 cryptocurrencies, including USDT, USDC, Bitcoin, and Ethereum. For low fees, we recommend USDT on Tron or Solana, with transactions under $0.10."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I convert crypto to local currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use P2P exchanges like Binance P2P or Paxful to convert USDT to Pakistani Rupees. These platforms offer competitive rates and fast settlements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a monthly fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. After deployment, you own the infrastructure. There are no subscriptions or platform fees. The only cost is NOWPayments’ 0.5% transaction fee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Cloudflare or Supabase goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare’s global edge network ensures high availability. Supabase is built on PostgreSQL, a proven, scalable database. Both services have robust uptime records, and your data remains under your control."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-48R9.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-48R9.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "Understanding Cloudflare Workers Crypto Payment Webhooks: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/understanding-cloudflare-workers-crypto-payment-webhooks-plain-language-12"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I receive crypto payments for my digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "cloudflare workers",
+    "totalWords": 1057,
+    "count": 6,
+    "densityPercent": 0.6,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "cloudflare workers crypto payment webhook",
+    "serpSource": "tavily",
+    "imageSource": "picsum",
+    "wordCount": 1121,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I receive crypto payments for my digital products?",
+      "How long does USDT payment take to arrive compared to PayPal?",
+      "How do creators in Nigeria convert Bitcoin to naira?",
+      "What is NOWPayments and how does it work for digital sellers?"
+    ],
+    "relatedSearches": [
+      "nowpayments digital products webhook setup guide",
+      "receive usdt tron payment for ebook sale",
+      "convert bitcoin naira p2p exchange binance patricia",
+      "crypto payment fastest settlement digital goods 2025"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-04T21:22:32.406Z"
+  }
+}
