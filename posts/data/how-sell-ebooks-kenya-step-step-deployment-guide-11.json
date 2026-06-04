@@ -1,0 +1,415 @@
+{
+  "id": "post-20260604-5BPG",
+  "slug": "how-sell-ebooks-kenya-step-step-deployment-guide-11",
+  "title": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+  "date": "2026-06-04T23:42:03.808Z",
+  "category": "Global Access",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260604-5BPG.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments",
+  "imageCaption": "The blockchain has no geographic restrictions — a wallet in Lagos processes identically to one in London.",
+  "canonical": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve written an ebook. You’ve designed a cover. You’ve priced it. Now comes the wall: [[LINK:https://coremerch.github.io/store/blog/payment-methods-filipino-digital-creators-trap-most-creators-2|The Payment]] processing. In Kenya, Stripe and PayPal are absent. Local gateways fail under volume. Crypto exchanges block merchant accounts. Your audience in Nigeria, Ghana, and Tanzania cannot send you money. This is not a market problem. It is an infrastructure problem. COREMERCH solves it. This guide deploys a [[LINK:https://coremerch.github.io/store/blog/sovereign-commerce-infrastructure-digital-creators-which-architecture-actually-10|COREMERCH guide to sovereign]] commerce stack for [[LINK:https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-10|ebooks]]—no platforms, no subscriptions, no geographic locks. You own the code, the data, the pipeline. Payments route through NOWPayments, verifying 300+ cryptocurrencies on-chain. Delivery uses Cloudflare R2, immutable and global. Orders store in Supabase, yours to query. Hosting runs on Cloudflare Pages, free and unmetered. This is not a workaround. It is base-layer infrastructure, built to outlast payment rejections and currency collapses. Start here."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Selling Digital Products from Africa: The Complete Infrastructure Guide at https://coremerch.github.io/store/blog/selling-digital-products-africa-step-step-deployment-guide. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-step-step-deployment-guide",
+      "title": "Selling Digital Products from Africa: The Complete Infrastructure Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Platforms fail because they rent infrastructure, not own it. Stripe locks you out. PayPal freezes accounts. Local gateways cap transactions. This stack removes intermediaries. Payments verify on-chain, not through banks. Files deliver via CDN, not email attachments. Orders store in your database, not a SaaS dashboard. Cloudflare’s edge network serves your store globally, with no region-based throttling. NOWPayments processes crypto without KYC, buyer accounts, or volume limits. The moment a payment confirms on-chain, a webhook fires, delivering your ebook. No platform can shut this down. No geography can block it. You deploy once, own forever. This is infrastructure sovereignty—built for creators in Kenya, Ghana, and beyond who chose architecture over workarounds."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before deploying, gather your assets. First, your ebook files—PDF, EPUB, or MOBI. Second, a cover image and product description. Third, a NOWPayments API key (free, no KYC). Fourth, a Cloudflare account (free). Fifth, a GitHub or GitLab repository to store your code. If using The Sovereign Blueprint, you’ll have templates for all components. If building from scratch, prepare to write HTML, JavaScript, and basic API integrations. No server management required—Cloudflare Workers handle backend logic. No database admin needed—Supabase manages orders. Focus on your product, not infrastructure. This stack is designed for creators, not DevOps engineers. Every component is free or low-cost, with no hidden fees. Deploy in 48 hours, not weeks."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with payments. Integrate NOWPayments into your checkout flow. Configure webhooks to fire on payment confirmation. Set payout to USDT on BSC for low fees ($0.05 per transaction). For delivery, upload your ebook to Cloudflare R2. Generate a signed URL that expires after 24 hours. Store this URL in Supabase, linked to the order ID. When payment confirms, retrieve the URL and email it to the buyer. Use Cloudflare Workers to automate this logic. No server, no cron jobs, no manual intervention. Test with a small transaction—send 0.01 USDT from a test wallet. Verify the ebook delivers instantly. This pipeline is immutable. Once deployed, it runs without you. No platform can alter it. No geography can disrupt it."
+    },
+    {
+      "type": "callout",
+      "text": "Payments verify on-chain—no banks, no platforms, no rejections."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploy your store to Cloudflare Pages. Connect your custom domain or use the free Cloudflare URL. Test the checkout flow end-to-end. Send a payment from a friend’s wallet. Ensure the ebook delivers within seconds. Monitor Supabase for order data. Check Cloudflare R2 for file access logs. Once live, share your store with your audience. Use WhatsApp, Instagram, or email—no platform restrictions. Track transactions in NOWPayments and Supabase. For support, use the 30-day included with The Sovereign Blueprint. For self-deployers, debug using Cloudflare’s logs and NOWPayments webhooks. Your first transaction proves the stack works. Your second proves it scales. This is not a prototype. It is production-ready infrastructure, built for creators who sell globally."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "Scaling means adding products, not rearchitecting. Clone your Cloudflare Worker to handle multiple ebooks. Update your Supabase schema to track SKUs. Add more payment networks in NOWPayments—Solana, TRON, or Polygon for under $0.10 per transaction. Use Cloudflare’s edge caching to serve your store faster in Nigeria, Ghana, and beyond. Monitor costs—Cloudflare Pages and R2 are free, Supabase’s free tier handles 50K rows, NOWPayments charges 0.5% per transaction. Upgrade only when necessary. This stack is designed to grow with you, not bill you. No platform fees, no revenue share, no caps. You own the infrastructure. You control the scaling. Sell 10 ebooks or 10,000—the architecture does not change. This is sovereignty, not renting."
+    },
+    {
+      "type": "heading",
+      "text": "How can creators in Africa sell digital products to international buyers?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell ebooks from Kenya without Stripe or PayPal, deploy a sovereign commerce stack using Cloudflare Pages for hosting, Cloudflare Workers for backend logic, Supabase for order storage, Cloudflare R2 for file delivery, and NOWPayments for crypto payment processing. This infrastructure removes geographic barriers, verifies payments on-chain, and delivers files globally. Own the code, data, and pipeline—no platforms, no subscriptions. Start with The Sovereign Blueprint for templates and guides, or build from scratch using free tools. Test end-to-end, deploy in 48 hours, and scale as needed."
+    },
+    {
+      "type": "callout",
+      "text": "Files deliver via CDN—instant, global, immutable."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Creators in Nigeria, Ghana, Kenya, Pakistan, Bangladesh, Zimbabwe, and other restricted markets searching for international payment solutions are looking for the same thing: a way to receive USD-equivalent payments from global buyers without a Stripe or PayPal account. The Edge Commerce Stack at $197 is the complete answer — Cloudflare Pages, Workers, Supabase, and NOWPayments deployed under your accounts in 48 hours. For creators who want to self-deploy, the Sovereign Blueprint at $47 covers both stack options with full source code and step-by-step configuration guides. See both options at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Gather assets: ebook files, cover image, product description. 2. Create a NOWPayments account and generate an API key. 3. Set up Cloudflare account and connect GitHub/GitLab repository. 4. Upload ebook to Cloudflare R2 and configure signed URLs. 5. Integrate NOWPayments into your checkout flow with webhooks. 6. Deploy store to Cloudflare Pages and test end-to-end. 7. Monitor transactions in Supabase and NOWPayments dashboard. 8. Share your store via WhatsApp, Instagram, or email. 9. Scale by adding products and payment networks. 10. Upgrade infrastructure only when necessary—no platform fees, no caps."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Sovereign Blueprint includes templates and guides for non-developers. Cloudflare Workers and Supabase require no server management. Focus on your product, not infrastructure."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies can I accept?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON. Transactions under $0.10 per payment."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle refunds?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Manually send crypto back to the buyer’s wallet. Track refund requests in Supabase. No platform fees or approvals required."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can buyers pay with fiat currency?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. This stack processes crypto payments only. Direct buyers to local exchanges to purchase USDT or USDC before checkout."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Cloudflare or Supabase goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare’s uptime is 99.99%. Supabase runs on Postgres, with built-in redundancy. Your stack remains operational—no single point of failure."
+    },
+    {
+      "type": "callout",
+      "text": "You own the infrastructure—no subscriptions, no geographic locks."
+    },
+    {
+      "type": "cta",
+      "text": "The Sovereign Blueprint — $47. Complete documentation for all 5 stacks. Full source code. NOWPayments integration guide. Scaling playbook. Instant download.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "The Sovereign Blueprint",
+      "price": "$47"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260604-J9CY",
+      "slug": "how-sell-ebooks-kenya-step-step-deployment-guide-10"
+    },
+    {
+      "id": "post-20260604-V5EO",
+      "slug": "how-how-sell-ebooks-kenya-complete-infrastructure-guide-9"
+    },
+    {
+      "id": "post-20260603-Q9C2",
+      "slug": "nonsense-guide-how-sell-ebooks-kenya-stripe-required-5"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m not a developer?",
+      "answer": "Yes. The Sovereign Blueprint includes templates and guides for non-developers. Cloudflare Workers and Supabase require no server management. Focus on your product, not infrastructure."
+    },
+    {
+      "question": "What cryptocurrencies can I accept?",
+      "answer": "NOWPayments supports 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON. Transactions under $0.10 per payment."
+    },
+    {
+      "question": "How do I handle refunds?",
+      "answer": "Manually send crypto back to the buyer’s wallet. Track refund requests in Supabase. No platform fees or approvals required."
+    },
+    {
+      "question": "Can buyers pay with fiat currency?",
+      "answer": "No. This stack processes crypto payments only. Direct buyers to local exchanges to purchase USDT or USDC before checkout."
+    },
+    {
+      "question": "What happens if Cloudflare or Supabase goes down?",
+      "answer": "Cloudflare’s uptime is 99.99%. Supabase runs on Postgres, with built-in redundancy. Your stack remains operational—no single point of failure."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-04",
+    "lastReviewed": "2026-06-04",
+    "nextReviewDue": "2026-08-03"
+  },
+  "social": {
+    "x": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "linkedIn": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\nThe Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "forum": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "hook": "How to Sell Ebooks from Kenya: A Step-by-Step D...",
+    "bullets": [
+      "→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11"
+  },
+  "crossPostSummary": {
+    "title": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+    "hook": "How to Sell Ebooks from Kenya: A Step-by-Step D...",
+    "bullets": [
+      "→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.",
+      "→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks."
+    ],
+    "cta": "→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "forum": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "x": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "linkedIn": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ The Sovereign Blueprint — $47. Complete documentation for all 5 stacks.\n\n→ The Sovereign Blueprint — $47 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+    "hook50": "How to Sell Ebooks from Kenya: A Step-by-Step D..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "datePublished": "2026-06-04T23:42:03.810Z",
+      "dateModified": "2026-06-04T23:42:03.810Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-5BPG.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11"
+      },
+      "keywords": "how to sell ebooks from kenya",
+      "articleSection": "Global Access"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Sovereign Blueprint includes templates and guides for non-developers. Cloudflare Workers and Supabase require no server management. Focus on your product, not infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies can I accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports 300+ cryptocurrencies. Recommended networks for low fees: BSC, Solana, TRON. Transactions under $0.10 per payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Manually send crypto back to the buyer’s wallet. Track refund requests in Supabase. No platform fees or approvals required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can buyers pay with fiat currency?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This stack processes crypto payments only. Direct buyers to local exchanges to purchase USDT or USDC before checkout."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Cloudflare or Supabase goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare’s uptime is 99.99%. Supabase runs on Postgres, with built-in redundancy. Your stack remains operational—no single point of failure."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "url": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-5BPG.png",
+      "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260604-5BPG.png",
+      "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Global Access",
+        "url": "https://coremerch.github.io/store/blog/category/global-access"
+      },
+      {
+        "name": "How to Sell Ebooks from Kenya: A Step-by-Step Deployment Guide — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-step-step-deployment-guide-11"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How can creators in Africa sell digital products to international buyers?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "ebooks kenya",
+    "totalWords": 1197,
+    "count": 0,
+    "densityPercent": 0,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to sell ebooks from kenya",
+    "serpSource": "tavily",
+    "imageSource": "picsum",
+    "wordCount": 1252,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How can creators in Africa sell digital products to international buyers?",
+      "What payment methods work in Nigeria for online digital product sales?",
+      "Is there a way to sell ebooks from Pakistan without a Stripe account?",
+      "How do creators in Zimbabwe and Ethiopia accept international payments?"
+    ],
+    "relatedSearches": [
+      "how to sell ebooks in nigeria without paypal 2025",
+      "digital product store ghana cloudflare crypto payments",
+      "pakistan creator accept international crypto payment nowpayments",
+      "sell online kenya ethiopia without bank account crypto"
+    ],
+    "product": "The Sovereign Blueprint",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-04T23:42:03.810Z"
+  }
+}
