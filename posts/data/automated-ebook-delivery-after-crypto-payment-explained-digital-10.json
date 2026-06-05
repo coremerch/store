@@ -1,0 +1,415 @@
+{
+  "id": "post-20260605-B7V3",
+  "slug": "automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+  "title": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+  "date": "2026-06-05T22:44:51.329Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260605-B7V3.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve just finished your first ebook. It’s polished, valuable, and ready to sell. But here’s the problem: Stripe and PayPal don’t operate in Kenya. You can’t collect [[LINK:https://coremerch.github.io/store/blog/usdt-[[LINK:https://coremerch.github.io/store/blog/usdt-payment-gateways-[[LINK:https://coremerch.github.io/store/blog/how-digital-product-payment-solutions-west-africa-works-2|COREMERCH guide to digital]]-products-explained-digital-creators-12|USDT Payment]]-gateways-digital-products-what-actually-how-13|payment]]s. You can’t deliver products automatically. Your audience wants instant access, but you’re stuck manually emailing files after mobile money transfers—if you’re lucky enough to get paid at all. This isn’t just frustrating; it’s infrastructure failure. What you need isn’t a workaround. You need a system that works. A system where payment verification triggers instant delivery, without relying on platforms that exclude you. This is that system. Built for creators in regions where conventional tools fail, it uses crypto payments, automated scripts, and free hosting to give you full control. No subscriptions. No middlemen. Just sovereign commerce infrastructure that works anywhere."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-9. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-9",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Automated ebook"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is a self-hosted, automated ebook delivery pipeline that activates the moment a crypto payment confirms on-chain. It’s not a plugin or a SaaS tool—it’s infrastructure you own. Here’s why that matters: In Kenya, Stripe’s absence isn’t a minor inconvenience; it’s a market lockout. Mobile money solutions like M-Pesa work locally but fail for international buyers. Crypto payments solve this by being borderless, but they introduce a new problem: volatility and complexity. This system fixes that. It prices your ebook in USD, converts it to the buyer’s chosen cryptocurrency at checkout, and verifies payment on-chain. Once confirmed, a script fires, delivering the ebook instantly. No manual steps. No waiting. The buyer gets their product; you get paid. The infrastructure is yours—hosted on GitHub Pages or Cloudflare, with backend logic in Google Apps Script or Cloudflare Workers. You’re not renting a platform; you’re deploying your own."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s the flow: A buyer lands on your GitHub Pages site, selects your ebook, and checks out via NOWPayments. They pay in any of 300+ cryptocurrencies. The payment hits the blockchain, and NOWPayments’ webhook notifies your backend script. If the payment confirms, the script generates a unique download link for the ebook, hosted on Google Drive or Cloudflare R2. The link is emailed to the buyer or displayed on a thank-you page. All this happens in seconds, without you lifting a finger. The backend logic—written in Google Apps Script or Cloudflare Workers—is stateless and scalable. It doesn’t store data locally; it pulls order details from Supabase or Google Sheets. This keeps costs low and performance high. The system is modular: swap out components as needed. Use BSC, Solana, or TRON for low transaction fees. Host files on R2 instead of Google Drive. The architecture is yours to adapt."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is for digital creators who sell ebooks, courses, templates, or software but are locked out of Stripe, PayPal, and Gumroad. If you’re in Kenya, Nigeria, Zimbabwe, or any region where financial infrastructure fails you, this is your solution. It’s not just about selling ebooks; it’s about owning your commerce stack. You’re not building on rented land. You’re deploying infrastructure that stays operational even if platforms collapse or currencies devalue. It’s for creators who value sovereignty over convenience. Who prefer owning their tools to paying subscriptions. Who understand that relying on third parties in volatile markets is a liability. This system turns crypto’s volatility into an asset. It converts payments to USD at transaction time, shielding you from price swings. It’s not a hack—it’s a blueprint for permanent financial autonomy."
+    },
+    {
+      "type": "callout",
+      "text": "Own your commerce stack. No platforms. No subscriptions. Just infrastructure you control."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack is simple but powerful: GitHub Pages or Cloudflare Pages for hosting (free), Google Apps Script or Cloudflare Workers for backend logic (free), Supabase or Google Sheets for order storage (free), Google Drive or Cloudflare R2 for file hosting (low-cost), and NOWPayments for crypto payment processing (0.5% fee). Each component is chosen for reliability and cost-efficiency. GitHub Pages serves static sites globally with zero config. Google Apps Script handles webhook logic without servers. Supabase gives you a PostgreSQL database with auth and storage. NOWPayments verifies payments on-chain and fires webhooks instantly. These tools integrate seamlessly. For example, when NOWPayments confirms a payment, it sends a webhook to your script. The script queries Supabase for the product ID, generates a signed URL for the file on R2, and emails it to the buyer. No component is critical; replace any part without breaking the system."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with the Complete Builder Kit ($197) at https://coremerch.github.io/products.html. It includes all blueprints, templates, and guides for deploying this system in 48 hours. Here’s your path: First, set up NOWPayments to accept crypto payments. Choose BSC, Solana, or TRON for low fees. Next, deploy your frontend on GitHub Pages or Cloudflare Pages. Write your backend logic in Google Apps Script or Cloudflare Workers. Configure webhooks to trigger on payment confirmation. Store order data in Supabase or Google Sheets. Host your ebook on Google Drive or R2. Test end-to-end: simulate a purchase, verify payment, and confirm delivery. Once live, you own the stack. No platform can shut you down. No currency collapse can stop you. This isn’t just a tool—it’s your new infrastructure backbone."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system automates ebook delivery after crypto payment confirmation. It uses NOWPayments to verify transactions, Google Apps Script or Cloudflare Workers to handle logic, and Google Drive or Cloudflare R2 to deliver files. The buyer pays in crypto, the system confirms the payment on-chain, and the ebook is delivered instantly via email or download link. You own the entire stack, with no reliance on Stripe, PayPal, or other restricted platforms. It’s built for creators in regions where conventional payment tools are unavailable, offering infrastructure sovereignty and permanent control."
+    },
+    {
+      "type": "callout",
+      "text": "Crypto payments solve what Stripe cannot: borderless, instant transactions with no middlemen."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ready to deploy this system today? The Complete Builder Kit ($197) gives you all the blueprints, templates, and guides to launch your sovereign commerce stack in 48 hours. It includes step-by-step instructions for integrating NOWPayments, writing backend logic, and hosting your products. Visit https://coremerch.github.io/products.html to get started. This isn’t a tutorial—it’s a full infrastructure package designed for creators who need to own their tools, not rent them."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Set up a NOWPayments account to accept crypto payments. Choose low-fee networks like BSC, Solana, or TRON. 2. Deploy your frontend on GitHub Pages or Cloudflare Pages. Use the provided HTML/CSS templates. 3. Write backend logic in Google Apps Script or Cloudflare Workers. Configure webhooks to listen for payment confirmations. 4. Store order data in Supabase or Google Sheets. Ensure the schema includes product IDs and buyer emails. 5. Host your ebook on Google Drive or Cloudflare R2. Generate signed URLs for secure delivery. 6. Test the system end-to-end: simulate a purchase, verify payment, and confirm file delivery. 7. Launch your store and share the link with your audience. Monitor transactions via Supabase or Google Sheets."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’ve never worked with crypto before?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The system abstracts crypto complexity. Buyers pay in any currency; NOWPayments converts it to your chosen coin. You don’t need a wallet or technical crypto knowledge. The Complete Builder Kit includes a NOWPayments integration guide."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if a payment fails or the buyer disputes it?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system only delivers the ebook after payment confirms on-chain. Disputes are handled via the blockchain’s immutable ledger. For chargebacks, buyers must prove fraud—not possible with crypto’s pseudonymous nature. The system is designed to minimize disputes."
+    },
+    {
+      "type": "faq_question",
+      "text": "How much does it cost to run this system?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Hosting on GitHub Pages, Cloudflare Pages, or Google Drive is free. Supabase’s free tier handles thousands of orders. NOWPayments charges 0.5% per transaction. Total monthly costs are typically under $10, depending on storage and transaction volume."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell products other than ebooks?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The system works for any digital product: courses, templates, software, presets. Adjust file hosting and delivery logic as needed. The Complete Builder Kit includes templates for multiple product types."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I need to update my ebook after selling it?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Host the ebook on Google Drive or R2. Update the file in place; the system delivers the latest version automatically. No need to change your backend logic or notify buyers—the system handles it transparently."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy in 48 hours. The Complete Builder Kit gives you everything—blueprints, templates, guides."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260605-CD2C",
+      "slug": "everything-about-automated-ebook-delivery-after-crypto-payment-2"
+    },
+    {
+      "id": "post-20260605-PCUA",
+      "slug": "automated-ebook-delivery-after-crypto-payment-what-actually-7"
+    },
+    {
+      "id": "post-20260604-XY9M",
+      "slug": "understanding-automated-ebook-delivery-after-crypto-payment-plain-6"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this system if I’ve never worked with crypto before?",
+      "answer": "Yes. The system abstracts crypto complexity. Buyers pay in any currency; NOWPayments converts it to your chosen coin. You don’t need a wallet or technical crypto knowledge. The Complete Builder Kit includes a NOWPayments integration guide."
+    },
+    {
+      "question": "What happens if a payment fails or the buyer disputes it?",
+      "answer": "The system only delivers the ebook after payment confirms on-chain. Disputes are handled via the blockchain’s immutable ledger. For chargebacks, buyers must prove fraud—not possible with crypto’s pseudonymous nature. The system is designed to minimize disputes."
+    },
+    {
+      "question": "How much does it cost to run this system?",
+      "answer": "Hosting on GitHub Pages, Cloudflare Pages, or Google Drive is free. Supabase’s free tier handles thousands of orders. NOWPayments charges 0.5% per transaction. Total monthly costs are typically under $10, depending on storage and transaction volume."
+    },
+    {
+      "question": "Can I sell products other than ebooks?",
+      "answer": "Yes. The system works for any digital product: courses, templates, software, presets. Adjust file hosting and delivery logic as needed. The Complete Builder Kit includes templates for multiple product types."
+    },
+    {
+      "question": "What if I need to update my ebook after selling it?",
+      "answer": "Host the ebook on Google Drive or R2. Update the file in place; the system delivers the latest version automatically. No need to change your backend logic or notify buyers—the system handles it transparently."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-05",
+    "lastReviewed": "2026-06-05",
+    "nextReviewDue": "2026-08-04"
+  },
+  "social": {
+    "x": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "linkedIn": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "forum": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "hook": "Automated Ebook Delivery After Crypto Payment E...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10"
+  },
+  "crossPostSummary": {
+    "title": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+    "hook": "Automated Ebook Delivery After Crypto Payment E...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "forum": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "x": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "linkedIn": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+    "hook50": "Automated Ebook Delivery After Crypto Payment E..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-05T22:44:51.329Z",
+      "dateModified": "2026-06-05T22:44:51.329Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-B7V3.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10"
+      },
+      "keywords": "automated ebook delivery after crypto payment",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’ve never worked with crypto before?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The system abstracts crypto complexity. Buyers pay in any currency; NOWPayments converts it to your chosen coin. You don’t need a wallet or technical crypto knowledge. The Complete Builder Kit includes a NOWPayments integration guide."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a payment fails or the buyer disputes it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system only delivers the ebook after payment confirms on-chain. Disputes are handled via the blockchain’s immutable ledger. For chargebacks, buyers must prove fraud—not possible with crypto’s pseudonymous nature. The system is designed to minimize disputes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to run this system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hosting on GitHub Pages, Cloudflare Pages, or Google Drive is free. Supabase’s free tier handles thousands of orders. NOWPayments charges 0.5% per transaction. Total monthly costs are typically under $10, depending on storage and transaction volume."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell products other than ebooks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The system works for any digital product: courses, templates, software, presets. Adjust file hosting and delivery logic as needed. The Complete Builder Kit includes templates for multiple product types."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I need to update my ebook after selling it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Host the ebook on Google Drive or R2. Update the file in place; the system delivers the latest version automatically. No need to change your backend logic or notify buyers—the system handles it transparently."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-B7V3.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-B7V3.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Automated Ebook Delivery After Crypto Payment Explained for Digital Creators — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/automated-ebook-delivery-after-crypto-payment-explained-digital-10"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Automated ebook",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "automated ebook",
+    "totalWords": 1421,
+    "count": 2,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "automated ebook delivery after crypto payment",
+    "serpSource": "tavily",
+    "imageSource": "picsum",
+    "wordCount": 1501,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-05T22:44:51.330Z"
+  }
+}
