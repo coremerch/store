@@ -1,0 +1,415 @@
+{
+  "id": "post-20260605-NF86",
+  "slug": "everything-you-need-know-about-bitcoin-payments-digital-8",
+  "title": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+  "date": "2026-06-05T04:52:42.104Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260605-NF86.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve built a [[LINK:https://coremerch.github.io/store/blog/digital-product-[[LINK:https://coremerch.github.io/store/blog/how-payment-infrastructure-south-asian-creators-works-how-3|How Payment]]-solutions-west-africa-first-principles|digital]] product—an ebook, a course, a plugin—and you’re ready to sell. But in Kenya, Stripe and PayPal aren’t options. Local payment gateways fail. [[LINK:https://coremerch.github.io/store/blog/crypto-payments-tanzanian-online-sellers-what-actually-how-3|COREMERCH guide to crypto]] is your only reliable channel, but how do you accept Bitcoin without depending on a third party? This is where sovereign commerce infrastructure steps in. It’s not a workaround; it’s a base-layer system you own. No subscriptions. No platform lock-in. No revenue split. Your store runs on GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for automatic crypto verification. The customer pays in Bitcoin, the product delivers instantly, and you keep 99.5% of every sale. This is how creators in restricted markets reclaim financial autonomy—not by begging for access, but by deploying their own infrastructure."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-what-actually-how-7. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-what-actually-how-7",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Bitcoin payment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sovereign commerce infrastructure is a self-owned system for selling digital products. It’s designed for creators in markets where Stripe, PayPal, and Gumroad are unavailable or unreliable. The core components are hosting, backend logic, payment processing, and file delivery—all stitched together without dependency on a single third party. For example, GitHub Pages hosts your storefront for free. Cloudflare Workers handles order processing and file delivery. NOWPayments verifies Bitcoin payments on-chain, firing a webhook the moment the transaction confirms. The system is stateless: once deployed, it runs without COREMERCH or any other intermediary. You own the code, the data, and the revenue stream. This architecture isn’t just a technical solution—it’s a strategic response to financial exclusion. It turns Bitcoin from a speculative asset into a functional payment rail for your business."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "Here’s the flow: A customer lands on your storefront, hosted on GitHub Pages or Cloudflare Pages. They select a product priced in USD, but pay in Bitcoin via NOWPayments. The payment hits the blockchain, and NOWPayments sends a webhook to your backend (Cloudflare Worker or Google Apps Script). The script verifies the payment, logs the order in Supabase or Google Sheets, and generates a secure, time-limited download link for the product file stored in Google Drive or Cloudflare R2. The customer receives the link instantly via email or on-screen. Every step is automated, and every component is replaceable. For example, if NOWPayments goes down, you can swap it for CoinGate without rewriting your stack. This modularity is what makes the system sovereign—it’s not tied to any single vendor or service."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is built for digital creators in markets where conventional payment processors are blocked or unreliable. If you’re selling ebooks, courses, templates, or software in Kenya, Nigeria, Zimbabwe, or Venezuela, this is your infrastructure. It’s also for creators who refuse to rent their revenue streams from platforms that can shut them down arbitrarily. The Edge Commerce Stack ($197) deploys this architecture in 48 hours, configured for your products and tested end-to-end. It includes SPF/DKIM/DMARC setup for email deliverability, five products loaded, and 30 days of support. You don’t need to understand every line of code, but you do need to understand the value of owning your stack. This isn’t a tool for victims—it’s a tool for architects."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure turns Bitcoin into a functional payment rail for your business."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack is composed of free and paid tools, each serving a specific function. GitHub Pages or Cloudflare Pages hosts your storefront for free, with global CDN distribution. Cloudflare Workers or Google Apps Script handles backend logic, from payment verification to file delivery. Supabase or Google Sheets stores order data, and Google Drive or Cloudflare R2 hosts your product files. NOWPayments processes Bitcoin payments with a 0.5% fee, no KYC, and no buyer account required. The system is designed for low-fee transactions—use BSC, Solana, or TRON networks to keep costs under $0.10 per payment. Each component is independent, so you can upgrade or replace parts without rebuilding the entire stack. For example, if you outgrow Google Sheets, migrate order data to Supabase with zero downtime."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by mapping your product flow: How will customers discover, purchase, and download your product? Identify the tools you’ll use for each step. If you’re selling three products and need a fast deployment, the Sovereign Starter Stack ($97) sets up GitHub Pages, Google Apps Script, and NOWPayments in 48 hours. For a more robust setup, the Edge Commerce Stack ($197) includes Cloudflare Workers, Supabase, and email deliverability configuration. If you prefer to build yourself, purchase The Sovereign Blueprint ($47) for complete documentation and source code. Every stack is designed for ownership—once deployed, COREMERCH has no access to your system. You control the code, the data, and the revenue. This isn’t a temporary fix; it’s permanent infrastructure for a permanent problem."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To accept Bitcoin payments for digital downloads without Stripe, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for crypto processing. The system verifies payments on-chain, delivers files automatically, and stores order data in Supabase or Google Sheets. The Edge Commerce Stack ($197) deploys this architecture in 48 hours, configured for your products and tested end-to-end."
+    },
+    {
+      "type": "callout",
+      "text": "The Edge Commerce Stack deploys your store in 48 hours—no coding required."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re ready to deploy this architecture today, the Edge Commerce Stack ($197) sets up your storefront, payment processing, and file delivery in 48 hours. It includes Cloudflare Pages hosting, Workers backend, Supabase order storage, and NOWPayments integration—all configured for your products and tested end-to-end. Visit https://coremerch.github.io/products.html to get started."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your hosting: GitHub Pages for simplicity or Cloudflare Pages for edge performance. 2. Set up backend logic: Use Cloudflare Workers for scalability or Google Apps Script for ease. 3. Configure payment processing: Integrate NOWPayments for Bitcoin acceptance with a 0.5% fee. 4. Store order data: Use Supabase for relational queries or Google Sheets for simplicity. 5. Host product files: Upload to Google Drive or Cloudflare R2 for secure delivery. 6. Automate file delivery: Write a script to generate time-limited download links post-payment. 7. Test end-to-end: Simulate a purchase to ensure payment verification and file delivery work seamlessly. 8. Deploy and monitor: Push your stack live and track transactions in your order database."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Edge Commerce Stack ($197) deploys the architecture in 48 hours, configured for your products. You don’t need to write code, but you should understand how the components work together."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Bitcoin’s price fluctuates?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments converts Bitcoin to USD at the transaction rate, so you receive the exact amount you priced your product for. There’s no exposure to volatility."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I accept other cryptocurrencies?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. NOWPayments supports 300+ cryptocurrencies. Recommended low-fee networks include BSC, Solana, and TRON."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if a customer disputes a payment?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Crypto transactions are irreversible, so chargebacks aren’t possible. However, ensure your product descriptions are clear to manage customer expectations."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I update my product catalog?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Edit your product data in Supabase or Google Sheets, and the system will reflect the changes immediately. No need to redeploy the entire stack."
+    },
+    {
+      "type": "callout",
+      "text": "Own your stack, own your revenue. No platforms. No subscriptions. No compromises."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260604-XO0O",
+      "slug": "everything-you-need-know-about-bitcoin-payments-digital-7"
+    },
+    {
+      "id": "post-20260603-BGRU",
+      "slug": "everything-about-bitcoin-payments-digital-downloads-guide-leaves-4"
+    },
+    {
+      "id": "post-20260603-IUXX",
+      "slug": "bitcoin-payments-digital-downloads-what-actually-how-works-8"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this system if I’m not a developer?",
+      "answer": "Yes. The Edge Commerce Stack ($197) deploys the architecture in 48 hours, configured for your products. You don’t need to write code, but you should understand how the components work together."
+    },
+    {
+      "question": "What happens if Bitcoin’s price fluctuates?",
+      "answer": "NOWPayments converts Bitcoin to USD at the transaction rate, so you receive the exact amount you priced your product for. There’s no exposure to volatility."
+    },
+    {
+      "question": "Can I accept other cryptocurrencies?",
+      "answer": "Yes. NOWPayments supports 300+ cryptocurrencies. Recommended low-fee networks include BSC, Solana, and TRON."
+    },
+    {
+      "question": "What if a customer disputes a payment?",
+      "answer": "Crypto transactions are irreversible, so chargebacks aren’t possible. However, ensure your product descriptions are clear to manage customer expectations."
+    },
+    {
+      "question": "How do I update my product catalog?",
+      "answer": "Edit your product data in Supabase or Google Sheets, and the system will reflect the changes immediately. No need to redeploy the entire stack."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-05",
+    "lastReviewed": "2026-06-05",
+    "nextReviewDue": "2026-08-04"
+  },
+  "social": {
+    "x": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "linkedIn": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "forum": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "hook": "Everything You Need to Know About Bitcoin Payme...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8"
+  },
+  "crossPostSummary": {
+    "title": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+    "hook": "Everything You Need to Know About Bitcoin Payme...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "forum": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "x": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "linkedIn": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+    "hook50": "Everything You Need to Know About Bitcoin Payme..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-05T04:52:42.106Z",
+      "dateModified": "2026-06-05T04:52:42.106Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-NF86.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8"
+      },
+      "keywords": "bitcoin payment for digital downloads",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Edge Commerce Stack ($197) deploys the architecture in 48 hours, configured for your products. You don’t need to write code, but you should understand how the components work together."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Bitcoin’s price fluctuates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments converts Bitcoin to USD at the transaction rate, so you receive the exact amount you priced your product for. There’s no exposure to volatility."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I accept other cryptocurrencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. NOWPayments supports 300+ cryptocurrencies. Recommended low-fee networks include BSC, Solana, and TRON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a customer disputes a payment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Crypto transactions are irreversible, so chargebacks aren’t possible. However, ensure your product descriptions are clear to manage customer expectations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I update my product catalog?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Edit your product data in Supabase or Google Sheets, and the system will reflect the changes immediately. No need to redeploy the entire stack."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-NF86.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-NF86.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Everything You Need to Know About Bitcoin Payments for Digital Downloads — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-bitcoin-payments-digital-8"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Bitcoin payment",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "bitcoin payment",
+    "totalWords": 1250,
+    "count": 4,
+    "densityPercent": 0.3,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "bitcoin payment for digital downloads",
+    "serpSource": "tavily",
+    "imageSource": "picsum",
+    "wordCount": 1315,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-05T04:52:42.107Z"
+  }
+}
