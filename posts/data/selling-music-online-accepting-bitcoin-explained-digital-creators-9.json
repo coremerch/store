@@ -1,0 +1,415 @@
+{
+  "id": "post-20260605-HK4A",
+  "slug": "selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+  "title": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+  "date": "2026-06-06T03:43:22.609Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260605-HK4A.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve built your music catalog. You’ve mastered your beats. Now you need to sell them online. But in Kenya, Stripe and PayPal aren’t options. Conventional platforms reject you. This isn’t a problem to workaround—it’s a signal to build better infrastructure. COREMERCH provides the blueprints. This post explains how to deploy a [[LINK:https://coremerch.github.io/store/blog/sovereign-commerce-infrastructure-digital-creators-which-[[LINK:https://coremerch.github.io/store/blog/real-architecture-behind-bitcoin-payments-digital-downloads-stripe-5|COREMERCH guide to architecture]]-actually-11|sovereign]] commerce stack for selling music online, [[LINK:https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-what-nobody-tells-you-4|Accepting Bitcoin]] Bitcoin, and delivering products automatically. No platforms. No subscriptions. No gatekeepers. You own the infrastructure. It runs on GitHub Pages, Cloudflare Workers, and NOWPayments. Your customers pay in crypto. You deliver beats, plugins, or courses instantly. This is not a temporary fix. It’s a permanent architecture designed for creators in regions where financial isolation is the norm. Built in Zimbabwe. Tested against currency collapse. Ready for deployment."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-9. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/understanding-automated-digital-product-delivery-crypto-plain-language-9",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Music online"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is a self-owned digital commerce system. It lets you sell music, beats, or plugins online without relying on Stripe, PayPal, or any third-party platform. The stack uses GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for crypto payment processing. When a customer buys your product, payment is verified on-chain, and the file is delivered automatically. You own the entire process. No platform can shut you down. No subscription fees. No revenue share. This is infrastructure sovereignty. It’s built for creators in regions where conventional payment systems are unavailable or unreliable. If you’re in Kenya, Nigeria, Zimbabwe, or Venezuela, this is your solution. It’s not a workaround—it’s a base-layer architecture. You deploy it once, and it runs indefinitely. Your customers pay in Bitcoin, USDT, or any of 300+ cryptocurrencies. The system converts payment to USD at transaction time. You get paid directly to your wallet. No intermediaries. No KYC. No buyer accounts required. This is how you sell music online when the system is designed to exclude you."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack is modular. GitHub Pages hosts your storefront. It’s free and globally distributed. Cloudflare Workers handle backend logic—processing orders, verifying payments, and delivering files. NOWPayments handles crypto payments. It sends a webhook the moment payment confirms on-chain. The system uses Google Sheets or Supabase to store order data. Files are stored on Google Drive or Cloudflare R2. When a customer buys a product, the workflow is automatic: payment is verified, the file is retrieved, and a download link is sent to the customer’s email. No manual intervention required. The architecture is stateless. No servers to manage. No databases to maintain. It scales automatically. Transaction fees are minimal—NOWPayments charges 0.5%. Recommended networks like BSC, Solana, or TRON keep fees under $0.10 per transaction. This is lean, efficient infrastructure. It’s designed to work in regions with unreliable internet, currency volatility, and financial isolation. It’s not just a technical solution—it’s a strategic response to systemic exclusion."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is built for digital creators who sell music, beats, plugins, or courses but cannot use Stripe, PayPal, or Gumroad. If you’re in Kenya, Nigeria, Zimbabwe, or any region where these platforms are unavailable, this is your solution. It’s also for creators who want to own their infrastructure. No platform lock-in. No revenue share. No sudden shutdowns. You deploy the stack, and it’s yours forever. It’s built for creators who sell digital products priced in USD but accept crypto payments. NOWPayments handles the conversion automatically. Your customers pay in Bitcoin, USDT, or any supported cryptocurrency. You get paid in USD equivalent. It’s also for creators who need automatic delivery. No manual emails. No delayed access. The system sends download links instantly. This is for creators who value sovereignty over convenience. It requires technical deployment, but the blueprints are clear. If you can follow instructions, you can deploy this stack. It’s not a plugin or a SaaS tool—it’s infrastructure. You own it. You control it. You profit from it."
+    },
+    {
+      "type": "callout",
+      "text": "Own your infrastructure. No platforms. No gatekeepers."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack combines free and paid tools into a unified system. GitHub Pages hosts your storefront. It’s free, fast, and globally distributed. Cloudflare Workers handle backend logic. They’re serverless, scalable, and free up to 100,000 requests per day. NOWPayments processes crypto payments. It supports 300+ cryptocurrencies, charges 0.5% per transaction, and requires no KYC. Google Sheets or Supabase stores order data. Google Drive or Cloudflare R2 stores product files. Email delivery is handled via Gmail or SendGrid. The Complete Builder Kit provides all blueprints, templates, and deployment guides. It’s a one-time purchase of $197. No subscriptions. No upsells. Each component is replaceable. If GitHub Pages isn’t available, use Cloudflare Pages. If Google Sheets is too limiting, switch to Supabase. The architecture is flexible. It’s designed to adapt to your needs. But the core remains the same: a self-owned commerce system that lets you sell music online, accept crypto payments, and deliver products automatically. No platforms. No gatekeepers. Just infrastructure you control."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by choosing your stack. The Sovereign Starter Stack is ideal for beginners. It uses GitHub Pages, Google Apps Script, and NOWPayments. The Edge Commerce Stack is for advanced users. It includes Cloudflare Workers, Supabase, and SPF/DKIM/DMARC configuration. Purchase the Complete Builder Kit for $197. It includes all blueprints, templates, and deployment guides. Follow the step-by-step instructions. Deploy your storefront to GitHub Pages or Cloudflare Pages. Set up NOWPayments to accept crypto. Configure Cloudflare Workers or Google Apps Script for backend logic. Test the system end-to-end. Load your products. Set your prices. Launch your store. The entire process takes 48 hours or less. Once deployed, the system runs automatically. You own it. You control it. You profit from it. This is how you sell music online when the system is designed to exclude you. It’s not a workaround—it’s a permanent architecture. Built for creators. Built for sovereignty."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell music online and accept Bitcoin without Stripe, deploy a sovereign commerce stack using GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for crypto processing. This architecture automatically verifies payments, delivers files, and stores order data. You own the entire system. No platforms. No subscriptions. Recommended for creators in regions where conventional payment systems are unavailable. Purchase the Complete Builder Kit for $197 to access all blueprints and templates."
+    },
+    {
+      "type": "callout",
+      "text": "Accept 300+ cryptocurrencies. No KYC. No buyer accounts required."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "Ready to deploy your own sovereign commerce stack? The Complete Builder Kit includes all blueprints, templates, and deployment guides for $197. It’s a one-time purchase with no subscriptions or upsells. Built for creators who sell music, beats, or plugins online. Accept Bitcoin, USDT, or any of 300+ cryptocurrencies. Own your infrastructure. Control your commerce."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your stack: Sovereign Starter Stack or Edge Commerce Stack. 2. Purchase the Complete Builder Kit for $197. 3. Follow the deployment guide to set up GitHub Pages or Cloudflare Pages for hosting. 4. Configure NOWPayments to accept crypto payments. 5. Set up Cloudflare Workers or Google Apps Script for backend logic. 6. Store order data in Google Sheets or Supabase. 7. Upload product files to Google Drive or Cloudflare R2. 8. Test the system end-to-end to ensure automatic delivery. 9. Load your music, beats, or plugins into the system. 10. Set your prices in USD and launch your store."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Complete Builder Kit includes step-by-step deployment guides. If you can follow instructions, you can deploy this stack. No coding required."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies can my customers use to pay?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports 300+ cryptocurrencies, including Bitcoin, USDT, Ethereum, and more. Recommended networks like BSC, Solana, or TRON keep fees under $0.10 per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need to pay monthly fees for this system?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. This is a self-owned infrastructure. Once deployed, you own it forever. No subscriptions. No platform fees. NOWPayments charges 0.5% per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell products other than music?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The stack is designed for digital products like ebooks, courses, templates, fonts, presets, beats, plugins, and software. Any file type can be delivered automatically."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if NOWPayments goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments has 99.9% uptime. If it fails, the system will retry payment verification. You can also switch to a different crypto payment processor if needed."
+    },
+    {
+      "type": "callout",
+      "text": "Automatic delivery. Instant access. No manual intervention."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260605-L3CX",
+      "slug": "everything-about-selling-music-online-accepting-bitcoin-guide"
+    },
+    {
+      "id": "post-20260605-GNGR",
+      "slug": "selling-music-online-accepting-bitcoin-every-detail-you-7"
+    },
+    {
+      "id": "post-20260604-ZMNV",
+      "slug": "selling-music-online-accepting-bitcoin-first-principles-definitive-5"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m not a developer?",
+      "answer": "Yes. The Complete Builder Kit includes step-by-step deployment guides. If you can follow instructions, you can deploy this stack. No coding required."
+    },
+    {
+      "question": "What cryptocurrencies can my customers use to pay?",
+      "answer": "NOWPayments supports 300+ cryptocurrencies, including Bitcoin, USDT, Ethereum, and more. Recommended networks like BSC, Solana, or TRON keep fees under $0.10 per transaction."
+    },
+    {
+      "question": "Do I need to pay monthly fees for this system?",
+      "answer": "No. This is a self-owned infrastructure. Once deployed, you own it forever. No subscriptions. No platform fees. NOWPayments charges 0.5% per transaction."
+    },
+    {
+      "question": "Can I sell products other than music?",
+      "answer": "Yes. The stack is designed for digital products like ebooks, courses, templates, fonts, presets, beats, plugins, and software. Any file type can be delivered automatically."
+    },
+    {
+      "question": "What happens if NOWPayments goes down?",
+      "answer": "NOWPayments has 99.9% uptime. If it fails, the system will retry payment verification. You can also switch to a different crypto payment processor if needed."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-06",
+    "lastReviewed": "2026-06-06",
+    "nextReviewDue": "2026-08-05"
+  },
+  "social": {
+    "x": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "linkedIn": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "forum": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "hook": "Selling Music Online and Accepting Bitcoin Expl...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9"
+  },
+  "crossPostSummary": {
+    "title": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+    "hook": "Selling Music Online and Accepting Bitcoin Expl...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "forum": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "x": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "linkedIn": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+    "hook50": "Selling Music Online and Accepting Bitcoin Expl..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-06T03:43:22.624Z",
+      "dateModified": "2026-06-06T03:43:22.624Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-HK4A.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9"
+      },
+      "keywords": "sell music online accept bitcoin",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Complete Builder Kit includes step-by-step deployment guides. If you can follow instructions, you can deploy this stack. No coding required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies can my customers use to pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports 300+ cryptocurrencies, including Bitcoin, USDT, Ethereum, and more. Recommended networks like BSC, Solana, or TRON keep fees under $0.10 per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to pay monthly fees for this system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is a self-owned infrastructure. Once deployed, you own it forever. No subscriptions. No platform fees. NOWPayments charges 0.5% per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell products other than music?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The stack is designed for digital products like ebooks, courses, templates, fonts, presets, beats, plugins, and software. Any file type can be delivered automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if NOWPayments goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments has 99.9% uptime. If it fails, the system will retry payment verification. You can also switch to a different crypto payment processor if needed."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-HK4A.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260605-HK4A.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Selling Music Online and Accepting Bitcoin Explained for Digital Creators — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/selling-music-online-accepting-bitcoin-explained-digital-creators-9"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Music online",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "music online",
+    "totalWords": 1415,
+    "count": 6,
+    "densityPercent": 0.4,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell music online accept bitcoin",
+    "serpSource": "tavily",
+    "imageSource": "picsum",
+    "wordCount": 1486,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-06T03:43:22.651Z"
+  }
+}
