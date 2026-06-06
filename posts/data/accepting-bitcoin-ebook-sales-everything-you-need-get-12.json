@@ -1,0 +1,415 @@
+{
+  "id": "post-20260606-030W",
+  "slug": "accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+  "title": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+  "date": "2026-06-06T21:12:17.998Z",
+  "category": "Selling Digital Products",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260606-030W.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’re a creator in Nigeria. Your ebook is ready. But Stripe won’t let you sell. PayPal blocks your account. Gumroad takes 10% per sale. This guide solves the problem at the infrastructure layer. You’ll deploy a sovereign commerce stack that accepts Bitcoin, USDT, and 300+ [[LINK:https://coremerch.github.io/store/blog/crypto-payments-tanzanian-online-sellers-step-step-deployment-4|Crypto Payments]]currencies. No platform fees. No account freezes. Full ownership of your store, payments, and customer data. By the end, you’ll have a live store hosted on [[LINK:https://coremerch.github.io/store/blog/github-pages-free-digital-product-store-hosting-explained-7|github]] Pages or Cloudflare Pages, automated delivery via Cloudflare Workers or Google Apps Script, and instant payment verification through NOWPayments. This is not a workaround. It’s base-layer infrastructure built to withstand financial isolation."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-8. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-8",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail: Bitcoin ebook"
+    },
+    {
+      "type": "paragraph",
+      "text": "Platforms fail creators in restricted regions by design. Stripe and PayPal enforce geographic blocks. Gumroad and Payhip charge 10% per sale. This stack removes all intermediaries. Your store runs on GitHub Pages or Cloudflare Pages — both free and globally accessible. Payments are processed directly on-chain via NOWPayments, which charges 0.5% and requires no KYC. Delivery is automated through Cloudflare Workers or Google Apps Script, ensuring files are sent instantly after payment. The database is either [[LINK:https://coremerch.github.io/store/blog/how-supabase-order-database-digital-stores-works-how-10|COREMERCH guide to supabase]] or Google Sheets, both of which you control. At 100 sales per month on a $97 product, switching from Gumroad to NOWPayments retains $921 more in revenue. This infrastructure is sovereign — you own every component, and no platform can shut you down."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with a clear product offering. Define your ebook’s price in USD — NOWPayments will convert it to the buyer’s chosen cryptocurrency at transaction time. Prepare your ebook file in PDF or EPUB format. Upload it to Google Drive or Cloudflare R2 for secure storage. Choose your stack: GitHub Pages + Google Apps Script for simplicity, or Cloudflare Pages + Workers for scalability. Create a NOWPayments account — no KYC required. Select your preferred cryptocurrencies (BSC, Solana, or TRON for low fees under $0.10 per transaction). Finally, decide whether you’ll deploy the Sovereign Starter Stack ($97) or the Edge Commerce Stack ($197) for advanced features like SPF/DKIM/DMARC email configuration."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Connect NOWPayments to your store by generating API keys in your NOWPayments dashboard. Configure the webhook to trigger file delivery the moment payment confirms on-chain. For delivery, use Cloudflare Workers or Google Apps Script to automate the process. Write a script that checks the payment status via the NOWPayments API, then sends a download link to the buyer’s email. Store order data in Supabase or Google Sheets for easy tracking. Test the pipeline with a $1 transaction to ensure the ebook is delivered instantly. This pipeline is stateless — it runs without servers, and you pay nothing for idle time. Once deployed, it operates 24/7 without your intervention."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments’ 0.5% fee retains $921 more per 100 sales compared to Gumroad’s 10%."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploy your store to GitHub Pages or Cloudflare Pages. Both platforms offer free hosting with global CDN distribution. Add your ebook’s sales page, linking the \"Buy Now\" button to your NOWPayments invoice URL. Share the live link with your audience. When a buyer pays, NOWPayments will verify the transaction on-chain and fire the webhook. Your delivery script will send the ebook automatically. Monitor your first transactions in Supabase or Google Sheets to ensure everything works as expected. This stack is designed to handle its first sale as reliably as its thousandth — no manual intervention required."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "Once live, optimize for growth. Add more products by duplicating your delivery script and updating the file paths. Expand to new cryptocurrencies by configuring additional payment options in NOWPayments. Upgrade to the Edge Commerce Stack ($197) for advanced email deliverability and end-to-end testing. For full documentation and templates, purchase the Complete Builder Kit ($197) from https://coremerch.github.io/products.html. This kit includes all 6 blueprints and 7 templates, saving you $348 compared to buying separately. Scale with confidence — this infrastructure is built to handle volume without additional fees or platform restrictions."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell an ebook without PayPal, Stripe, or Gumroad, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, NOWPayments for crypto processing, and Cloudflare Workers or Google Apps Script for automated delivery. This eliminates platform fees and geographic restrictions. For example, replacing Gumroad’s 10% fee with NOWPayments’ 0.5% fee on a $97 product retains $921 more per 100 sales. The Complete Builder Kit ($197) provides all blueprints and templates needed to deploy this stack instantly."
+    },
+    {
+      "type": "callout",
+      "text": "This stack runs on free infrastructure — no hosting, server, or platform fees."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re selling notion templates, fonts, or software, the same infrastructure applies. The Complete Builder Kit ($197) includes all 6 blueprints and 7 templates for every digital product type. Available at https://coremerch.github.io/products.html, it’s the fastest way to deploy a crypto-only digital download store without platform dependencies. Whether you’re in the Philippines, Zimbabwe, or Venezuela, this stack ensures you can sell globally without restrictions."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Define your ebook’s USD price and prepare the file for upload. 2. Choose your stack: GitHub Pages + Apps Script or Cloudflare Pages + Workers. 3. Create a NOWPayments account and select low-fee cryptocurrencies like BSC or Solana. 4. Write or purchase the delivery script for automated file transfer. 5. Deploy your store to GitHub Pages or Cloudflare Pages. 6. Test the pipeline with a $1 transaction to ensure delivery works. 7. Share your live store link with your audience. 8. Monitor transactions in Supabase or Google Sheets for tracking."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m in a country where Stripe and PayPal are banned?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. This stack relies on GitHub Pages, Cloudflare Pages, and NOWPayments — all globally accessible without geographic restrictions. Your store will work in any country."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle chargebacks with cryptocurrency payments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cryptocurrency transactions are irreversible. Once payment confirms on-chain, the buyer cannot reverse it. This eliminates chargeback risk entirely."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I want to sell multiple products?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Duplicate your delivery script and update the file paths for each product. The Edge Commerce Stack ($197) includes pre-configured scripts for up to 5 products."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need technical skills to deploy this?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Basic familiarity with GitHub or Cloudflare is helpful but not required. The Sovereign Starter Stack ($97) includes deployment within 48 hours, or purchase the Complete Builder Kit ($197) for instant access to all templates."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I switch cryptocurrencies after deployment?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. Add or remove cryptocurrencies in your NOWPayments dashboard at any time. The stack is designed to be flexible."
+    },
+    {
+      "type": "callout",
+      "text": "You own every component. No platform can shut down your store or freeze your payments."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260606-D78X",
+      "slug": "real-difference-between-choices-accepting-bitcoin-ebook-sales-2"
+    },
+    {
+      "id": "post-20260606-65TN",
+      "slug": "how-accepting-bitcoin-ebook-sales-works-how-deploy-9"
+    },
+    {
+      "id": "post-20260606-PMB3",
+      "slug": "accepting-bitcoin-ebook-sales-step-step-deployment-guide-9"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m in a country where Stripe and PayPal are banned?",
+      "answer": "Yes. This stack relies on GitHub Pages, Cloudflare Pages, and NOWPayments — all globally accessible without geographic restrictions. Your store will work in any country."
+    },
+    {
+      "question": "How do I handle chargebacks with cryptocurrency payments?",
+      "answer": "Cryptocurrency transactions are irreversible. Once payment confirms on-chain, the buyer cannot reverse it. This eliminates chargeback risk entirely."
+    },
+    {
+      "question": "What if I want to sell multiple products?",
+      "answer": "Duplicate your delivery script and update the file paths for each product. The Edge Commerce Stack ($197) includes pre-configured scripts for up to 5 products."
+    },
+    {
+      "question": "Do I need technical skills to deploy this?",
+      "answer": "Basic familiarity with GitHub or Cloudflare is helpful but not required. The Sovereign Starter Stack ($97) includes deployment within 48 hours, or purchase the Complete Builder Kit ($197) for instant access to all templates."
+    },
+    {
+      "question": "Can I switch cryptocurrencies after deployment?",
+      "answer": "Yes. Add or remove cryptocurrencies in your NOWPayments dashboard at any time. The stack is designed to be flexible."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-06",
+    "lastReviewed": "2026-06-06",
+    "nextReviewDue": "2026-08-05"
+  },
+  "social": {
+    "x": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "linkedIn": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "forum": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "hook": "Accepting Bitcoin for Ebook Sales: Everything Y...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12"
+  },
+  "crossPostSummary": {
+    "title": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+    "hook": "Accepting Bitcoin for Ebook Sales: Everything Y...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "forum": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "x": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "linkedIn": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+    "hook50": "Accepting Bitcoin for Ebook Sales: Everything Y..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-06T21:12:17.998Z",
+      "dateModified": "2026-06-06T21:12:17.998Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-030W.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12"
+      },
+      "keywords": "how to accept bitcoin for ebook sales",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m in a country where Stripe and PayPal are banned?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. This stack relies on GitHub Pages, Cloudflare Pages, and NOWPayments — all globally accessible without geographic restrictions. Your store will work in any country."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle chargebacks with cryptocurrency payments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cryptocurrency transactions are irreversible. Once payment confirms on-chain, the buyer cannot reverse it. This eliminates chargeback risk entirely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I want to sell multiple products?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Duplicate your delivery script and update the file paths for each product. The Edge Commerce Stack ($197) includes pre-configured scripts for up to 5 products."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need technical skills to deploy this?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Basic familiarity with GitHub or Cloudflare is helpful but not required. The Sovereign Starter Stack ($97) includes deployment within 48 hours, or purchase the Complete Builder Kit ($197) for instant access to all templates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I switch cryptocurrencies after deployment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Add or remove cryptocurrencies in your NOWPayments dashboard at any time. The stack is designed to be flexible."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-030W.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-030W.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Accepting Bitcoin for Ebook Sales: Everything You Need to Get Your Store Live — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/accepting-bitcoin-ebook-sales-everything-you-need-get-12"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail: Bitcoin ebook",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "bitcoin ebook",
+    "totalWords": 1137,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to accept bitcoin for ebook sales",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1213,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-06T21:12:17.999Z"
+  }
+}
