@@ -1,0 +1,409 @@
+{
+  "id": "post-20260606-TXBX",
+  "slug": "understanding-google-apps-script-digital-commerce-automation-plain-9",
+  "title": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+  "date": "2026-06-06T21:32:10.350Z",
+  "category": "Automation",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds. The fully automated sovereign commerce pipeline.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260606-TXBX.png",
+  "imageSource": "picsum",
+  "imageAlt": "Automated webhook pipeline processing crypto payments and delivering digital products for creators in Philippines",
+  "imageCaption": "NOWPayments webhook fires, Cloudflare Worker receives, order logs, delivery email sends — all within 30 seconds.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Nigeria, digital creators face a critical infrastructure gap: Stripe and PayPal are unavailable, yet their customers demand instant product delivery. Conventional platforms reject them, but sovereign commerce stacks solve this. Google Apps Script, combined with crypto payment verification, automates order fulfillment without relying on blocked payment gateways. This breakdown explains how to [[LINK:https://coremerch.github.io/store/blog/build-selling-digital-downloads-pakistan-until-you-read-2|COREMERCH guide to build]] and deploy this [[LINK:https://coremerch.github.io/store/blog/real-[[LINK:https://coremerch.github.io/store/blog/real-architecture-behind-selling-beats-online-crypto-payments-4|The Real]]-behind-google-apps-script-digital-commerce-18|architecture]], ensuring your digital products are delivered securely and instantly, even in regions where traditional tools fail."
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Google apps"
+    },
+    {
+      "type": "paragraph",
+      "text": "Google Apps Script is a cloud-based JavaScript platform that automates tasks within Google Workspace. For digital commerce, it acts as the backend logic layer, processing orders, verifying payments, and triggering product delivery. Paired with NOWPayments for crypto payment verification, it eliminates the need for Stripe or PayPal. This architecture ensures that when a customer pays in Bitcoin, USDT, or any of 300+ cryptocurrencies, the system automatically confirms the payment on-chain, updates the order status, and sends the download link—all in under 30 seconds. This is not a workaround; it’s a fully sovereign stack that operates independently of restricted platforms."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The pipeline starts with a NOWPayments webhook. When a payment confirms on-chain, NOWPayments sends a POST request to a Cloudflare Worker or Google Apps Script endpoint. This script verifies the payment details, logs the order in Supabase or Google Sheets, and generates a secure download link. The system then sends a delivery email via Resend or Gmail. Cloudflare Workers handles up to 100,000 webhook events per day on the free tier, making it scalable for high-volume stores. Every step is automated, from payment verification to file delivery, ensuring manual errors are eliminated."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This architecture is designed for digital creators in regions like Nigeria, Ghana, Kenya, and Venezuela, where conventional payment gateways are unavailable or unreliable. If you sell ebooks, courses, templates, or software and need a way to collect crypto payments and deliver products instantly, this stack is for you. It’s also for creators who value infrastructure sovereignty—owning their entire commerce stack instead of renting it. After deployment, you own the code, the data, and the process. No platform can shut you down or restrict your access."
+    },
+    {
+      "type": "callout",
+      "text": "Cloudflare Workers processes 100,000 webhook events per day on the free tier—ideal for high-volume stores."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack relies on five core components: GitHub Pages or Cloudflare Pages for hosting the storefront (free), Cloudflare Workers or Google Apps Script for backend logic (free), Supabase or Google Sheets for order storage (free), Google Drive or Cloudflare R2 for file delivery (free), and NOWPayments for crypto payment verification (0.5% fee). Each component is chosen for its reliability, cost-efficiency, and ease of integration. For example, Supabase provides a PostgreSQL database with real-time updates, while Cloudflare Workers ensures low-latency webhook processing. Together, they form a robust, scalable, and fully automated commerce infrastructure."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy this stack, start by setting up a NOWPayments account and configuring a webhook to your backend endpoint. Write the Google Apps Script or Cloudflare Worker code to handle the webhook, verify the payment, and log the order. Integrate Supabase or Google Sheets for order storage and Google Drive or Cloudflare R2 for file hosting. Test the pipeline end-to-end using testnet crypto transactions. Once verified, deploy your storefront on GitHub Pages or Cloudflare Pages. If you prefer a turnkey solution, the Edge Commerce Stack ($197) deploys this architecture in 48 hours, with 5 products loaded, SPF/DKIM/DMARC configured, and full end-to-end testing."
+    },
+    {
+      "type": "heading",
+      "text": "How does automated digital product delivery work with crypto payments?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Automated digital product delivery with crypto payments works by integrating a payment verification service like NOWPayments with a backend script. When a payment confirms on-chain, NOWPayments sends a webhook to your script, which verifies the payment, logs the order, and sends a download link to the customer. This process is fully automated and takes under 30 seconds. The key is the webhook pipeline, which triggers the fulfillment process without manual intervention. For example, a customer pays in USDT, the payment confirms on the TRON network, and the script instantly emails the download link."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments verifies crypto payments on-chain in under 30 seconds, ensuring instant order fulfillment."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re looking to automate digital product delivery with crypto payments, the Edge Commerce Stack ($197) provides a turnkey solution deployed in 48 hours. It includes Cloudflare Pages, Workers, Supabase, and NOWPayments integration, with 5 products loaded and email delivery configured. For those who prefer to build their own stack, the components discussed here—Google Apps Script, Cloudflare Workers, and NOWPayments—are also used in the Edge Commerce Stack. Visit https://coremerch.github.io/products.html to explore your options and choose the path that fits your needs."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Set up a NOWPayments account and configure a webhook to your backend endpoint. Write the Google Apps Script or Cloudflare Worker code to handle the webhook and verify payments. Integrate Supabase or Google Sheets for order storage and logging. Host your digital products on Google Drive or Cloudflare R2. Write the script to generate secure download links and send delivery emails via Resend or Gmail. Test the pipeline end-to-end using testnet crypto transactions. Deploy your storefront on GitHub Pages or Cloudflare Pages. Configure SPF/DKIM/DMARC for email deliverability. Monitor the system for errors and optimize as needed. If you prefer a done-for-you solution, purchase the Edge Commerce Stack ($197) at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, the Edge Commerce Stack ($197) deploys this architecture for you in 48 hours, with 5 products loaded and full end-to-end testing. If you prefer to build it yourself, the components are designed to be accessible, with detailed documentation available in The Sovereign Blueprint ($47)."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies are supported for payments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, USDT, Ethereum, and Solana. For low transaction fees, we recommend using BSC, Solana, or TRON networks, where fees are typically under $0.10 per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "How secure is the download link delivery process?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The download links are generated dynamically and include a unique token to prevent unauthorized access. The links expire after a set time, typically 24 hours, ensuring security. The system logs all access attempts for auditing."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if a payment fails or is unconfirmed?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system checks the payment status via the blockchain. If a payment fails or is unconfirmed, the order remains pending, and no download link is sent. Customers can retry the payment, and the system will process it automatically once confirmed."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I scale this stack to handle thousands of orders per day?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, Cloudflare Workers handles up to 100,000 webhook events per day on the free tier, making it scalable for high-volume stores. Supabase and Google Sheets can store millions of orders, and Google Drive or Cloudflare R2 can handle large file deliveries efficiently."
+    },
+    {
+      "type": "callout",
+      "text": "The Edge Commerce Stack ($197) deploys this architecture in 48 hours, with 5 products loaded and full testing."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260606-7Q32",
+      "slug": "understanding-google-apps-script-digital-commerce-automation-plain-8"
+    },
+    {
+      "id": "post-20260606-M41J",
+      "slug": "real-architecture-behind-google-apps-script-digital-commerce-18"
+    },
+    {
+      "id": "post-20260606-V5HR",
+      "slug": "google-apps-script-digital-commerce-automation-what-actually-13"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I’m not a developer?",
+      "answer": "Yes, the Edge Commerce Stack ($197) deploys this architecture for you in 48 hours, with 5 products loaded and full end-to-end testing. If you prefer to build it yourself, the components are designed to be accessible, with detailed documentation available in The Sovereign Blueprint ($47)."
+    },
+    {
+      "question": "What cryptocurrencies are supported for payments?",
+      "answer": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, USDT, Ethereum, and Solana. For low transaction fees, we recommend using BSC, Solana, or TRON networks, where fees are typically under $0.10 per transaction."
+    },
+    {
+      "question": "How secure is the download link delivery process?",
+      "answer": "The download links are generated dynamically and include a unique token to prevent unauthorized access. The links expire after a set time, typically 24 hours, ensuring security. The system logs all access attempts for auditing."
+    },
+    {
+      "question": "What happens if a payment fails or is unconfirmed?",
+      "answer": "The system checks the payment status via the blockchain. If a payment fails or is unconfirmed, the order remains pending, and no download link is sent. Customers can retry the payment, and the system will process it automatically once confirmed."
+    },
+    {
+      "question": "Can I scale this stack to handle thousands of orders per day?",
+      "answer": "Yes, Cloudflare Workers handles up to 100,000 webhook events per day on the free tier, making it scalable for high-volume stores. Supabase and Google Sheets can store millions of orders, and Google Drive or Cloudflare R2 can handle large file deliveries efficiently."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-06",
+    "lastReviewed": "2026-06-06",
+    "nextReviewDue": "2026-08-05"
+  },
+  "social": {
+    "x": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Br https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "linkedIn": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.\n→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "forum": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.\n→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "hook": "Understanding Google Apps Script for Digital Co...",
+    "bullets": [
+      "→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.",
+      "→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9"
+  },
+  "crossPostSummary": {
+    "title": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+    "hook": "Understanding Google Apps Script for Digital Co...",
+    "bullets": [
+      "→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.",
+      "→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "forum": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.\n→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "x": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Br https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "linkedIn": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds.\n→ Payment confirmed on-chain, webhook fires, order logs, delivery email sends — all within 30 seconds, whether you are awake or not.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+    "hook50": "Understanding Google Apps Script for Digital Co..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds. The fully automated sovereign commerce pipeline.",
+      "datePublished": "2026-06-06T21:32:10.354Z",
+      "dateModified": "2026-06-06T21:32:10.354Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-TXBX.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9"
+      },
+      "keywords": "google apps script digital commerce automation",
+      "articleSection": "Automation"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the Edge Commerce Stack ($197) deploys this architecture for you in 48 hours, with 5 products loaded and full end-to-end testing. If you prefer to build it yourself, the components are designed to be accessible, with detailed documentation available in The Sovereign Blueprint ($47)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies are supported for payments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports over 300 cryptocurrencies, including Bitcoin, USDT, Ethereum, and Solana. For low transaction fees, we recommend using BSC, Solana, or TRON networks, where fees are typically under $0.10 per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How secure is the download link delivery process?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The download links are generated dynamically and include a unique token to prevent unauthorized access. The links expire after a set time, typically 24 hours, ensuring security. The system logs all access attempts for auditing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a payment fails or is unconfirmed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system checks the payment status via the blockchain. If a payment fails or is unconfirmed, the order remains pending, and no download link is sent. Customers can retry the payment, and the system will process it automatically once confirmed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I scale this stack to handle thousands of orders per day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Cloudflare Workers handles up to 100,000 webhook events per day on the free tier, making it scalable for high-volume stores. Supabase and Google Sheets can store millions of orders, and Google Drive or Cloudflare R2 can handle large file deliveries efficiently."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds. The fully automated sovereign commerce pipeline.",
+      "url": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-TXBX.png",
+      "imageAlt": "Automated webhook pipeline processing crypto payments and delivering digital products for creators in Philippines",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Payment confirmed on-chain, webhook received, order logged, delivery email sent — all within 30 seconds. The fully automated sovereign commerce pipeline.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260606-TXBX.png",
+      "imageAlt": "Automated webhook pipeline processing crypto payments and delivering digital products for creators in Philippines"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Automation",
+        "url": "https://coremerch.github.io/store/blog/category/automation"
+      },
+      {
+        "name": "Understanding Google Apps Script for Digital Commerce Automation: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/understanding-google-apps-script-digital-commerce-automation-plain-9"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Google apps",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How does automated digital product delivery work with crypto payments?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "google apps",
+    "totalWords": 1135,
+    "count": 8,
+    "densityPercent": 0.7,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "google apps script digital commerce automation",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1210,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How does automated digital product delivery work with crypto payments?",
+      "What is a webhook and how does it trigger order fulfillment?",
+      "Can I automatically send download links after a crypto payment confirms?",
+      "How do Cloudflare Workers handle NOWPayments webhooks automatically?"
+    ],
+    "relatedSearches": [
+      "automated digital delivery webhook crypto payment cloudflare",
+      "nowpayments webhook cloudflare workers digital product",
+      "auto send download link after bitcoin usdt payment",
+      "supabase order log automated crypto store pipeline"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-06T21:32:10.357Z"
+  }
+}
