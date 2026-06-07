@@ -1,0 +1,415 @@
+{
+  "id": "post-20260607-XXW5",
+  "slug": "selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+  "title": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+  "date": "2026-06-07T22:03:26.115Z",
+  "category": "Platform Restrictions",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260607-XXW5.png",
+  "imageSource": "picsum",
+  "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria",
+  "imageCaption": "Sovereign infrastructure routes around Stripe and PayPal restrictions permanently — not a workaround, a different architecture.",
+  "canonical": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Nigeria, [[LINK:https://coremerch.github.io/store/blog/selling-digital-art-without-paypal-explained-digital-creators-6|Selling Digital]] digital products like [[LINK:https://coremerch.github.io/store/blog/how-sell-ebooks-kenya-which-architecture-actually-works-2|COREMERCH guide to ebooks]] should be straightforward. But when platforms like Stripe and PayPal restrict access, creators face a dead end. These platforms cite regulatory hurdles, but the real issue is deeper: reliance on centralized payment systems that exclude entire regions. Sovereign commerce infrastructure solves this by shifting control to the creator. It’s not a workaround—it’s a permanent, base-layer solution. This [[LINK:https://coremerch.github.io/store/blog/real-architecture-behind-selling-stock-photos-without-paypal-4|architecture]] uses open tools like Cloudflare Workers, Supabase, and NOWPayments to bypass middlemen. You own the stack, the data, and the process. No subscriptions, no platform lock-in, no geographic restrictions. This post explains how it works, why it matters, and how to deploy it today."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: The Complete Guide to Selling Digital Products Without Stripe at https://coremerch.github.io/store/blog/comparing-real-options-selling-digital-products-without-stripe-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/comparing-real-options-selling-digital-products-without-stripe-2",
+      "title": "The Complete Guide to Selling Digital Products Without Stripe"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Ebooks nigeria"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sovereign commerce infrastructure is a self-owned system for selling digital products. It’s built on open tools that don’t rely on Stripe, PayPal, or any single provider. For Nigerian creators, this means selling ebooks without waiting for permission from platforms that don’t serve your region. The core idea is ownership: you control the hosting, payment processing, and delivery. This isn’t a plugin or a patch—it’s a complete stack. Cloudflare Pages hosts your store, Cloudflare Workers handle backend logic, Supabase stores orders, and NOWPayments processes crypto payments. The system is modular, meaning you can swap components without rebuilding everything. It’s designed to withstand payment blockades and currency instability. By owning the infrastructure, you’re not at the mercy of platforms that exclude you. This is how creators in regions like Nigeria, Ghana, and Zimbabwe are reclaiming their ability to sell globally."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The architecture is split into layers, each handling a specific function. First, the frontend: your store is hosted on Cloudflare Pages, a free, globally distributed platform. The backend uses Cloudflare Workers, serverless functions that process orders and payments. Orders are stored in Supabase, an open-source alternative to Firebase, which gives you full control over your data. Payments are processed via NOWPayments, which supports 300+ cryptocurrencies and charges a flat 0.5% fee. Once payment is verified, the system delivers the ebook via a secure link from Cloudflare R2 or Google Drive. The entire process is automated, from payment confirmation to file delivery. There’s no need for manual intervention. The system is designed to handle low-fee networks like BSC, Solana, and TRON, keeping transaction costs under $0.10. This architecture ensures that every component is replaceable and that you’re not locked into any single tool."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is built for digital creators in regions where conventional payment platforms are unavailable or unreliable. If you’re selling ebooks, courses, templates, or software in Nigeria, Ghana, Kenya, or Zimbabwe, this is for you. It’s also for creators who value ownership over convenience. You don’t want to rent infrastructure—you want to own it. This stack is pressure-tested against real-world challenges like currency collapse and payment rejection. It’s not a theoretical solution; it’s been deployed in regions where financial isolation is a daily reality. By using this architecture, you’re not just selling products—you’re building a resilient business. It’s for creators who refuse to be locked out of the global economy and are ready to take control of their commerce stack."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure gives you full ownership of your digital store."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each component in the stack serves a specific purpose. Cloudflare Pages provides fast, free hosting with global distribution. Cloudflare Workers handle backend logic, ensuring your store runs smoothly without servers. Supabase acts as the database, storing order details securely. NOWPayments handles crypto payments, verifying transactions on-chain and firing webhooks to trigger file delivery. Cloudflare R2 or Google Drive stores your ebook files, delivering them via secure, expiring links. The Edge Commerce Stack ($197) bundles these components into a deployable solution, configured with SPF/DKIM/DMARC for email deliverability. It’s not just a collection of tools—it’s a cohesive system. Each piece is chosen for its reliability, cost-effectiveness, and compatibility with the others. The result is a stack that’s both powerful and simple to maintain."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy this system, start by mapping your requirements. Decide which cryptocurrencies to accept (BSC, Solana, and TRON are recommended for low fees). Choose a hosting provider—Cloudflare Pages is free and fast. Set up your backend with Cloudflare Workers, using their serverless functions to handle order processing. Configure Supabase to store order data, and integrate NOWPayments for crypto processing. Test the entire flow end-to-end to ensure payments trigger file delivery. The Edge Commerce Stack ($197) accelerates this process, deploying a fully configured stack in 48 hours. It includes five pre-loaded products, SPF/DKIM/DMARC setup, and 30-day support. Once deployed, you own the entire system. No platform fees, no geographic restrictions, no waiting for approval. This is how you sell ebooks in Nigeria—and anywhere else—on your terms."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell digital products if Stripe is not available in my country?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sovereign commerce infrastructure is a self-owned system for selling digital products without relying on platforms like Stripe or PayPal. It uses open tools like Cloudflare Pages, Cloudflare Workers, Supabase, and NOWPayments to handle hosting, backend logic, order storage, and crypto payments. This architecture gives creators full control over their commerce stack, bypassing geographic restrictions and platform fees. It’s designed for regions where conventional payment systems are unavailable, offering a permanent, base-layer solution."
+    },
+    {
+      "type": "callout",
+      "text": "The Edge Commerce Stack deploys a complete solution in 48 hours, no technical expertise required."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re ready to deploy this system today, the Edge Commerce Stack ($197) provides a fully configured solution. It includes Cloudflare Pages hosting, Cloudflare Workers backend, Supabase order storage, and NOWPayments integration. The stack is deployed in 48 hours, with five products pre-loaded and SPF/DKIM/DMARC configured. This is how creators in Nigeria and beyond are reclaiming their ability to sell globally—without waiting for permission."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your cryptocurrencies: Start with low-fee networks like BSC, Solana, or TRON. 2. Set up hosting: Use Cloudflare Pages for fast, free global distribution. 3. Configure backend logic: Deploy Cloudflare Workers to handle order processing. 4. Store order data: Set up Supabase as your database. 5. Integrate payments: Use NOWPayments for crypto processing, ensuring webhook compatibility. 6. Deliver files: Store ebooks in Cloudflare R2 or Google Drive and generate secure download links. 7. Test end-to-end: Verify that payments trigger file delivery automatically. 8. Deploy: Use the Edge Commerce Stack ($197) for a pre-configured, fully tested solution."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’m not technical?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, the Edge Commerce Stack ($197) deploys a fully configured system in 48 hours, requiring no technical expertise. It includes 30-day support for any questions."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies should I accept?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Start with low-fee networks like BSC, Solana, or TRON. These keep transaction costs under $0.10, making them ideal for digital products."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need to pay monthly fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. This is a one-time purchase. You own the stack and pay only the 0.5% NOWPayments fee per transaction."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell products other than ebooks?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The system works for any digital product, including courses, templates, software, and more."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if NOWPayments goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system is modular. You can replace NOWPayments with another crypto processor without rebuilding the entire stack."
+    },
+    {
+      "type": "callout",
+      "text": "Sell globally without relying on platforms that exclude your region."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260607-GYAE",
+      "slug": "everything-you-need-know-about-selling-ebooks-nigeria-5"
+    },
+    {
+      "id": "post-20260607-6VU9",
+      "slug": "understanding-selling-ebooks-nigeria-without-paypal-plain-language-7"
+    },
+    {
+      "id": "post-20260606-9ESL",
+      "slug": "comparing-real-options-selling-ebooks-nigeria-without-paypal-14"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this system if I’m not technical?",
+      "answer": "Yes, the Edge Commerce Stack ($197) deploys a fully configured system in 48 hours, requiring no technical expertise. It includes 30-day support for any questions."
+    },
+    {
+      "question": "What cryptocurrencies should I accept?",
+      "answer": "Start with low-fee networks like BSC, Solana, or TRON. These keep transaction costs under $0.10, making them ideal for digital products."
+    },
+    {
+      "question": "Do I need to pay monthly fees?",
+      "answer": "No. This is a one-time purchase. You own the stack and pay only the 0.5% NOWPayments fee per transaction."
+    },
+    {
+      "question": "Can I sell products other than ebooks?",
+      "answer": "Yes. The system works for any digital product, including courses, templates, software, and more."
+    },
+    {
+      "question": "What happens if NOWPayments goes down?",
+      "answer": "The system is modular. You can replace NOWPayments with another crypto processor without rebuilding the entire stack."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-07",
+    "lastReviewed": "2026-06-07",
+    "nextReviewDue": "2026-08-06"
+  },
+  "social": {
+    "x": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "linkedIn": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "forum": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "hook": "Selling Ebooks in Nigeria Without PayPal: What ...",
+    "bullets": [
+      "→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.",
+      "→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4"
+  },
+  "crossPostSummary": {
+    "title": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+    "hook": "Selling Ebooks in Nigeria Without PayPal: What ...",
+    "bullets": [
+      "→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.",
+      "→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "forum": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "x": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "linkedIn": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required\n\n→ Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries.\n→ Stripe, PayPal, and Gumroad block creators in 150+ countries — sovereign infrastructure routes around every restriction permanently.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+    "hook50": "Selling Ebooks in Nigeria Without PayPal: What ..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "datePublished": "2026-06-07T22:03:26.116Z",
+      "dateModified": "2026-06-07T22:03:26.116Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260607-XXW5.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4"
+      },
+      "keywords": "sell ebooks in nigeria without paypal",
+      "articleSection": "Platform Restrictions"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’m not technical?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the Edge Commerce Stack ($197) deploys a fully configured system in 48 hours, requiring no technical expertise. It includes 30-day support for any questions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies should I accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with low-fee networks like BSC, Solana, or TRON. These keep transaction costs under $0.10, making them ideal for digital products."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to pay monthly fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This is a one-time purchase. You own the stack and pay only the 0.5% NOWPayments fee per transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell products other than ebooks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The system works for any digital product, including courses, templates, software, and more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if NOWPayments goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system is modular. You can replace NOWPayments with another crypto processor without rebuilding the entire stack."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "url": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260607-XXW5.png",
+      "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+      "description": "Stripe, PayPal, Gumroad, and Lemon Squeezy block creators in dozens of countries. Here is the sovereign infrastructure that works everywhere they do not.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260607-XXW5.png",
+      "imageAlt": "Sovereign commerce infrastructure for digital creators blocked by Stripe and PayPal in Nigeria"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Platform Restrictions",
+        "url": "https://coremerch.github.io/store/blog/category/platform-restrictions"
+      },
+      {
+        "name": "Selling Ebooks in Nigeria Without PayPal: What It Actually Is and How It Works — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/selling-ebooks-nigeria-without-paypal-what-actually-how-4"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Ebooks nigeria",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell digital products if Stripe is not available in my country?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "ebooks nigeria",
+    "totalWords": 1243,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell ebooks in nigeria without paypal",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1307,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell digital products if Stripe is not available in my country?",
+      "What is the best alternative to Gumroad for creators in restricted countries?",
+      "Can I use PayPal if I am in Nigeria, Ghana, or Pakistan?",
+      "Why does Lemon Squeezy say it is not supported in my region?"
+    ],
+    "relatedSearches": [
+      "stripe alternative for nigeria digital sellers",
+      "sell digital products without gumroad account",
+      "lemon squeezy not available in my country alternative",
+      "crypto payment gateway no kyc digital products"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-07T22:03:26.117Z"
+  }
+}
