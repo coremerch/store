@@ -1,0 +1,415 @@
+{
+  "id": "post-20260609-MHQ7",
+  "slug": "how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+  "title": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+  "date": "2026-06-09T22:33:02.141Z",
+  "category": "Getting Paid",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260609-MHQ7.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’ve built a [[LINK:https://coremerch.github.io/store/blog/digital-product-payment-solutions-west-africa-broken-here-2|Digital Product]] product. You’ve found buyers. But when it’s time to get paid, the system fails you. [[LINK:https://coremerch.github.io/store/blog/stripe-alternatives-nigerian-creators-which-architecture-actually-works-10|COREMERCH guide to stripe]] and PayPal are unavailable in Pakistan. Local payment gateways collapse under currency volatility. Buyers want USDT, but you’re stuck with platforms that delay payouts, freeze accounts, or reject your region outright. This guide solves that. It’s not a workaround—it’s infrastructure. You’ll deploy a sovereign commerce stack that processes USDT payments on TRON or Solana (under $0.10 per transaction), delivers products instantly, and stores your data where you control it. No platforms. No subscriptions. No third-party risk. By the end of this guide, you’ll own a system that works even when [[LINK:https://coremerch.github.io/store/blog/everything-you-need-know-about-cloudflare-workers-crypto-15|everything]] else fails."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Platforms fail because they’re not built for you. Stripe and PayPal exclude regions like Pakistan based on geopolitical risk, not your merit. Local gateways fail because they’re tied to unstable currencies. This infrastructure bypasses both problems. It uses GitHub Pages or Cloudflare Pages for hosting—no servers to manage. Cloudflare Workers or Google Apps Script handle backend logic—no APIs to maintain. NOWPayments processes USDT payments on-chain—no bank accounts required. File delivery happens via Google Drive or Cloudflare R2—no storage limits. The system is decoupled: each component operates independently. If one part fails, the rest keep running. You own the code, the data, and the deployment. No platform can shut you down, delay your payouts, or change the rules mid-game. This is infrastructure sovereignty—built for creators who need systems that work when everything else collapses."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before deploying, gather three things: a product to sell, a crypto wallet to receive USDT, and a domain name (optional but recommended). Your product—ebook, course, template—must be in a digital format ready for instant delivery. For your wallet, choose TRON or Solana for low fees (under $0.10 per transaction). Set up a NOWPayments account to handle USDT payments—they charge 0.5% per transaction with no KYC. If you want a custom domain, register one via Cloudflare or Namecheap. Next, decide your stack: Sovereign Starter Stack ($97) uses GitHub Pages and Google Apps Script, ideal for 1-3 products. Edge Commerce Stack ($197) uses Cloudflare Pages, Workers, and Supabase, scaling to 10+ products. If you’re building multiple stores, the Complete Builder Kit ($197) includes all blueprints and templates. Finally, allocate 2-3 hours to deploy. This is not a plugin—it’s infrastructure. You’re building a system that outlasts platforms."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start with payments. Integrate NOWPayments into your stack. Set up a USDT invoice on TRON or Solana—these networks confirm transactions in seconds for pennies. Configure the webhook to trigger product delivery the moment payment hits the blockchain. For delivery, upload your product to Google Drive or Cloudflare R2. Generate a time-limited download link that expires after 24 hours. Connect this to your backend logic: Cloudflare Worker or Google Apps Script. When NOWPayments confirms payment, the script emails the buyer their unique download link. Store order data in Supabase or Google Sheets—you control the database. Test the pipeline end-to-end before going live. Send a test payment, verify the webhook fires, and confirm the download link works. This pipeline is your core loop: payment in, product out. No platforms. No delays. Just infrastructure doing its job."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments charges 0.5% per transaction—no hidden fees, no KYC."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploy your stack to GitHub Pages or Cloudflare Pages. Point your custom domain to the live URL if you’re using one. Share your product page with your first buyer. When they pay in USDT, NOWPayments will verify the transaction on-chain and fire the webhook. Your backend script will email the buyer their download link. Log into your wallet to see the USDT payment—no payout delays, no platform fees beyond 0.5%. Monitor the first transaction closely. Check your Supabase or Google Sheets database to confirm the order is logged. Verify the buyer receives their product. If any step fails, debug the component—not the entire system. This modular design lets you fix issues without downtime. Once the first transaction succeeds, your infrastructure is live. You’re now collecting USDT directly, delivering products automatically, and owning your data."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "With your stack live, scale methodically. Add more products by uploading files to your storage and updating your backend logic. If you’re using the Edge Commerce Stack, configure SPF/DKIM/DMARC for your domain to ensure delivery emails don’t land in spam. Monitor transaction volume—if you’re processing over 50 orders daily, consider upgrading to Supabase for faster database queries. For higher traffic, deploy Cloudflare Workers on the paid tier for increased capacity. Use the scaling playbook included in the Complete Builder Kit ($197) to optimize performance. Reinvest profits into stablecoins or local currency via P2P exchanges—Binance P2P or LocalBitcoins work in Pakistan. As you grow, keep the infrastructure decoupled. Each component should scale independently. This design ensures your system handles growth without breaking—no platform bottlenecks, no sudden shutdowns. You’re not renting scalability; you’re building it."
+    },
+    {
+      "type": "heading",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To get paid in USDT for digital work in Pakistan, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, NOWPayments for USDT processing, and Google Drive or Cloudflare R2 for file delivery. Use TRON or Solana for low transaction fees (under $0.10). Integrate a backend script via Cloudflare Workers or Google Apps Script to automate product delivery. Store order data in Supabase or Google Sheets. This infrastructure bypasses Stripe and PayPal restrictions, ensures instant payouts, and gives you full data ownership. The Complete Builder Kit ($197) includes all blueprints and templates for deployment."
+    },
+    {
+      "type": "callout",
+      "text": "TRON and Solana confirm USDT payments in seconds for under $0.10 per transaction."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you’re in Pakistan and platforms keep rejecting your region, the Complete Builder Kit ($197) gives you all the blueprints and templates to deploy your own sovereign commerce stack. It includes step-by-step guides for integrating NOWPayments, setting up USDT invoices on TRON or Solana, and automating product delivery. No more payout delays. No more platform rejections. Own your infrastructure—visit https://coremerch.github.io/products.html to get started."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your stack: Sovereign Starter Stack ($97) for 1-3 products or Edge Commerce Stack ($197) for 10+ products. 2. Set up a NOWPayments account and configure USDT invoices on TRON or Solana. 3. Upload your product to Google Drive or Cloudflare R2 and generate a time-limited download link. 4. Write the backend script in Cloudflare Workers or Google Apps Script to handle payment verification and email delivery. 5. Deploy your frontend to GitHub Pages or Cloudflare Pages. 6. Test the pipeline end-to-end: send a test payment, verify the webhook, and confirm product delivery. 7. Point your custom domain to the live URL (optional). 8. Monitor your first live transaction and log order data in Supabase or Google Sheets."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this infrastructure if I’ve never coded before?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Complete Builder Kit ($197) includes templates and step-by-step guides. Cloudflare Workers and Google Apps Script use simple logic—no advanced coding required. Focus on deploying, not mastering code."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if USDT prices fluctuate?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "USDT is a stablecoin pegged 1:1 to the USD. Fluctuations are minimal. If you’re concerned, convert USDT to stablecoins or local currency immediately via P2P exchanges like Binance."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle refunds?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Refunds are processed manually. Since you control the wallet, you can send USDT back to the buyer’s address. Document refund policies clearly on your product page."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can buyers pay with PayPal or Stripe instead?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. This infrastructure is designed for USDT payments via NOWPayments. It bypasses platforms like PayPal and Stripe entirely—that’s the point."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if transaction volume exceeds 100 orders daily?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Upgrade to the Edge Commerce Stack ($197) and use Supabase for faster database queries. Cloudflare Workers’ paid tier handles higher traffic. The scaling playbook in the Complete Builder Kit guides optimization."
+    },
+    {
+      "type": "callout",
+      "text": "You own the code, the data, and the deployment—no platform can shut you down."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260608-PJHK",
+      "slug": "nonsense-guide-getting-paid-usdt-digital-work-stripe-14"
+    },
+    {
+      "id": "post-20260608-0PGF",
+      "slug": "getting-paid-usdt-digital-work-step-step-deployment-18"
+    },
+    {
+      "id": "post-20260608-VCWI",
+      "slug": "how-getting-paid-usdt-digital-work-works-how-6"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this infrastructure if I’ve never coded before?",
+      "answer": "Yes. The Complete Builder Kit ($197) includes templates and step-by-step guides. Cloudflare Workers and Google Apps Script use simple logic—no advanced coding required. Focus on deploying, not mastering code."
+    },
+    {
+      "question": "What if USDT prices fluctuate?",
+      "answer": "USDT is a stablecoin pegged 1:1 to the USD. Fluctuations are minimal. If you’re concerned, convert USDT to stablecoins or local currency immediately via P2P exchanges like Binance."
+    },
+    {
+      "question": "How do I handle refunds?",
+      "answer": "Refunds are processed manually. Since you control the wallet, you can send USDT back to the buyer’s address. Document refund policies clearly on your product page."
+    },
+    {
+      "question": "Can buyers pay with PayPal or Stripe instead?",
+      "answer": "No. This infrastructure is designed for USDT payments via NOWPayments. It bypasses platforms like PayPal and Stripe entirely—that’s the point."
+    },
+    {
+      "question": "What if transaction volume exceeds 100 orders daily?",
+      "answer": "Upgrade to the Edge Commerce Stack ($197) and use Supabase for faster database queries. Cloudflare Workers’ paid tier handles higher traffic. The scaling playbook in the Complete Builder Kit guides optimization."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-09",
+    "lastReviewed": "2026-06-09",
+    "nextReviewDue": "2026-08-08"
+  },
+  "social": {
+    "x": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "linkedIn": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "forum": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "hook": "How to Getting Paid in USDT for Digital Work: T...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12"
+  },
+  "crossPostSummary": {
+    "title": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+    "hook": "How to Getting Paid in USDT for Digital Work: T...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "forum": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "x": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "linkedIn": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+    "hook50": "How to Getting Paid in USDT for Digital Work: T..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-06-09T22:33:02.142Z",
+      "dateModified": "2026-06-09T22:33:02.142Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-MHQ7.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12"
+      },
+      "keywords": "how to get paid in usdt for digital work",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this infrastructure if I’ve never coded before?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Complete Builder Kit ($197) includes templates and step-by-step guides. Cloudflare Workers and Google Apps Script use simple logic—no advanced coding required. Focus on deploying, not mastering code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if USDT prices fluctuate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USDT is a stablecoin pegged 1:1 to the USD. Fluctuations are minimal. If you’re concerned, convert USDT to stablecoins or local currency immediately via P2P exchanges like Binance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Refunds are processed manually. Since you control the wallet, you can send USDT back to the buyer’s address. Document refund policies clearly on your product page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can buyers pay with PayPal or Stripe instead?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This infrastructure is designed for USDT payments via NOWPayments. It bypasses platforms like PayPal and Stripe entirely—that’s the point."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if transaction volume exceeds 100 orders daily?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Upgrade to the Edge Commerce Stack ($197) and use Supabase for faster database queries. Cloudflare Workers’ paid tier handles higher traffic. The scaling playbook in the Complete Builder Kit guides optimization."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-MHQ7.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-MHQ7.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "How to Getting Paid in USDT for Digital Work: The Complete Infrastructure Guide — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-getting-paid-usdt-digital-work-complete-infrastructure-12"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I receive crypto payments for my digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "paid usdt",
+    "totalWords": 1353,
+    "count": 0,
+    "densityPercent": 0,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to get paid in usdt for digital work",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1419,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I receive crypto payments for my digital products?",
+      "How long does USDT payment take to arrive compared to PayPal?",
+      "How do creators in Nigeria convert Bitcoin to naira?",
+      "What is NOWPayments and how does it work for digital sellers?"
+    ],
+    "relatedSearches": [
+      "nowpayments digital products webhook setup guide",
+      "receive usdt tron payment for ebook sale",
+      "convert bitcoin naira p2p exchange binance patricia",
+      "crypto payment fastest settlement digital goods 2025"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-09T22:33:02.143Z"
+  }
+}
