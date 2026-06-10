@@ -1,0 +1,409 @@
+{
+  "id": "post-20260609-6HF5",
+  "slug": "how-building-crypto-store-cloudflare-pages-works-how-12",
+  "title": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+  "date": "2026-06-10T00:42:15.562Z",
+  "category": "Store Setup",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260609-6HF5.png",
+  "imageSource": "picsum",
+  "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+  "imageCaption": "Stack 01 or Stack 02 — both deployed under your own accounts, end-to-end tested before handoff.",
+  "canonical": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Most tutorials about [[LINK:https://coremerch.github.io/store/blog/building-crypto-store-cloudflare-pages-[[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/everything-you-need-know-about-usdt-payment-gateways-8|COREMERCH guide to everything]]-you-need-know-about-cloudflare-workers-crypto-15|Everything You]]-you-need-17|building]] a digital store focus on the storefront. The storefront is the last thing you should configure. The backend is what makes the store work — and the backend is what most creators get wrong when they try to build without a clear sequence. In Stack 01, Google Apps Script serves as the backend Web App — it receives the NOWPayments webhook, validates the signature, confirms the transaction on-chain, logs the order to Google Sheets, and sends the delivery email via Gmail. In Stack 02, Cloudflare Workers replaces Apps Script with a faster, more scalable serverless backend that integrates natively with Supabase for order storage and Resend for email delivery. Configure the backend first, set the webhook endpoint URL in NOWPayments second, build the storefront third, and test on mainnet fourth."
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 01 — the Sovereign Starter Stack — uses GitHub Pages for storefront hosting, Google Apps Script as the backend Web App, Google Sheets as the order database, Google Drive for product file storage, and Gmail for delivery email. The entire stack costs nothing per month. Google Apps Script runs in response to webhook events from NOWPayments, validates the payment, logs the order to Google Sheets, generates a receipt, and sends a Gmail delivery email with a Google Drive shared link. The daily limits on the free tier are adequate for most creators at the early and growth stages."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "Stack 02 — the Edge Commerce Stack — uses Cloudflare Pages for storefront hosting, Cloudflare Workers for backend webhook handling, Supabase for order storage, Cloudflare R2 for product file delivery, and Resend for transactional email. The entire stack costs nothing per month up to significant volume thresholds — Cloudflare Workers provides 100,000 requests per day free, Supabase provides 500MB of PostgreSQL storage free, Cloudflare R2 provides 10GB storage and zero egress fees free, and Resend provides 3,000 emails per month free. SPF, DKIM, and DMARC are configured during COREMERCH deployment."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "The NOWPayments configuration sequence is the same regardless of which stack you are deploying. Create a NOWPayments account — no KYC required, no document upload, no bank account needed. Navigate to the wallet settings and add the wallet addresses for each cryptocurrency you want to accept. USDT on Tron and Bitcoin are the practical starting point for most creators in restricted markets. Generate an API key from the NOWPayments dashboard. Set the webhook endpoint URL in the NOWPayments IPN settings pointing to your Cloudflare Worker or Apps Script Web App. Set the webhook secret key — a string you generate that both NOWPayments and your backend know."
+    },
+    {
+      "type": "callout",
+      "text": "Full ownership means you're in control of your store and revenue."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Once your payment and delivery systems are set up, it’s time to go live. Publish your store on Cloudflare Pages and conduct thorough testing on the mainnet to ensure everything functions correctly. Process your first transaction to verify that payments are confirmed on-chain and products are delivered instantly. This step solidifies your store's operational capabilities and builds confidence in your setup."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "The post-deployment ownership transfer is explicit in every COREMERCH deployment. When the build is complete and the end-to-end test passes, COREMERCH provides the credentials and configuration details for every component under the customer's accounts. The GitHub or Cloudflare repository is under the customer's account from the start. The Supabase or Google Sheets database is under the customer's account. The NOWPayments account is under the customer's email. COREMERCH removes collaborator access upon delivery. From that point, the store runs entirely under the customer's own accounts."
+    },
+    {
+      "type": "heading",
+      "text": "How do I build a digital store that accepts crypto payments for free?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The difference between Stack 01 and Stack 02 is not which one works — both work — it is which one fits your situation. Stack 01 is the right choice if you want to deploy yourself, you are comfortable with Google Workspace tools, and your initial volume is under 100 orders per day. The Sovereign Blueprint at $47 documents the complete Stack 01 build with full source code and step-by-step configuration. Stack 02 is the right choice if you want the deployment done for you, you need higher volume capacity, or you want email deliverability infrastructure configured from day one. The Edge Commerce Stack at $197 has COREMERCH deploy Stack 02 under your accounts in 48 hours, end-to-end tested before handoff. Both are available at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy your store quickly and efficiently without conventional barriers."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "The setup decision comes down to time versus depth. The Sovereign Blueprint at $47 gives you everything to build Stack 01 yourself in an afternoon or Stack 02 over a weekend — full source code, step-by-step configuration, and the NOWPayments integration guide. The Edge Commerce Stack at $197 has COREMERCH build Stack 02 for you in 48 hours, end-to-end tested before handoff, with SPF, DKIM, and DMARC configured for email deliverability. Both paths lead to a store you own completely. Both are at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Read the Sovereign Blueprint before you start configuring anything — understanding the complete architecture before touching any settings prevents the most common configuration mistakes. Create all required accounts first: NOWPayments, Cloudflare or GitHub, Supabase or Google account, Resend or Gmail. Then configure the backend with all credentials before deploying it. Then deploy the backend and confirm the endpoint is live. Then configure NOWPayments with the endpoint URL. Then build and deploy the storefront. Then configure your custom domain if using one. Then run the mainnet test. Then check the order database. Then — and only then — share the URL. The sequence is not arbitrary. Each step depends on the previous one."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I build a crypto store on Cloudflare Pages?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Start by creating a GitHub repository and deploying your site on Cloudflare Pages. Integrate NOWPayments for cryptocurrency transactions and configure your backend with Google Apps Script. Ensure everything is tested before launching to ensure a smooth experience."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the difference between Stack 01 and Stack 02 in COREMERCH?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Stack 01 uses GitHub Pages and Apps Script for deployment, taking 4-6 hours. Stack 02, built on Cloudflare Pages, Workers, and Supabase, is deployed in 48 hours with end-to-end testing, providing a more robust solution for creators."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I host a digital product store on GitHub Pages or Cloudflare Pages?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, both GitHub Pages and Cloudflare Pages are excellent for hosting digital product stores. They provide the necessary infrastructure to support your store while ensuring you maintain full data ownership."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies can I accept with NOWPayments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments supports over 300 cryptocurrencies, including popular options like Bitcoin, Ethereum, and stablecoins. This wide acceptance allows you to cater to a diverse customer base and enhance your revenue potential."
+    },
+    {
+      "type": "faq_question",
+      "text": "Is there ongoing support after deployment?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you will receive 30 days of support after deploying your stack. This ensures you have assistance as you navigate the initial stages of your crypto store operation."
+    },
+    {
+      "type": "callout",
+      "text": "Automate payments and deliveries for a seamless customer experience."
+    },
+    {
+      "type": "cta",
+      "text": "Edge Commerce Stack — $197. Stack 02 deployed in 48 hours. Cloudflare Pages + Workers + Supabase + NOWPayments. 5 products loaded. SPF/DKIM/DMARC configured. End-to-end tested before handoff. 30-day support.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Edge Commerce Stack",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260609-T8EM",
+      "slug": "building-crypto-store-cloudflare-pages-everything-you-need-17"
+    },
+    {
+      "id": "post-20260609-ZLJC",
+      "slug": "building-crypto-store-cloudflare-pages-everything-you-need-16"
+    },
+    {
+      "id": "post-20260609-89M8",
+      "slug": "building-crypto-store-cloudflare-pages-everything-you-need-15"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I build a crypto store on Cloudflare Pages?",
+      "answer": "Start by creating a GitHub repository and deploying your site on Cloudflare Pages. Integrate NOWPayments for cryptocurrency transactions and configure your backend with Google Apps Script. Ensure everything is tested before launching to ensure a smooth experience."
+    },
+    {
+      "question": "What is the difference between Stack 01 and Stack 02 in COREMERCH?",
+      "answer": "Stack 01 uses GitHub Pages and Apps Script for deployment, taking 4-6 hours. Stack 02, built on Cloudflare Pages, Workers, and Supabase, is deployed in 48 hours with end-to-end testing, providing a more robust solution for creators."
+    },
+    {
+      "question": "Can I host a digital product store on GitHub Pages or Cloudflare Pages?",
+      "answer": "Yes, both GitHub Pages and Cloudflare Pages are excellent for hosting digital product stores. They provide the necessary infrastructure to support your store while ensuring you maintain full data ownership."
+    },
+    {
+      "question": "What cryptocurrencies can I accept with NOWPayments?",
+      "answer": "NOWPayments supports over 300 cryptocurrencies, including popular options like Bitcoin, Ethereum, and stablecoins. This wide acceptance allows you to cater to a diverse customer base and enhance your revenue potential."
+    },
+    {
+      "question": "Is there ongoing support after deployment?",
+      "answer": "Yes, you will receive 30 days of support after deploying your stack. This ensures you have assistance as you navigate the initial stages of your crypto store operation."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-10",
+    "lastReviewed": "2026-06-10",
+    "nextReviewDue": "2026-08-09"
+  },
+  "social": {
+    "x": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Require https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "linkedIn": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\nEdge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "forum": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "hook": "How Building a Crypto Store on Cloudflare Pages...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12"
+  },
+  "crossPostSummary": {
+    "title": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+    "hook": "How Building a Crypto Store on Cloudflare Pages...",
+    "bullets": [
+      "→ Stack 01 or Stack 02.",
+      "→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.",
+      "→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours."
+    ],
+    "cta": "→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "forum": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "x": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Require https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "linkedIn": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required\n\n→ Stack 01 or Stack 02.\n→ Stack 01 deploys in an afternoon following the Blueprint — Stack 02 deploys in 48 hours with COREMERCH, end-to-end tested before handoff.\n→ Edge Commerce Stack — $197. Stack 02 deployed in 48 hours.\n\n→ Edge Commerce Stack — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+    "hook50": "How Building a Crypto Store on Cloudflare Pages..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "datePublished": "2026-06-10T00:42:15.563Z",
+      "dateModified": "2026-06-10T00:42:15.563Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-6HF5.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12"
+      },
+      "keywords": "how to build a crypto store on cloudflare pages",
+      "articleSection": "Store Setup"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I build a crypto store on Cloudflare Pages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start by creating a GitHub repository and deploying your site on Cloudflare Pages. Integrate NOWPayments for cryptocurrency transactions and configure your backend with Google Apps Script. Ensure everything is tested before launching to ensure a smooth experience."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Stack 01 and Stack 02 in COREMERCH?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stack 01 uses GitHub Pages and Apps Script for deployment, taking 4-6 hours. Stack 02, built on Cloudflare Pages, Workers, and Supabase, is deployed in 48 hours with end-to-end testing, providing a more robust solution for creators."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I host a digital product store on GitHub Pages or Cloudflare Pages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, both GitHub Pages and Cloudflare Pages are excellent for hosting digital product stores. They provide the necessary infrastructure to support your store while ensuring you maintain full data ownership."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies can I accept with NOWPayments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments supports over 300 cryptocurrencies, including popular options like Bitcoin, Ethereum, and stablecoins. This wide acceptance allows you to cater to a diverse customer base and enhance your revenue potential."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there ongoing support after deployment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you will receive 30 days of support after deploying your stack. This ensures you have assistance as you navigate the initial stages of your crypto store operation."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "url": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-6HF5.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+      "description": "Stack 01 or Stack 02. GitHub Pages or Cloudflare Pages. Google Apps Script or Cloudflare Workers. NOWPayments throughout. Deployed in 48 hours. Owned by you.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260609-6HF5.png",
+      "imageAlt": "COREMERCH sovereign digital store deployed on Cloudflare Pages with NOWPayments integration for creators in Zimbabwe"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Store Setup",
+        "url": "https://coremerch.github.io/store/blog/category/store-setup"
+      },
+      {
+        "name": "How Building a Crypto Store on Cloudflare Pages Works and How to Deploy It Today — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/how-building-crypto-store-cloudflare-pages-works-how-12"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I build a digital store that accepts crypto payments for free?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "crypto store",
+    "totalWords": 1153,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "how to build a crypto store on cloudflare pages",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1231,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I build a digital store that accepts crypto payments for free?",
+      "What is the difference between Stack 01 and Stack 02 in COREMERCH?",
+      "Can I host a digital product store on GitHub Pages or Cloudflare Pages?",
+      "How do I connect NOWPayments to my static site?"
+    ],
+    "relatedSearches": [
+      "github pages digital store crypto payments free hosting",
+      "cloudflare pages workers supabase nowpayments stack",
+      "coremerch edge stack deployment 48 hours",
+      "sovereign starter stack google apps script nowpayments"
+    ],
+    "product": "Edge Commerce Stack",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-10T00:42:15.566Z"
+  }
+}
