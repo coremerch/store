@@ -1,0 +1,415 @@
+{
+  "id": "post-20260613-KU28",
+  "slug": "selling-digital-products-africa-every-detail-you-need-2",
+  "title": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+  "date": "2026-06-13T21:53:24.046Z",
+  "category": "Global Access",
+  "contentType": "deep-dive",
+  "author": "COREMERCH",
+  "excerpt": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260613-KU28.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments",
+  "imageCaption": "The blockchain has no geographic restrictions — a wallet in Lagos processes identically to one in London.",
+  "canonical": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Ghana, [[LINK:https://coremerch.github.io/store/blog/digital-product-[[LINK:https://coremerch.github.io/store/blog/payment-gateways-cameroon-digital-products-broken-here-infrastructure-3|Payment Gateways]]-solutions-west-africa-every-detail-2|digital]] creators face a stark reality: global payment gateways like Stripe and PayPal are inaccessible. This isn't a minor inconvenience—it's a barrier to commerce. Conventional workarounds, like relying on third-party platforms, expose you to data extraction, sudden account freezes, and currency conversion losses. [[LINK:https://coremerch.github.io/store/blog/sovereign-commerce-infrastructure-digital-creators-honest-side-side-17|COREMERCH guide to sovereign]] commerce infrastructure is the solution. It's not about bypassing restrictions; it's about owning your stack. COREMERCH provides the blueprints and tools to deploy a digital commerce system where you control hosting, payment processing, and product delivery. No subscriptions. No middlemen. Just infrastructure you own. This guide walks you through every component, failure mode, and deployment step required to sell digital products globally from Ghana—using only tools you control."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Selling Digital Products from Africa: The Complete Infrastructure Guide at https://coremerch.github.io/store/blog/selling-digital-products-africa-step-step-deployment-guide. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-step-step-deployment-guide",
+      "title": "Selling Digital Products from Africa: The Complete Infrastructure Guide"
+    },
+    {
+      "type": "heading",
+      "text": "The Full Picture Most Guides Leave Out"
+    },
+    {
+      "type": "paragraph",
+      "text": "Most guides focus on payment processing alone, ignoring the infrastructure that sustains it. A sovereign commerce stack requires four critical layers: hosting, backend logic, order storage, and file delivery. Hosting must be globally accessible and free from geographic restrictions—GitHub Pages or Cloudflare Pages fit this need. Backend logic processes orders and verifies payments; Cloudflare Workers or Google Apps Script handle this without servers. Order storage needs to be secure and scalable; Supabase or Google Sheets provide this. File delivery must be instant and reliable; Google Drive or Cloudflare R2 ensures this. Payment processing is the final piece—NOWPayments integrates seamlessly, accepting 300+ cryptocurrencies with a 0.5% fee and no KYC. Each layer must function independently of geographic or financial barriers. This architecture isn’t a workaround—it’s a system designed to operate in environments where traditional platforms fail. By owning these components, you eliminate dependency on any single provider. The stack is yours. The data is yours. The revenue is yours."
+    },
+    {
+      "type": "heading",
+      "text": "Every Component and What It Does"
+    },
+    {
+      "type": "paragraph",
+      "text": "GitHub Pages or Cloudflare Pages hosts your storefront. Both are free, globally distributed, and immune to regional restrictions. Cloudflare Workers or Google Apps Script processes orders, verifies payments via NOWPayments webhooks, and triggers product delivery. Supabase or Google Sheets stores order data securely, with Supabase offering advanced querying for scaling. Google Drive or Cloudflare R2 stores and delivers digital products instantly upon payment confirmation. NOWPayments handles crypto payments, firing a webhook the moment a transaction confirms on-chain. Recommended networks like BSC, Solana, and TRON keep transaction fees under $0.10. Each component is selected for its ability to operate independently of geographic or financial barriers. For example, Cloudflare Workers run on Cloudflare’s global edge network, ensuring low-latency order processing regardless of your customer’s location. Google Sheets, while simpler, provides a no-cost, no-setup solution for order storage. The Complete Builder Kit includes blueprints for all configurations, ensuring you can choose the tools that best fit your needs without reinventing the wheel."
+    },
+    {
+      "type": "heading",
+      "text": "The Technical Layer Explained Without Abstraction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The frontend is static HTML/CSS/JS hosted on GitHub Pages or Cloudflare Pages. The backend uses Cloudflare Workers (JavaScript) or Google Apps Script (JavaScript/Apps Script) to handle form submissions, verify payments via NOWPayments API, and write order data to Supabase or Google Sheets. Payment verification is triggered by a webhook from NOWPayments, which sends a POST request to your backend the moment a transaction confirms on-chain. File delivery is handled by generating a temporary, signed URL to the product file stored in Google Drive or Cloudflare R2. DNS configuration is critical for email deliverability—SPF, DKIM, and DMARC records must be set correctly to ensure order confirmations reach customers. The Complete Builder Kit includes templates for all scripts, webhook configurations, and DNS setups. No server management is required. No databases to provision. The technical complexity is abstracted into reusable templates, but the control remains entirely with you."
+    },
+    {
+      "type": "callout",
+      "text": "Sovereign commerce infrastructure eliminates geographic and financial barriers entirely."
+    },
+    {
+      "type": "heading",
+      "text": "Edge Cases, Failures, and How to Handle Them"
+    },
+    {
+      "type": "paragraph",
+      "text": "Payment failures occur when transactions time out or are underpaid. NOWPayments’ webhook includes a status field—check for \"confirmed\" before delivering the product. File delivery failures can happen if signed URLs expire or are tampered with. Set URL expiration to 15 minutes and log all access attempts. Order data corruption is rare but possible if multiple writes occur simultaneously. Use Supabase’s row-level security or Google Sheets’ locking mechanisms to prevent this. Hosting takedowns are unlikely with GitHub Pages or Cloudflare Pages, but always keep a backup of your static files. Email delivery failures occur if DNS records are misconfigured. Test SPF, DKIM, and DMARC using tools like Mail-Tester before going live. The Complete Builder Kit includes a troubleshooting guide for each failure mode, ensuring you can diagnose and resolve issues without downtime. Every edge case is an opportunity to strengthen your stack—not a reason to abandon it."
+    },
+    {
+      "type": "heading",
+      "text": "The Complete Deployment Roadmap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by selecting your stack components based on your technical comfort and scaling needs. For most creators, Cloudflare Pages + Workers + Supabase + NOWPayments is the optimal choice. Purchase the Complete Builder Kit ($197) to access all blueprints and templates. Deploy your frontend to GitHub Pages or Cloudflare Pages using the provided HTML/CSS/JS templates. Configure your backend using the Cloudflare Workers or Google Apps Script templates, integrating NOWPayments API keys and webhook URLs. Set up order storage in Supabase or Google Sheets, following the schema provided. Upload your digital products to Google Drive or Cloudflare R2 and configure signed URL generation. Test end-to-end by placing a test order, verifying payment, and confirming product delivery. Configure DNS records for email deliverability if using Cloudflare. Launch your store and monitor performance using the included scaling playbook. The roadmap is linear but flexible—each step builds on the last, ensuring you deploy a fully functional stack in 48 hours or less. Ownership begins the moment you deploy."
+    },
+    {
+      "type": "heading",
+      "text": "How can creators in Africa sell digital products to international buyers?"
+    },
+    {
+      "type": "paragraph",
+      "text": "To sell digital products from Ghana without Stripe or PayPal, deploy a sovereign commerce stack using GitHub Pages or Cloudflare Pages for hosting, Cloudflare Workers or Google Apps Script for backend logic, Supabase or Google Sheets for order storage, and Google Drive or Cloudflare R2 for file delivery. Integrate NOWPayments for crypto payment processing, accepting 300+ cryptocurrencies with a 0.5% fee and no KYC. Recommended networks like BSC, Solana, and TRON keep transaction fees under $0.10. The Complete Builder Kit provides all blueprints and templates for a 48-hour deployment. This architecture eliminates geographic and financial barriers, giving you full control over your commerce infrastructure."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments processes 300+ cryptocurrencies with a 0.5% fee and no KYC requirements."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Complete Builder Kit ($197) includes all 6 blueprints, 7 templates, and a scaling playbook, providing everything you need to deploy and operate a sovereign commerce stack. From GitHub Pages hosting to NOWPayments integration, every component is documented and templated for immediate use. Purchase at https://coremerch.github.io/products.html and own your infrastructure in 48 hours."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Select stack components: GitHub Pages/Cloudflare Pages for hosting, Cloudflare Workers/Google Apps Script for backend, Supabase/Google Sheets for storage, Google Drive/Cloudflare R2 for delivery, NOWPayments for crypto processing.\n2. Purchase the Complete Builder Kit ($197) for blueprints and templates.\n3. Deploy frontend to GitHub Pages or Cloudflare Pages using provided templates.\n4. Configure backend with Cloudflare Workers or Google Apps Script, integrating NOWPayments API and webhooks.\n5. Set up order storage in Supabase or Google Sheets following provided schema.\n6. Upload digital products to Google Drive or Cloudflare R2 and configure signed URL generation.\n7. Test end-to-end: Place a test order, verify payment, confirm product delivery.\n8. Configure DNS records for email deliverability if using Cloudflare.\n9. Launch your store and monitor performance using the scaling playbook.\n10. Keep backups of all static files and templates for future updates."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this stack if I have no coding experience?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Complete Builder Kit includes templates for all components, requiring only basic configuration. Cloudflare Workers and Google Apps Script use JavaScript, with pre-written scripts provided. Follow the step-by-step guides to deploy without coding from scratch."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if a customer’s payment fails?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments sends a webhook with payment status. If the status is not \"confirmed,\" the product is not delivered. The customer can retry payment, and the system will verify the new transaction automatically."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle high traffic or scaling?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Cloudflare Pages and Workers are designed for global scale, handling millions of requests without additional configuration. Supabase provides advanced querying and scaling options. Follow the scaling playbook included in the Complete Builder Kit for detailed guidance."
+    },
+    {
+      "type": "faq_question",
+      "text": "What cryptocurrencies should I accept for low fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Accept payments on BSC, Solana, or TRON networks for fees under $0.10 per transaction. NOWPayments supports 300+ cryptocurrencies, but these networks ensure low costs for both you and your customers."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I migrate from an existing platform to this stack?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. Export your product data and customer emails, then load them into Supabase or Google Sheets. Redirect your domain to the new storefront hosted on GitHub Pages or Cloudflare Pages. The Complete Builder Kit includes migration templates."
+    },
+    {
+      "type": "callout",
+      "text": "The Complete Builder Kit includes all blueprints, templates, and a scaling playbook for $197."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260613-MRQL",
+      "slug": "stop-losing-selling-digital-products-africa-here-real-3"
+    },
+    {
+      "id": "post-20260613-XY59",
+      "slug": "blocked-earning-real-selling-digital-products-africa-story"
+    },
+    {
+      "id": "post-20260612-9EAL",
+      "slug": "selling-digital-products-africa-how-one-creator-went-2"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Can I use this stack if I have no coding experience?",
+      "answer": "Yes. The Complete Builder Kit includes templates for all components, requiring only basic configuration. Cloudflare Workers and Google Apps Script use JavaScript, with pre-written scripts provided. Follow the step-by-step guides to deploy without coding from scratch."
+    },
+    {
+      "question": "What happens if a customer’s payment fails?",
+      "answer": "NOWPayments sends a webhook with payment status. If the status is not \"confirmed,\" the product is not delivered. The customer can retry payment, and the system will verify the new transaction automatically."
+    },
+    {
+      "question": "How do I handle high traffic or scaling?",
+      "answer": "Cloudflare Pages and Workers are designed for global scale, handling millions of requests without additional configuration. Supabase provides advanced querying and scaling options. Follow the scaling playbook included in the Complete Builder Kit for detailed guidance."
+    },
+    {
+      "question": "What cryptocurrencies should I accept for low fees?",
+      "answer": "Accept payments on BSC, Solana, or TRON networks for fees under $0.10 per transaction. NOWPayments supports 300+ cryptocurrencies, but these networks ensure low costs for both you and your customers."
+    },
+    {
+      "question": "Can I migrate from an existing platform to this stack?",
+      "answer": "Yes. Export your product data and customer emails, then load them into Supabase or Google Sheets. Redirect your domain to the new storefront hosted on GitHub Pages or Cloudflare Pages. The Complete Builder Kit includes migration templates."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-13",
+    "lastReviewed": "2026-06-13",
+    "nextReviewDue": "2026-08-12"
+  },
+  "social": {
+    "x": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Requ https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "linkedIn": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "forum": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "hook": "Selling Digital Products from Africa: Every Det...",
+    "bullets": [
+      "→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2"
+  },
+  "crossPostSummary": {
+    "title": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+    "hook": "Selling Digital Products from Africa: Every Det...",
+    "bullets": [
+      "→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "forum": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "x": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Requ https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "linkedIn": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required\n\n→ Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.\n→ The blockchain has no map of restricted countries — creators in Lagos, Karachi, and Accra receive payments identically to those in London.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+    "hook50": "Selling Digital Products from Africa: Every Det..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "datePublished": "2026-06-13T21:53:24.047Z",
+      "dateModified": "2026-06-13T21:53:24.047Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260613-KU28.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2"
+      },
+      "keywords": "sell digital products from africa",
+      "articleSection": "Global Access"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I use this stack if I have no coding experience?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Complete Builder Kit includes templates for all components, requiring only basic configuration. Cloudflare Workers and Google Apps Script use JavaScript, with pre-written scripts provided. Follow the step-by-step guides to deploy without coding from scratch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a customer’s payment fails?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments sends a webhook with payment status. If the status is not \"confirmed,\" the product is not delivered. The customer can retry payment, and the system will verify the new transaction automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle high traffic or scaling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cloudflare Pages and Workers are designed for global scale, handling millions of requests without additional configuration. Supabase provides advanced querying and scaling options. Follow the scaling playbook included in the Complete Builder Kit for detailed guidance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What cryptocurrencies should I accept for low fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Accept payments on BSC, Solana, or TRON networks for fees under $0.10 per transaction. NOWPayments supports 300+ cryptocurrencies, but these networks ensure low costs for both you and your customers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I migrate from an existing platform to this stack?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Export your product data and customer emails, then load them into Supabase or Google Sheets. Redirect your domain to the new storefront hosted on GitHub Pages or Cloudflare Pages. The Complete Builder Kit includes migration templates."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260613-KU28.png",
+      "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+      "description": "Selling digital products from Nigeria, Ghana, Kenya, Pakistan, Bangladesh, or Zimbabwe is fully operational with sovereign commerce infrastructure that has no geographic restrictions.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260613-KU28.png",
+      "imageAlt": "Digital creator in Ghana building a sovereign store with crypto payments and NOWPayments"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Global Access",
+        "url": "https://coremerch.github.io/store/blog/category/global-access"
+      },
+      {
+        "name": "Selling Digital Products from Africa: Every Detail You Need for a Bulletproof Stack — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/selling-digital-products-africa-every-detail-you-need-2"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Full Picture Most Guides Leave Out",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Every Component and What It Does",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Technical Layer Explained Without Abstraction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Edge Cases, Failures, and How to Handle Them",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Complete Deployment Roadmap",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How can creators in Africa sell digital products to international buyers?",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "digital products",
+    "totalWords": 1500,
+    "count": 7,
+    "densityPercent": 0.5,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "sell digital products from africa",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1574,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How can creators in Africa sell digital products to international buyers?",
+      "What payment methods work in Nigeria for online digital product sales?",
+      "Is there a way to sell ebooks from Pakistan without a Stripe account?",
+      "How do creators in Zimbabwe and Ethiopia accept international payments?"
+    ],
+    "relatedSearches": [
+      "how to sell ebooks in nigeria without paypal 2025",
+      "digital product store ghana cloudflare crypto payments",
+      "pakistan creator accept international crypto payment nowpayments",
+      "sell online kenya ethiopia without bank account crypto"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-13T21:53:24.047Z"
+  }
+}
