@@ -1,0 +1,415 @@
+{
+  "id": "post-20260614-3DXJ",
+  "slug": "setting-up-nowpayments-digital-store-everything-you-need-13",
+  "title": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+  "date": "2026-06-14T20:42:31.378Z",
+  "category": "Getting Paid",
+  "contentType": "guide",
+  "author": "COREMERCH",
+  "excerpt": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260614-3DXJ.png",
+  "imageSource": "picsum",
+  "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+  "imageCaption": "USDT on Tron settles in under 60 seconds for less than $0.10 — direct to your self-custody wallet.",
+  "canonical": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You’re a creator in Nigeria. Gumroad holds your payouts for 30 days. Stripe isn’t available. PayPal freezes accounts without warning. Your audience wants your ebook, course, or template now—but you can’t collect payment reliably. This guide deploys a sovereign [[LINK:https://coremerch.[[LINK:https://coremerch.github.io/store/blog/github-pages-free-digital-product-store-hosting-first|COREMERCH guide to github]].io/store/blog/digital-product-stores-kyc-payments-every-detail-you-5|Digital Product]] store using NOWPayments, GitHub Pages, and Cloudflare Workers. No platforms. No subscriptions. No payout delays. Own the [[LINK:https://coremerch.github.io/store/blog/full-infrastructure-guide-github-pages-free-digital-product-3|infrastructure]]. Accept 300+ cryptocurrencies. Deliver products instantly. Your stack. Your rules."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: Setting Up a NOWPayments Digital Store: The Full Guide at https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/how-setting-up-nowpayments-digital-store-works-how-2",
+      "title": "Setting Up a NOWPayments Digital Store: The Full Guide"
+    },
+    {
+      "type": "heading",
+      "text": "Why This Infrastructure Works When Platforms Fail"
+    },
+    {
+      "type": "paragraph",
+      "text": "This stack is built on open, permissionless infrastructure. GitHub Pages hosts your storefront for free. Cloudflare Workers handles backend logic without servers. NOWPayments processes crypto payments with a flat 0.5% fee—no KYC, no buyer accounts. Google Drive or Cloudflare R2 delivers files instantly after payment confirms. No platform can shut you down. No payout delays. No currency collapse exposure. This architecture is pressure-tested in Zimbabwe, Nigeria, and Venezuela. It works where Stripe and PayPal fail."
+    },
+    {
+      "type": "heading",
+      "text": "What You Need Before You Deploy"
+    },
+    {
+      "type": "paragraph",
+      "text": "You need a digital product to sell, a GitHub account, and a NOWPayments API key. Sign up for NOWPayments—it takes 2 minutes. Choose USDT on Tron or Solana for transaction fees under $0.10. Set up a Google Drive folder for product files. If you want email receipts, create a free SendGrid account. No coding required, but you’ll copy-paste code into GitHub. The Complete Builder Kit ($197) includes all templates if you want to skip setup entirely."
+    },
+    {
+      "type": "heading",
+      "text": "Setting Up Your Payment and Delivery Pipeline"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploy your storefront to GitHub Pages. Connect NOWPayments using your API key. Configure the webhook to trigger file delivery when payment confirms on-chain. Use Google Apps Script or Cloudflare Workers to automate delivery. Test with a $0.01 USDT transaction on Tron. Verify the file delivers instantly. Your customer pays, the blockchain confirms, the product downloads—no manual intervention. The infrastructure runs itself."
+    },
+    {
+      "type": "callout",
+      "text": "USDT on Tron costs under $0.10 per transaction—cheaper than PayPal or Stripe."
+    },
+    {
+      "type": "heading",
+      "text": "Going Live and Processing Your First Transaction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fee structure of NOWPayments is fundamentally different from conventional platform fees. NOWPayments charges 0.5% per transaction. There is no monthly fee, no setup fee, no payout fee, and no minimum transaction volume requirement. Network fees for the underlying blockchain transaction are paid by the buyer and vary by network — Tron fees are under $0.10, Solana fees are fractions of a cent, Bitcoin fees average $1 to $5 for most transactions. For a $97 product sold through the Sovereign Starter Stack, the total transaction cost is approximately $0.49 to NOWPayments plus network fees typically under $0.10 on Tron. Compare this to Gumroad's 10% fee on the same transaction — $9.70."
+    },
+    {
+      "type": "heading",
+      "text": "Scaling Once the Infrastructure Is Running"
+    },
+    {
+      "type": "paragraph",
+      "text": "The transaction log in a COREMERCH deployment provides a complete, independently verifiable audit trail of every payment. Each entry includes the transaction hash, which links directly to the public blockchain record. You can verify any transaction independently on Tronscan, Etherscan, Solscan, or the relevant blockchain explorer — no platform intermediary required. If a buyer claims they paid but the transaction does not appear in your order log, you check the blockchain directly. This level of cryptographic verifiability is structurally impossible with conventional payment processors."
+    },
+    {
+      "type": "heading",
+      "text": "How do I receive crypto payments for my digital products?"
+    },
+    {
+      "type": "paragraph",
+      "text": "USDT payments on Tron or Solana arrive in your wallet within minutes—compared to PayPal’s 2-5 business days or Gumroad’s 30-day hold. Transaction fees are under $0.10 on Tron and fractions of a cent on Solana. NOWPayments verifies payments on-chain automatically. The moment the blockchain confirms, your product delivers. No waiting. No chargebacks. Full sovereignty."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments’ 0.5% fee is the only platform cost. You own everything else."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy this stack faster, get the Complete Builder Kit ($197) from https://coremerch.github.io/products.html. It includes all 6 blueprints, 7 templates, and the NOWPayments integration guide. Skip weeks of setup. Instant download. Worth $348 separately. Or build it yourself using the steps in this guide. Either way, you own the infrastructure. No platforms. No payout delays. Your store. Your rules."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Sign up for NOWPayments. Choose USDT on Tron or Solana. Create a GitHub account. Deploy your storefront to GitHub Pages. Connect NOWPayments using your API key. Set up the webhook for payment verification. Configure file delivery via Google Drive or Cloudflare R2. Test with a $0.01 transaction. Verify instant delivery. Share your live store URL. Process your first sale. Scale by adding products and webhooks."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I convert USDT to local currency in Nigeria?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Use P2P exchanges like Binance or Patricia. Sell USDT for naira directly to buyers. Rates are market-driven. Transactions settle within minutes. No bank involvement. No currency collapse exposure."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I accept Bitcoin payments with NOWPayments?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. NOWPayments supports 300+ cryptocurrencies, including Bitcoin. However, USDT on Tron or Solana is recommended for low transaction fees under $0.10."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if a customer’s payment doesn’t confirm?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "NOWPayments handles payment verification. If the blockchain doesn’t confirm, the product doesn’t deliver. No manual intervention required. No chargeback risk."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do I need to host my own files?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "No. Use Google Drive or Cloudflare R2 for file storage. Both are free and integrate directly with your delivery pipeline. No server management required."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I track sales without a platform dashboard?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Use Google Sheets or Supabase for order tracking. Log each transaction automatically via the webhook. Full data ownership. No platform restrictions."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy once. Sell forever. No subscriptions. No payout delays. Full sovereignty."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260614-1PVR",
+      "slug": "how-setting-up-nowpayments-digital-store-complete-infrastructure-13"
+    },
+    {
+      "id": "post-20260612-Y12G",
+      "slug": "how-setting-up-nowpayments-digital-store-complete-infrastructure-12"
+    },
+    {
+      "id": "post-20260612-ICHW",
+      "slug": "setting-up-nowpayments-digital-store-everything-you-need-12"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I convert USDT to local currency in Nigeria?",
+      "answer": "Use P2P exchanges like Binance or Patricia. Sell USDT for naira directly to buyers. Rates are market-driven. Transactions settle within minutes. No bank involvement. No currency collapse exposure."
+    },
+    {
+      "question": "Can I accept Bitcoin payments with NOWPayments?",
+      "answer": "Yes. NOWPayments supports 300+ cryptocurrencies, including Bitcoin. However, USDT on Tron or Solana is recommended for low transaction fees under $0.10."
+    },
+    {
+      "question": "What if a customer’s payment doesn’t confirm?",
+      "answer": "NOWPayments handles payment verification. If the blockchain doesn’t confirm, the product doesn’t deliver. No manual intervention required. No chargeback risk."
+    },
+    {
+      "question": "Do I need to host my own files?",
+      "answer": "No. Use Google Drive or Cloudflare R2 for file storage. Both are free and integrate directly with your delivery pipeline. No server management required."
+    },
+    {
+      "question": "How do I track sales without a platform dashboard?",
+      "answer": "Use Google Sheets or Supabase for order tracking. Log each transaction automatically via the webhook. Full data ownership. No platform restrictions."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-14",
+    "lastReviewed": "2026-06-14",
+    "nextReviewDue": "2026-08-13"
+  },
+  "social": {
+    "x": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Requi https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "linkedIn": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "forum": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "hook": "Setting Up a NOWPayments Digital Store: Everyth...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13"
+  },
+  "crossPostSummary": {
+    "title": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+    "hook": "Setting Up a NOWPayments Digital Store: Everyth...",
+    "bullets": [
+      "→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.",
+      "→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "forum": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "x": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Requi https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "linkedIn": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required\n\n→ USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments.\n→ USDT on Tron settles in under 60 seconds for less than $0.10 in fees — no payout schedule, no platform holding period.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+    "hook50": "Setting Up a NOWPayments Digital Store: Everyth..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "datePublished": "2026-06-14T20:42:31.380Z",
+      "dateModified": "2026-06-14T20:42:31.380Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260614-3DXJ.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13"
+      },
+      "keywords": "nowpayments digital store setup",
+      "articleSection": "Getting Paid"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert USDT to local currency in Nigeria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use P2P exchanges like Binance or Patricia. Sell USDT for naira directly to buyers. Rates are market-driven. Transactions settle within minutes. No bank involvement. No currency collapse exposure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I accept Bitcoin payments with NOWPayments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. NOWPayments supports 300+ cryptocurrencies, including Bitcoin. However, USDT on Tron or Solana is recommended for low transaction fees under $0.10."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a customer’s payment doesn’t confirm?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NOWPayments handles payment verification. If the blockchain doesn’t confirm, the product doesn’t deliver. No manual intervention required. No chargeback risk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to host my own files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Use Google Drive or Cloudflare R2 for file storage. Both are free and integrate directly with your delivery pipeline. No server management required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I track sales without a platform dashboard?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use Google Sheets or Supabase for order tracking. Log each transaction automatically via the webhook. Full data ownership. No platform restrictions."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "url": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260614-3DXJ.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+      "description": "USDT, BTC, ETH, SOL, and 300+ coins via NOWPayments. 0.5% fee. Funds go directly to your wallet. Convert locally through P2P. Keep what you earn.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260614-3DXJ.png",
+      "imageAlt": "Crypto payment flow from buyer to seller wallet using USDT on Tron for digital creators in Pakistan"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Getting Paid",
+        "url": "https://coremerch.github.io/store/blog/category/getting-paid"
+      },
+      {
+        "name": "Setting Up a NOWPayments Digital Store: Everything You Need to Get Your Store Live — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/setting-up-nowpayments-digital-store-everything-you-need-13"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "Why This Infrastructure Works When Platforms Fail",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "What You Need Before You Deploy",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Setting Up Your Payment and Delivery Pipeline",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Going Live and Processing Your First Transaction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Scaling Once the Infrastructure Is Running",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I receive crypto payments for my digital products?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "nowpayments digital",
+    "totalWords": 915,
+    "count": 1,
+    "densityPercent": 0.1,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "nowpayments digital store setup",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 986,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 1,
+    "peopleAlsoAsk": [
+      "How do I receive crypto payments for my digital products?",
+      "How long does USDT payment take to arrive compared to PayPal?",
+      "How do creators in Nigeria convert Bitcoin to naira?",
+      "What is NOWPayments and how does it work for digital sellers?"
+    ],
+    "relatedSearches": [
+      "nowpayments digital products webhook setup guide",
+      "receive usdt tron payment for ebook sale",
+      "convert bitcoin naira p2p exchange binance patricia",
+      "crypto payment fastest settlement digital goods 2025"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-14T20:42:31.414Z"
+  }
+}
