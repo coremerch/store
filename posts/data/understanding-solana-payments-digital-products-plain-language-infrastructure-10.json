@@ -1,0 +1,415 @@
+{
+  "id": "post-20260615-9GGG",
+  "slug": "understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+  "title": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+  "date": "2026-06-15T23:32:21.586Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260615-9GGG.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Kenya, [[LINK:https://coremerch.github.io/store/blog/digital-product-payment-solutions-west-africa-one-afternoon-3|COREMERCH guide to digital]] creators face a critical barrier: [[LINK:https://coremerch.github.io/store/blog/usdt-payment-gateways-digital-products-every-detail-you-5|USDT Payment]] processors like Stripe and PayPal are either unavailable or unreliable. This isn’t just an inconvenience—it’s a blockade. If you sell ebooks, courses, or templates, your ability to collect payment is non-negotiable. Sovereign commerce [[LINK:https://coremerch.github.io/store/blog/full-infrastructure-guide-usdt-payment-gateways-digital-products-5|infrastructure]] solves this by giving you ownership of your payment stack. Solana, with its sub-$0.10 transaction fees and near-instant confirmation, is the backbone of this system. It’s not a workaround; it’s base-layer architecture. This post breaks down how Solana payments integrate into a self-owned digital commerce stack—no platforms, no subscriptions, no dependence on third parties. By the end, you’ll understand the components, the logic, and the deployment steps required to sell digital products globally, starting today."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/real-architecture-behind-automated-digital-product-delivery-crypto-9. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/real-architecture-behind-automated-digital-product-delivery-crypto-9",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Solana payment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Solana payments are a decentralized alternative to traditional payment processors. Unlike Stripe or PayPal, which act as intermediaries, Solana transactions occur directly between buyer and seller. This eliminates rejection risk and reduces fees to under $0.10 per transaction. For digital creators in Kenya, this means you can price products in USD, accept payment in cryptocurrency, and deliver files automatically—all without relying on a third party. The system is built on open infrastructure: GitHub Pages for hosting, Cloudflare Workers for backend logic, and NOWPayments for on-chain verification. You own the stack after deployment. No platform fees. No account freezes. No geographic restrictions. This isn’t a patch for a broken system—it’s a replacement. It’s commerce infrastructure you control, designed to operate in environments where conventional tools fail."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack begins with a static site hosted on GitHub Pages or Cloudflare Pages—free and globally distributed. Backend logic is handled by Cloudflare Workers or Google Apps Script, which listen for payment webhooks from NOWPayments. When a buyer sends cryptocurrency (e.g., USDT on Solana), NOWPayments verifies the transaction on-chain and fires a webhook. The backend script confirms payment, retrieves the product file from Google Drive or Cloudflare R2, and generates a secure, time-limited download link. Order data is logged in Supabase or Google Sheets for your records. The entire process is automatic, instantaneous, and requires no manual intervention. Solana’s role is critical: its low fees and fast confirmation times make it ideal for microtransactions, ensuring buyers aren’t deterred by high costs. The architecture is modular—each component is replaceable, but the core logic remains consistent. You deploy once, own forever."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This system is built for digital creators who cannot rely on Stripe, PayPal, or local payment gateways. If you sell ebooks, courses, templates, or software and your customers are global, this stack gives you the tools to operate without geographic or financial restrictions. It’s not just for Kenya—it’s for anyone in regions where payment infrastructure is unreliable or inaccessible. The design prioritizes sovereignty: you own the code, the data, and the deployment. There are no recurring fees, no platform dependencies, and no risk of being shut down. It’s pressure-tested in environments like Zimbabwe, where currency collapse and payment rejection are realities. If you’ve been locked out of conventional systems, this isn’t a compromise—it’s an upgrade. It’s commerce infrastructure built for the people Stripe left behind."
+    },
+    {
+      "type": "callout",
+      "text": "Solana’s sub-$0.10 fees make microtransactions viable for digital products."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The stack consists of six core components: (1) **Hosting**: GitHub Pages or Cloudflare Pages for the storefront. (2) **Backend Logic**: Cloudflare Workers or Google Apps Script to handle payment verification and file delivery. (3) **Payment Verification**: NOWPayments for on-chain crypto transaction confirmation. (4) **File Storage**: Google Drive or Cloudflare R2 to store digital products. (5) **Order Database**: Supabase or Google Sheets to log transactions. (6) **Delivery Mechanism**: Automated scripts that generate secure download links. Solana is the preferred network for payments due to its low fees and speed. Each component is free or low-cost, and the entire stack can be deployed in 48 hours. The Complete Builder Kit provides all blueprints and templates, ensuring you don’t need to write code from scratch. The result is a fully automated, self-owned commerce system that operates 24/7 without your intervention."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "Start by choosing your stack: the Sovereign Starter Stack ($97) for basic needs or the Edge Commerce Stack ($197) for advanced features. If you prefer to build yourself, the Complete Builder Kit ($197) includes all blueprints and templates. Deployment takes three steps: (1) Set up hosting and backend logic using the provided templates. (2) Integrate NOWPayments for Solana payment verification. (3) Load your products and configure file delivery. The system is designed to be deployed in 48 hours, with 30 days of support included. Once live, you’ll own the entire infrastructure—no platform access required. This isn’t a temporary solution; it’s a permanent shift to sovereign commerce. Your customers pay in cryptocurrency, your products deliver automatically, and your data remains yours. The future of digital commerce is self-owned. Start building it today."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Solana payments are integrated into a sovereign commerce stack using NOWPayments for on-chain verification. When a buyer sends cryptocurrency (e.g., USDT on Solana), NOWPayments confirms the transaction and fires a webhook. Cloudflare Workers or Google Apps Script handle the backend logic, generating a secure download link for the product. The process is automatic, with fees under $0.10 per transaction. This system eliminates reliance on Stripe or PayPal, giving digital creators full control over their payment infrastructure."
+    },
+    {
+      "type": "callout",
+      "text": "You own the entire stack after deployment—no platform dependencies."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "To deploy this system today, the Complete Builder Kit ($197) provides all blueprints, templates, and integration guides. It includes step-by-step instructions for setting up Solana payments, backend logic, and automated file delivery. The kit is designed for digital creators who need sovereign commerce infrastructure without geographic or financial restrictions. Visit https://coremerch.github.io/products.html to get started."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your stack: Sovereign Starter Stack ($97) or Edge Commerce Stack ($197) for deployment in 48 hours, or Complete Builder Kit ($197) for self-building. 2. Set up hosting on GitHub Pages or Cloudflare Pages. 3. Configure backend logic using Cloudflare Workers or Google Apps Script. 4. Integrate NOWPayments for Solana payment verification. 5. Upload your digital products to Google Drive or Cloudflare R2. 6. Test the system end-to-end to ensure automatic file delivery. 7. Launch your storefront and start accepting payments globally."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "Why use Solana instead of other cryptocurrencies?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Solana offers transaction fees under $0.10 and near-instant confirmation, making it ideal for microtransactions. Its stability and speed ensure buyers aren’t deterred by high costs or delays."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use this system if I’m not a developer?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes. The Sovereign Starter Stack and Edge Commerce Stack are deployed for you in 48 hours. The Complete Builder Kit includes templates and blueprints for non-developers."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if Solana’s network goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The system is modular. If Solana is unavailable, you can switch to another supported network (e.g., BSC or TRON) via NOWPayments without altering the backend logic."
+    },
+    {
+      "type": "faq_question",
+      "text": "Do my customers need a crypto wallet to pay?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, but they don’t need an account with NOWPayments. They send payment directly from their wallet, and the system verifies the transaction on-chain."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I handle refunds or chargebacks?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Refunds are processed manually by sending cryptocurrency back to the buyer’s wallet. Chargebacks are not possible since transactions are irreversible once confirmed on-chain."
+    },
+    {
+      "type": "callout",
+      "text": "The system is pressure-tested in regions where Stripe and PayPal are unavailable."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260615-A93W",
+      "slug": "complete-deep-dive-solana-payments-digital-products-serious-3"
+    },
+    {
+      "id": "post-20260615-PFIB",
+      "slug": "solana-payments-digital-products-every-detail-you-need-4"
+    },
+    {
+      "id": "post-20260615-UX4Y",
+      "slug": "full-infrastructure-guide-solana-payments-digital-products-stripe-6"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Why use Solana instead of other cryptocurrencies?",
+      "answer": "Solana offers transaction fees under $0.10 and near-instant confirmation, making it ideal for microtransactions. Its stability and speed ensure buyers aren’t deterred by high costs or delays."
+    },
+    {
+      "question": "Can I use this system if I’m not a developer?",
+      "answer": "Yes. The Sovereign Starter Stack and Edge Commerce Stack are deployed for you in 48 hours. The Complete Builder Kit includes templates and blueprints for non-developers."
+    },
+    {
+      "question": "What happens if Solana’s network goes down?",
+      "answer": "The system is modular. If Solana is unavailable, you can switch to another supported network (e.g., BSC or TRON) via NOWPayments without altering the backend logic."
+    },
+    {
+      "question": "Do my customers need a crypto wallet to pay?",
+      "answer": "Yes, but they don’t need an account with NOWPayments. They send payment directly from their wallet, and the system verifies the transaction on-chain."
+    },
+    {
+      "question": "How do I handle refunds or chargebacks?",
+      "answer": "Refunds are processed manually by sending cryptocurrency back to the buyer’s wallet. Chargebacks are not possible since transactions are irreversible once confirmed on-chain."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-15",
+    "lastReviewed": "2026-06-15",
+    "nextReviewDue": "2026-08-14"
+  },
+  "social": {
+    "x": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No S https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "linkedIn": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "forum": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "hook": "Understanding Solana Payments for Digital Produ...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10"
+  },
+  "crossPostSummary": {
+    "title": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+    "hook": "Understanding Solana Payments for Digital Produ...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "forum": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "x": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No S https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "linkedIn": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+    "hook50": "Understanding Solana Payments for Digital Produ..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-15T23:32:21.587Z",
+      "dateModified": "2026-06-15T23:32:21.587Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260615-9GGG.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10"
+      },
+      "keywords": "solana payment for digital products",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why use Solana instead of other cryptocurrencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Solana offers transaction fees under $0.10 and near-instant confirmation, making it ideal for microtransactions. Its stability and speed ensure buyers aren’t deterred by high costs or delays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this system if I’m not a developer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Sovereign Starter Stack and Edge Commerce Stack are deployed for you in 48 hours. The Complete Builder Kit includes templates and blueprints for non-developers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if Solana’s network goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The system is modular. If Solana is unavailable, you can switch to another supported network (e.g., BSC or TRON) via NOWPayments without altering the backend logic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do my customers need a crypto wallet to pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but they don’t need an account with NOWPayments. They send payment directly from their wallet, and the system verifies the transaction on-chain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle refunds or chargebacks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Refunds are processed manually by sending cryptocurrency back to the buyer’s wallet. Chargebacks are not possible since transactions are irreversible once confirmed on-chain."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260615-9GGG.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260615-9GGG.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Understanding Solana Payments for Digital Products: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/understanding-solana-payments-digital-products-plain-language-infrastructure-10"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Solana payment",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "solana payment",
+    "totalWords": 1263,
+    "count": 7,
+    "densityPercent": 0.6,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "solana payment for digital products",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1333,
+    "aiProvider": "cohere",
+    "aiModel": "command-a-03-2025",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-15T23:32:21.588Z"
+  }
+}
