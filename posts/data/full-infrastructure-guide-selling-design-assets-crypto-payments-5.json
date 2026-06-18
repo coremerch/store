@@ -1,0 +1,415 @@
+{
+  "id": "post-20260618-TLPL",
+  "slug": "full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+  "title": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+  "date": "2026-06-18T21:23:05.179Z",
+  "category": "Selling Digital Products",
+  "contentType": "deep-dive",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260618-TLPL.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "You're a designer in Kenya, and you've crafted a collection of design assets ready to sell online. But the conventional [[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/usdt-[[LINK:https://coremerch.github.io/store/blog/payment-options-ethiopian-digital-creators-trap-most-creators-2|COREMERCH guide to payment]]-gateways-digital-products-explained-digital-creators-15|USDT Payment]]-methods-filipino-digital-creators-one-afternoon-fast|payment]] gateways you've tried — Stripe, PayPal, Gumroad, Lemon Squeezy, Paddle — they're all inaccessible or prohibitively restrictive in your region. This is a common challenge for digital creators in Kenya, and it's a challenge that demands a comprehensive solution."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-11. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/everything-you-need-know-about-automated-digital-product-11",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "The Full Picture Most Guides Leave Out: Design assets"
+    },
+    {
+      "type": "paragraph",
+      "text": "The absence of traditional payment gateways in your region is not a mere inconvenience; it's a fundamental infrastructure gap. This gap has significant implications for your business. It means you can't rely on the standard e-commerce platforms that many creators take for small-business owners in other parts of the world. You need a different kind of infrastructure, one that gives you the autonomy and control that conventional platforms don't offer. This is where the concept of 'sovereign commerce infrastructure' comes into play. It's about building your own e-commerce stack, tailored to your needs, using free and paid tools that give you full ownership and control over your online store."
+    },
+    {
+      "type": "heading",
+      "text": "Every Component and What It Does"
+    },
+    {
+      "type": "paragraph",
+      "text": "Your sovereign commerce infrastructure is a carefully selected set of tools, each with a specific role. For hosting, you can choose between GitHub Pages (free) and Cloudflare Pages (also free). Both provide the foundation for your online presence. The backend logic, which manages the functionality of your store, is handled by either Cloudflare Workers or Google Apps Script, both of which are free. Order storage, a critical component for any e-commerce operation, is managed by Supabase or Google Sheets, again offering free services. When it comes to file delivery, you have options: Google Drive or Cloudflare R2, both free, ensuring that your customers receive their purchases promptly. Lastly, for payment processing, NOWPayments steps in, charging a minimal 0.5% fee with no KYC requirements, and enabling automatic crypto payments in over 300 cryptocurrencies."
+    },
+    {
+      "type": "heading",
+      "text": "The Technical Layer Explained Without Abstraction"
+    },
+    {
+      "type": "paragraph",
+      "text": "The technical side of your sovereign commerce infrastructure is designed for efficiency and security. The chosen hosting platforms, GitHub Pages and Cloudflare Pages, are robust and reliable, ensuring your store is always accessible. Cloudflare Workers and Google Apps Script, as backend logic providers, offer powerful yet user-friendly environments for managing your store's operations. These tools are not just about functionality; they're about giving you control over your digital presence. Supabase and Google Sheets, for order storage, provide a secure and organized way to manage customer orders and transactions. Google Drive and Cloudflare R2, for file delivery, ensure that your digital products reach your customers swiftly and securely. NOWPayments, the payment processor, stands out for its low fees, wide cryptocurrency support, and automatic transaction verification, making it an ideal choice for your crypto-friendly store."
+    },
+    {
+      "type": "callout",
+      "text": "Every component of your sovereign commerce infrastructure is chosen for its reliability, security, and cost-effectiveness."
+    },
+    {
+      "type": "heading",
+      "text": "Edge Cases, Failures, and How to Handle Them"
+    },
+    {
+      "type": "paragraph",
+      "text": "In any complex system, it's essential to anticipate and plan for potential issues. In your sovereign commerce infrastructure, there are several points where things could go wrong. For instance, what if your hosting platform experiences downtime? This is where having a backup hosting provider comes into play. Cloudflare Workers and Google Apps Script, as backend logic tools, could potentially fail due to script errors or other technical issues. Regularly testing and updating your scripts, and having a backup script ready, can help mitigate these risks. Order storage in Supabase or Google Sheets could encounter data corruption or synchronization issues. Regular backups and data integrity checks are essential here. File delivery through Google Drive or Cloudflare R2 might face temporary unavailability or download failures. Having a backup file delivery system in place, such as a secondary cloud storage service, can ensure uninterrupted service. Lastly, NOWPayments, while reliable, could potentially face network issues or transaction verification delays. In this case, having a secondary payment processor as a backup, even if it's a conventional one with higher fees, can provide an essential fallback."
+    },
+    {
+      "type": "heading",
+      "text": "The Complete Deployment Roadmap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Deploying your sovereign commerce infrastructure is a structured process, ensuring that every component is set up correctly and securely. The first step is choosing your hosting platform. GitHub Pages and Cloudflare Pages both offer free, reliable hosting, but they have different features and setup processes. Next, you'll need to set up your backend logic. Cloudflare Workers and Google Apps Script are powerful tools, but they require careful configuration to manage your store's operations effectively. Then, you'll need to integrate your chosen order storage solution. Supabase and Google Sheets both offer free, secure data storage, but they have different integration methods and capabilities. After that, you'll set up your file delivery system. Google Drive and Cloudflare R2 provide free, robust file storage, but they have distinct features and setup requirements. Finally, you'll integrate your payment processor. NOWPayments is a reliable, low-fee option, but you'll need to configure it to handle various cryptocurrencies and ensure secure transaction processing. Each step in this roadmap is crucial, and careful configuration will ensure your infrastructure is robust and secure."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "The 'Complete Builder Kit' ($197) is a comprehensive package that includes all the blueprints and templates you need to build your sovereign commerce infrastructure. It's an all-in-one solution, providing you with the tools to set up your online store, accept crypto payments, and deliver digital products automatically. This kit is ideal for designers and creators who want full control over their e-commerce platform and are ready to deploy a robust, secure, and fully owned digital storefront."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments supports over 300 cryptocurrencies, ensuring your customers can pay with their preferred crypto."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "For designers in Kenya, the 'Complete Builder Kit' is a powerful tool to overcome the limitations of conventional e-commerce platforms. It offers a way to sell design assets directly to customers, without the need for intermediaries or conventional payment gateways. With this kit, you can build a digital storefront that is not just a store but a symbol of your independence and control in the digital economy."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. Choose your hosting platform: GitHub Pages or Cloudflare Pages. Set up your domain and hosting environment.\n2. Configure your backend logic: Set up Cloudflare Workers or Google Apps Script to manage product listings, customer interactions, and order processing.\n3. Integrate order storage: Connect Supabase or Google Sheets to store customer orders and transaction data securely.\n4. Set up file delivery: Configure Google Drive or Cloudflare R2 to deliver digital products to customers automatically upon purchase.\n5. Integrate NOWPayments: Set up your NOWPayments account to accept crypto payments in various currencies, ensuring secure and automatic transaction processing.\n6. Test and launch: Thoroughly test your store's functionality, including product listings, checkout process, and delivery of digital products. Once everything is functioning as expected, you're ready to launch your sovereign commerce platform."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How secure is my customer data in this infrastructure?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Your sovereign commerce infrastructure is designed with security in mind. Supabase and Google Sheets, as order storage solutions, provide robust data security measures, including encryption and access controls. Cloudflare Workers and Google Apps Script, as backend logic tools, can be configured to handle data securely, and both platforms have strong security practices. Additionally, NOWPayments, as a payment processor, adheres to high security standards, ensuring that transaction data is protected."
+    },
+    {
+      "type": "faq_question",
+      "text": "What happens if my hosting platform goes down?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Having a backup hosting provider is a crucial part of your infrastructure's resilience. If your primary hosting platform experiences downtime, your backup hosting provider can take over, ensuring your store remains accessible. This redundancy is a standard practice in enterprise-level infrastructure and is essential for maintaining a reliable online presence."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I use my own domain name with this setup?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Absolutely. You can use your own domain name with your sovereign commerce infrastructure. This involves configuring your chosen hosting platform to use your custom domain. This process varies depending on your hosting provider and domain registrar, but it's a straightforward way to brand your online store with your own unique identity."
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I manage customer support and refunds?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Customer support and refunds are integral parts of your e-commerce operation. With your sovereign commerce infrastructure, you have full control over these processes. You can set up a customer support system within your backend logic, allowing you to manage inquiries and provide assistance directly. Refunds can be processed manually through your payment processor, ensuring you maintain control over your finances and customer relationships."
+    },
+    {
+      "type": "faq_question",
+      "text": "What if I want to expand my product offerings?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Expanding your product offerings is a natural part of business growth. Your sovereign commerce infrastructure is designed to accommodate this growth. You can add new products and categories within your backend logic, update your product listings, and configure your payment processor to handle the new items. This flexibility allows your store to evolve with your business."
+    },
+    {
+      "type": "callout",
+      "text": "Your sovereign commerce infrastructure is a powerful symbol of digital autonomy, giving you control over your online business."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260618-BVR4",
+      "slug": "selling-design-assets-crypto-payments-every-detail-you-5"
+    },
+    {
+      "id": "post-20260616-H4MZ",
+      "slug": "selling-design-assets-crypto-payments-explained-digital-creators-10"
+    },
+    {
+      "id": "post-20260616-36HO",
+      "slug": "complete-deep-dive-selling-design-assets-crypto-payments-2"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How secure is my customer data in this infrastructure?",
+      "answer": "Your sovereign commerce infrastructure is designed with security in mind. Supabase and Google Sheets, as order storage solutions, provide robust data security measures, including encryption and access controls. Cloudflare Workers and Google Apps Script, as backend logic tools, can be configured to handle data securely, and both platforms have strong security practices. Additionally, NOWPayments, as a payment processor, adheres to high security standards, ensuring that transaction data is protected."
+    },
+    {
+      "question": "What happens if my hosting platform goes down?",
+      "answer": "Having a backup hosting provider is a crucial part of your infrastructure's resilience. If your primary hosting platform experiences downtime, your backup hosting provider can take over, ensuring your store remains accessible. This redundancy is a standard practice in enterprise-level infrastructure and is essential for maintaining a reliable online presence."
+    },
+    {
+      "question": "Can I use my own domain name with this setup?",
+      "answer": "Absolutely. You can use your own domain name with your sovereign commerce infrastructure. This involves configuring your chosen hosting platform to use your custom domain. This process varies depending on your hosting provider and domain registrar, but it's a straightforward way to brand your online store with your own unique identity."
+    },
+    {
+      "question": "How do I manage customer support and refunds?",
+      "answer": "Customer support and refunds are integral parts of your e-commerce operation. With your sovereign commerce infrastructure, you have full control over these processes. You can set up a customer support system within your backend logic, allowing you to manage inquiries and provide assistance directly. Refunds can be processed manually through your payment processor, ensuring you maintain control over your finances and customer relationships."
+    },
+    {
+      "question": "What if I want to expand my product offerings?",
+      "answer": "Expanding your product offerings is a natural part of business growth. Your sovereign commerce infrastructure is designed to accommodate this growth. You can add new products and categories within your backend logic, update your product listings, and configure your payment processor to handle the new items. This flexibility allows your store to evolve with your business."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-18",
+    "lastReviewed": "2026-06-18",
+    "nextReviewDue": "2026-08-17"
+  },
+  "social": {
+    "x": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "linkedIn": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "forum": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "hook": "The Full Infrastructure Guide to Selling Design...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5"
+  },
+  "crossPostSummary": {
+    "title": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+    "hook": "The Full Infrastructure Guide to Selling Design...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "forum": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "x": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "linkedIn": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+    "hook50": "The Full Infrastructure Guide to Selling Design..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-18T21:23:05.179Z",
+      "dateModified": "2026-06-18T21:23:05.179Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260618-TLPL.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5"
+      },
+      "keywords": "sell design assets crypto payments",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How secure is my customer data in this infrastructure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your sovereign commerce infrastructure is designed with security in mind. Supabase and Google Sheets, as order storage solutions, provide robust data security measures, including encryption and access controls. Cloudflare Workers and Google Apps Script, as backend logic tools, can be configured to handle data securely, and both platforms have strong security practices. Additionally, NOWPayments, as a payment processor, adheres to high security standards, ensuring that transaction data is protected."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if my hosting platform goes down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Having a backup hosting provider is a crucial part of your infrastructure's resilience. If your primary hosting platform experiences downtime, your backup hosting provider can take over, ensuring your store remains accessible. This redundancy is a standard practice in enterprise-level infrastructure and is essential for maintaining a reliable online presence."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use my own domain name with this setup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. You can use your own domain name with your sovereign commerce infrastructure. This involves configuring your chosen hosting platform to use your custom domain. This process varies depending on your hosting provider and domain registrar, but it's a straightforward way to brand your online store with your own unique identity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I manage customer support and refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Customer support and refunds are integral parts of your e-commerce operation. With your sovereign commerce infrastructure, you have full control over these processes. You can set up a customer support system within your backend logic, allowing you to manage inquiries and provide assistance directly. Refunds can be processed manually through your payment processor, ensuring you maintain control over your finances and customer relationships."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I want to expand my product offerings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Expanding your product offerings is a natural part of business growth. Your sovereign commerce infrastructure is designed to accommodate this growth. You can add new products and categories within your backend logic, update your product listings, and configure your payment processor to handle the new items. This flexibility allows your store to evolve with your business."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260618-TLPL.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260618-TLPL.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "The Full Infrastructure Guide to Selling Design Assets with Crypto Payments — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/full-infrastructure-guide-selling-design-assets-crypto-payments-5"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "The Full Picture Most Guides Leave Out: Design assets",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "Every Component and What It Does",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Technical Layer Explained Without Abstraction",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Edge Cases, Failures, and How to Handle Them",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Complete Deployment Roadmap",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "design assets",
+    "totalWords": 1511,
+    "count": 3,
+    "densityPercent": 0.2,
+    "flag": "low"
+  },
+  "meta": {
+    "searchQuery": "sell design assets crypto payments",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1585,
+    "aiProvider": "cohere",
+    "aiModel": "command-r-plus-08-2024",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-18T21:23:05.181Z"
+  }
+}
