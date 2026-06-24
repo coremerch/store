@@ -1,0 +1,415 @@
+{
+  "id": "post-20260624-NVSF",
+  "slug": "understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+  "title": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+  "date": "2026-06-24T19:02:08.716Z",
+  "category": "Selling Digital Products",
+  "contentType": "breakdown",
+  "author": "COREMERCH",
+  "excerpt": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+  "image": "https://coremerch.github.io/store/posts/images/post-20260624-NVSF.png",
+  "imageSource": "picsum",
+  "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+  "imageCaption": "The automated delivery pipeline sends download links within 30 seconds of on-chain payment confirmation.",
+  "canonical": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Selling a [[LINK:https://coremerch.github.io/store/blog/[[LINK:https://coremerch.github.io/store/blog/digital-product-payment-solutions-west-africa-stack-started|The Digital]]-product-payment-solutions-west-africa-[[LINK:https://coremerch.github.io/store/blog/everything-you-need-know-about-solana-payments-digital-15|COREMERCH guide to everything]]-you-2|digital]] product should be a simple transaction. You build something valuable — an ebook, a course, a Notion template, a font family, a preset pack, a beat — and someone pays you for access to it. The file transfers. The transaction completes. But for millions of creators, the payment layer is where everything breaks down. Stripe is unavailable. PayPal flags the account. Gumroad holds the payout. The workarounds stop working. What actually works is a sovereign commerce stack: a static storefront on GitHub Pages or Cloudflare Pages, automatic payment verification through NOWPayments, and delivery triggered by a webhook the moment the transaction confirms on-chain. No platform intermediary. No payout schedule. No geography filter. The customer owns the storefront code, the order history, the customer list, and the product files. COREMERCH has no access after deployment."
+    },
+    {
+      "type": "pillar_backlink",
+      "text": "This post is part of the COREMERCH infrastructure series. For the complete foundation — every component, every configuration step, and the full deployment sequence — read the pillar guide: How to Start Selling Digital Products with Crypto Payments at https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-every-detail-you-3. That guide covers the complete architecture that this post builds on.",
+      "url": "https://coremerch.github.io/store/blog/automated-digital-product-delivery-crypto-every-detail-you-3",
+      "title": "How to Start Selling Digital Products with Crypto Payments"
+    },
+    {
+      "type": "heading",
+      "text": "What This Actually Is and Why It Matters: Bitcoin payment"
+    },
+    {
+      "type": "paragraph",
+      "text": "The fundamental problem with platforms like Gumroad is their high fees; for instance, they charge 10% on every sale. In contrast, using NOWPayments for Bitcoin transactions comes with a mere 0.5% fee. This difference becomes significant, especially when considering the financial implications for creators who need to maximize their profits. By understanding and utilizing Bitcoin payments, creators can offer their ebooks, courses, and other digital products while retaining more of their earnings. This approach not only minimizes costs but also simplifies transactions for buyers who might prefer cryptocurrencies."
+    },
+    {
+      "type": "heading",
+      "text": "How the Architecture Works Under the Hood"
+    },
+    {
+      "type": "paragraph",
+      "text": "At its core, the architecture for accepting Bitcoin payments involves several key components. By utilizing platforms like Cloudflare Workers or Google Apps Script, creators can automate the delivery of digital products instantly upon payment confirmation. Integration with NOWPayments allows for real-time crypto payment processing, converting prices to USD at the moment of the transaction. This entire system ensures that creators have a seamless experience, with minimal reliance on third-party platforms, enhancing their sovereignty over the commerce process. The infrastructure is designed to run smoothly, enabling creators to scale their operations without additional burdens."
+    },
+    {
+      "type": "heading",
+      "text": "Who This Is Built For and Why"
+    },
+    {
+      "type": "paragraph",
+      "text": "This infrastructure is specifically tailored for digital creators operating in regions where conventional payment processors are unavailable or severely restricted. This includes individuals selling ebooks, courses, templates, and other digital assets in countries such as Nigeria, Kenya, and Venezuela. By focusing on these creators, the architecture is built to empower them with tools that ensure ownership and control over their products. It transforms the way they sell, allowing them to leverage the benefits of cryptocurrency while avoiding the pitfalls of high fees and restrictive policies of traditional platforms."
+    },
+    {
+      "type": "callout",
+      "text": "NOWPayments charges 0.5%, far less than traditional platforms like Gumroad."
+    },
+    {
+      "type": "heading",
+      "text": "The Components That Make It Work Together"
+    },
+    {
+      "type": "paragraph",
+      "text": "The successful deployment of a Bitcoin payment system for digital downloads relies on several key components working in harmony. GitHub Pages or Cloudflare Pages serves as the hosting solution, while Cloudflare Workers or Google Apps Script handles the backend logic. Product storage occurs in Supabase or Google Sheets, and file delivery is managed via Google Drive or Cloudflare R2. These elements come together with NOWPayments to facilitate payment verification on-chain. This integrated approach ensures that each transaction is secure, efficient, and cost-effective, allowing creators to focus on their content rather than the complexities of payment processing."
+    },
+    {
+      "type": "heading",
+      "text": "How to Use This Knowledge to Deploy Today"
+    },
+    {
+      "type": "paragraph",
+      "text": "To get started with deploying your own Bitcoin payment system, first, choose your hosting solution, either GitHub Pages or Cloudflare Pages. Next, set up backend functions using Cloudflare Workers or Google Apps Script to manage payment logic. Utilize Supabase or Google Sheets for order storage and implement Google Drive or Cloudflare R2 for product delivery. Finally, integrate NOWPayments for payment processing. This streamlined deployment can be achieved swiftly, allowing you to start selling digital products with Bitcoin payments in a matter of days. For a comprehensive guide, consider the Complete Builder Kit ($197) available at https://coremerch.github.io/products.html."
+    },
+    {
+      "type": "heading",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "paragraph",
+      "text": "You can sell an ebook online without PayPal or Stripe by utilizing Bitcoin payments processed through NOWPayments. This approach not only minimizes fees but also allows you to maintain ownership of your infrastructure and products. By leveraging tools like Cloudflare Workers or Google Apps Script, you can automate product delivery efficiently."
+    },
+    {
+      "type": "callout",
+      "text": "Control your sales and retain ownership with a sovereign digital commerce stack."
+    },
+    {
+      "type": "heading",
+      "text": "Related: How Creators Like You Are Building Sovereign Stores"
+    },
+    {
+      "type": "paragraph",
+      "text": "If you're exploring how to sell digital downloads without traditional platforms, consider the Complete Builder Kit ($197). It provides everything you need to set up your sovereign digital commerce stack and bypass high platform fees, making it easier to sell products like ebooks or templates effectively."
+    },
+    {
+      "type": "heading",
+      "text": "Your Deployment Checklist"
+    },
+    {
+      "type": "paragraph",
+      "text": "Prepare your product files in delivery-ready format — PDF for ebooks, ZIP archives for multi-file products, exported files for Notion templates, OTF and TTF archives for font families. Set your prices in USD and let NOWPayments handle the crypto equivalent calculation automatically at transaction time. Deploy your stack and configure the product list with file paths, USD prices, and delivery settings. Configure your storefront with product pages and checkout flow. Test the checkout on both desktop and mobile — confirm QR codes generate correctly and live price feeds display accurately. Complete a real mainnet test transaction and confirm the delivery email arrives with a working download link. Check your order database and confirm the test transaction appears with all correct fields."
+    },
+    {
+      "type": "heading",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "type": "faq_question",
+      "text": "How do I sell an ebook online without PayPal or Stripe?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "You can sell an ebook online by utilizing Bitcoin payments processed through NOWPayments, which has minimal fees. Set up a digital storefront using GitHub Pages or Cloudflare Pages and automate fulfillment with backend scripts."
+    },
+    {
+      "type": "faq_question",
+      "text": "What is the best way to sell digital downloads without platform fees?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "The best way to sell digital downloads without high platform fees is to use NOWPayments for Bitcoin transactions, which charges only 0.5%. This significantly reduces costs compared to platforms like Gumroad."
+    },
+    {
+      "type": "faq_question",
+      "text": "Can I sell templates and fonts without using Gumroad or Payhip?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Yes, you can sell templates and fonts by setting up your own online store using free hosting services and integrating NOWPayments for Bitcoin payments, bypassing the need for Gumroad or Payhip."
+    },
+    {
+      "type": "faq_question",
+      "text": "What are the benefits of using Bitcoin for digital product sales?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Using Bitcoin for digital product sales reduces transaction fees, enhances privacy, and allows for immediate payment confirmation. This ensures that you retain more revenue from each sale compared to traditional payment processors."
+    },
+    {
+      "type": "faq_question",
+      "text": "Is it difficult to set up a Bitcoin payment system?"
+    },
+    {
+      "type": "faq_answer",
+      "text": "Setting up a Bitcoin payment system is straightforward with platforms like NOWPayments and tools like Cloudflare Workers. With the right resources, you can deploy your system in just a few days."
+    },
+    {
+      "type": "callout",
+      "text": "Deploy your payment processing infrastructure in just 48 hours."
+    },
+    {
+      "type": "cta",
+      "text": "Complete Builder Kit — $197. All 6 blueprints plus all 7 templates. Everything you need to build, deploy, and scale a sovereign digital commerce stack. Instant download. Worth $348 separately.",
+      "url": "https://coremerch.github.io/products.html",
+      "product": "Complete Builder Kit",
+      "price": "$197"
+    }
+  ],
+  "related": [
+    {
+      "id": "post-20260624-27I6",
+      "slug": "everything-about-bitcoin-payments-digital-downloads-guide-leaves-7"
+    },
+    {
+      "id": "post-20260623-VBHB",
+      "slug": "everything-you-need-know-about-bitcoin-payments-digital-14"
+    },
+    {
+      "id": "post-20260622-2GUD",
+      "slug": "bitcoin-payments-digital-downloads-every-detail-you-need-5"
+    }
+  ],
+  "faq": [
+    {
+      "question": "How do I sell an ebook online without PayPal or Stripe?",
+      "answer": "You can sell an ebook online by utilizing Bitcoin payments processed through NOWPayments, which has minimal fees. Set up a digital storefront using GitHub Pages or Cloudflare Pages and automate fulfillment with backend scripts."
+    },
+    {
+      "question": "What is the best way to sell digital downloads without platform fees?",
+      "answer": "The best way to sell digital downloads without high platform fees is to use NOWPayments for Bitcoin transactions, which charges only 0.5%. This significantly reduces costs compared to platforms like Gumroad."
+    },
+    {
+      "question": "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "answer": "Yes, you can sell templates and fonts by setting up your own online store using free hosting services and integrating NOWPayments for Bitcoin payments, bypassing the need for Gumroad or Payhip."
+    },
+    {
+      "question": "What are the benefits of using Bitcoin for digital product sales?",
+      "answer": "Using Bitcoin for digital product sales reduces transaction fees, enhances privacy, and allows for immediate payment confirmation. This ensures that you retain more revenue from each sale compared to traditional payment processors."
+    },
+    {
+      "question": "Is it difficult to set up a Bitcoin payment system?",
+      "answer": "Setting up a Bitcoin payment system is straightforward with platforms like NOWPayments and tools like Cloudflare Workers. With the right resources, you can deploy your system in just a few days."
+    }
+  ],
+  "isPillar": false,
+  "pillarCategory": "",
+  "freshness": {
+    "firstPublished": "2026-06-24",
+    "lastReviewed": "2026-06-24",
+    "nextReviewDue": "2026-08-23"
+  },
+  "social": {
+    "x": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "linkedIn": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\nComplete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "forum": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "hook": "Understanding Bitcoin Payments for Digital Down...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17"
+  },
+  "crossPostSummary": {
+    "title": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+    "hook": "Understanding Bitcoin Payments for Digital Down...",
+    "bullets": [
+      "→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.",
+      "→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates."
+    ],
+    "cta": "→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html",
+    "url": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "forum": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "x": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "linkedIn": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required\n\n→ Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.\n→ NOWPayments charges 0.5% per transaction vs Gumroad's 10% — at 100 sales per month the difference exceeds $900 in retained revenue.\n→ Complete Builder Kit — $197. All 6 blueprints plus all 7 templates.\n\n→ Complete Builder Kit — $197 — https://coremerch.github.io/products.html\nhttps://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+    "hook50": "Understanding Bitcoin Payments for Digital Down..."
+  },
+  "seo": {
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "datePublished": "2026-06-24T19:02:08.717Z",
+      "dateModified": "2026-06-24T19:02:08.717Z",
+      "author": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "url": "https://coremerch.github.io/store"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "COREMERCH",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://coremerch.github.io/store/logo.png"
+        }
+      },
+      "image": "https://coremerch.github.io/store/posts/images/post-20260624-NVSF.png",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17"
+      },
+      "keywords": "bitcoin payment for digital downloads",
+      "articleSection": "Selling Digital Products"
+    },
+    "faqJsonLd": {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I sell an ebook online without PayPal or Stripe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can sell an ebook online by utilizing Bitcoin payments processed through NOWPayments, which has minimal fees. Set up a digital storefront using GitHub Pages or Cloudflare Pages and automate fulfillment with backend scripts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best way to sell digital downloads without platform fees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The best way to sell digital downloads without high platform fees is to use NOWPayments for Bitcoin transactions, which charges only 0.5%. This significantly reduces costs compared to platforms like Gumroad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I sell templates and fonts without using Gumroad or Payhip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, you can sell templates and fonts by setting up your own online store using free hosting services and integrating NOWPayments for Bitcoin payments, bypassing the need for Gumroad or Payhip."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the benefits of using Bitcoin for digital product sales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Using Bitcoin for digital product sales reduces transaction fees, enhances privacy, and allows for immediate payment confirmation. This ensures that you retain more revenue from each sale compared to traditional payment processors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it difficult to set up a Bitcoin payment system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Setting up a Bitcoin payment system is straightforward with platforms like NOWPayments and tools like Cloudflare Workers. With the right resources, you can deploy your system in just a few days."
+          }
+        }
+      ]
+    },
+    "openGraph": {
+      "title": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "url": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260624-NVSF.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya",
+      "type": "article",
+      "siteName": "COREMERCH",
+      "locale": "en_US"
+    },
+    "twitterCard": {
+      "card": "summary_large_image",
+      "site": "@coremerch",
+      "title": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+      "description": "Selling ebooks, courses, templates, fonts, and digital downloads with automated crypto delivery — no platform middleman, no payout delays, no geographic filter.",
+      "image": "https://coremerch.github.io/store/posts/images/post-20260624-NVSF.png",
+      "imageAlt": "Digital product delivery pipeline using NOWPayments and Cloudflare Workers for creators in Kenya"
+    },
+    "breadcrumb": [
+      {
+        "name": "Home",
+        "url": "https://coremerch.github.io/store/"
+      },
+      {
+        "name": "Blog",
+        "url": "https://coremerch.github.io/store/blog"
+      },
+      {
+        "name": "Selling Digital Products",
+        "url": "https://coremerch.github.io/store/blog/category/selling-digital-products"
+      },
+      {
+        "name": "Understanding Bitcoin Payments for Digital Downloads: A Plain-Language Infrastructure Breakdown — No Stripe Required",
+        "url": "https://coremerch.github.io/store/blog/understanding-bitcoin-payments-digital-downloads-plain-language-infrastructure-17"
+      }
+    ],
+    "headingMap": [
+      {
+        "level": "H2",
+        "text": "What This Actually Is and Why It Matters: Bitcoin payment",
+        "hasKeyword": true
+      },
+      {
+        "level": "H2",
+        "text": "How the Architecture Works Under the Hood",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Who This Is Built For and Why",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "The Components That Make It Work Together",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How to Use This Knowledge to Deploy Today",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "How do I sell an ebook online without PayPal or Stripe?",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Related: How Creators Like You Are Building Sovereign Stores",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Your Deployment Checklist",
+        "hasKeyword": false
+      },
+      {
+        "level": "H2",
+        "text": "Frequently Asked Questions",
+        "hasKeyword": false
+      }
+    ]
+  },
+  "keywordDensity": {
+    "primaryKeyword": "bitcoin payment",
+    "totalWords": 1126,
+    "count": 10,
+    "densityPercent": 0.9,
+    "flag": "ok"
+  },
+  "meta": {
+    "searchQuery": "bitcoin payment for digital downloads",
+    "serpSource": "static-library",
+    "imageSource": "picsum",
+    "wordCount": 1211,
+    "aiProvider": "sambanova",
+    "aiModel": "Meta-Llama-3.3-70B-Instruct",
+    "aiCallCount": 2,
+    "peopleAlsoAsk": [
+      "How do I sell an ebook online without PayPal or Stripe?",
+      "What is the best way to sell digital downloads without platform fees?",
+      "Can I sell templates and fonts without using Gumroad or Payhip?",
+      "How do independent creators sell courses without Teachable or Stripe?"
+    ],
+    "relatedSearches": [
+      "sell ebook without paypal stripe gumroad sovereign stack",
+      "digital download store crypto only no platform",
+      "sell notion templates for usdt bitcoin",
+      "font designer accept crypto payment nowpayments"
+    ],
+    "product": "Complete Builder Kit",
+    "botVersion": "6.0",
+    "generatedAt": "2026-06-24T19:02:08.719Z"
+  }
+}
